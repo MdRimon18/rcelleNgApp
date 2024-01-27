@@ -1,0 +1,220 @@
+
+<nb-card>
+
+  <div class="row">
+    <div class="col-md-2" >
+      <button  title="{{languageService.productEntry.BackButtonhoverEffect}}"  
+      class="btn btn-outline-success addMore" (click)="backToInvoiceInfo()"
+    >
+    <i class="fas fa-arrow-left"></i>
+    </button> 
+    </div>
+  </div>
+<div class="example-header">
+  <h5 class="ml-4">Money Recit</h5>
+   
+
+</div>
+
+<div class="row">
+  <div class="col-sm-12" style="text-align: center;margin-top:20px;">
+      <!-- <input type="button" value="Download Pdf" (click)="captureScreen()" /> -->
+      <button [printStyle]="{h3 : {'margin-top': '180px'}}" printSectionId="contentToConvert" ngxPrint>print</button>
+  </div>
+</div>
+<!-- end wrapper -->
+
+
+
+ 
+
+   <!-- 
+Invoice dynamically rendered into html using handlebars and converted into pdf
+using chrome-pdf recipe. The styles are extracted into separate asset for 
+better readability and later reuse.
+
+Data to this sample are mocked at the design time and should be filled on the 
+incoming API request.
+!-->
+
+ 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Example 1</title>
+      
+  </head>
+  <body id="contentToConvert" style=" position: relative;
+  width: 21cm;  
+  height: 40.7cm; 
+  margin: 0 auto; 
+  color: #001028;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 12px; 
+  font-family: Arial;">
+    <header class="clearfix">
+       
+      <div id="company"  class="clearfix"  style="text-align: center;" >
+        <div><strong><h3>*{{user?.orgName}}*</h3></strong> </div>
+        <div><h5> {{user?.AddressLineOne}},<br /> {{user?.AddressLineTwo}}, {{user?.State}}<br/>{{user?.countryCode}} <br/>Mobile:{{user?.phone}}</h5> </div>
+      </div>
+      <!-- <h6 style="text-align: center;">**INVOICE #{{invoiceDetails.invoiceNo}}**</h6> -->
+      <!-- <div id="project" style="margin-top: 10px; text-align: center;">
+        <div><span>CLIENT :</span></div>
+        <div><span>Phone :</span> </div>
+        <div><span>DATE :</span></div>
+      </div> -->
+    </header>
+    <main style="margin-top: 10px;">
+      <table style="width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      margin-bottom: 20px;">
+        <tr>
+          <th style=" padding: 5px 20px;
+          white-space: nowrap;        
+          font-weight: normal;">Client Mobile: {{headerInfo?.mobile}}</th>
+          <th style=" padding: 5px 20px;
+          white-space: nowrap;        
+          font-weight: normal;">Name:{{headerInfo?.clienName}}</th>
+           <th style=" padding: 5px 20px;
+           white-space: nowrap;        
+           font-weight: normal;"><strong> Money receipt</strong></th>
+          <th style=" padding: 5px 20px;
+          white-space: nowrap;        
+          font-weight: normal;">Date: {{headerInfo?.invoicEntryDate}}</th>
+        </tr>
+      </table>
+      <table style="width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      margin-bottom: 20px;">
+        <thead>
+          <tr>
+            <th class="service" style=" padding: 5px 20px;
+            color: #5D6975;
+            border-bottom: 1px solid #C1CED9;
+            white-space: nowrap;        
+            font-weight: normal;">Invoice No</th>
+            <th class="desc" style=" padding: 5px 20px;
+            color: #5D6975;
+            border-bottom: 1px solid #C1CED9;
+            white-space: nowrap;        
+            font-weight: normal;">Pay Date</th>
+            <th style=" padding: 5px 20px;
+            color: #5D6975;
+            border-bottom: 1px solid #C1CED9;
+            white-space: nowrap;        
+            font-weight: normal;">Total Amount</th>
+            <th style=" padding: 5px 20px;
+            color: #5D6975;
+            border-bottom: 1px solid #C1CED9;
+            white-space: nowrap;        
+            font-weight: normal;">Total Paid Amount</th>
+            <th style=" padding: 5px 20px;
+            color: #5D6975;
+            border-bottom: 1px solid #C1CED9;
+            white-space: nowrap;        
+            font-weight: normal;">Paid Amount</th>
+            <th style=" padding: 5px 20px;
+            color: #5D6975;
+            border-bottom: 1px solid #C1CED9;
+            white-space: nowrap;        
+            font-weight: normal;">Due Amount</th>
+              
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="text-align: center;" *ngFor="let item of moneyRecits; index as i;" >
+            <td class="service">{{item?.invoiceNo}}</td>
+            <td class="desc">{{item?.entryDate|date}}</td>
+            <td class="unit">{{item?.totalAmount}}</td>
+            <td class="qty">{{item?.PaidAmount}}</td>
+            <td class="qty">{{item?.payingAmount}}</td>
+            <td class="total">{{item?.DueAmount}}</td>
+           
+
+          </tr>
+          
+        
+         
+          <!-- <tr style="text-align: center;">
+            <td colspan="7">SUBTOTAL</td>
+            <td class="total">{{invoiceDetails.SubTotal}} .TK </td>
+          </tr>
+          <tr style="text-align: center;">
+            <td colspan="7">TAX</td>
+            <td class="total">{{invoiceDetails.totalVat}}</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td colspan="7">Discount</td>
+            <td class="total">{{invoiceDetails.totalDiscount}}</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td colspan="7">Prev. Due</td>
+            <td class="total">{{invoiceDetails.PrevDue}}</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td colspan="7" class="grand total"><strong>GRAND TOTAL</strong> </td>
+            <td class="grand total">{{invoiceDetails.totalAmount}} .TK</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td colspan="7" class="grand total">Special Discount</td>
+            <td class="grand total">{{invoiceDetails.totalAddiDiscnt}} .TK</td>
+          </tr>
+          <tr style="text-align: center;">
+            <td colspan="7" class="grand total"><strong> Paid Amount</strong></td>
+            <td class="grand total">{{invoiceDetails.PaidAmount}} .TK</td>
+          </tr>
+
+          <tr style="text-align: center;">
+            <td colspan="7" class="grand total">Due Amount</td>
+            <td class="grand total">{{invoiceDetails.DueAmount}} .TK</td>
+          </tr> -->
+        </tbody>
+      </table>
+
+      <table style="
+      margin-top: 80px;
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      margin-bottom: 20px;">
+        <tr>
+          <th style=" padding: 5px 20px;
+          white-space: nowrap;        
+          font-weight: normal;"> Author Signature .............</th>
+          <th style=" padding: 5px 20px;
+          white-space: nowrap;        
+          font-weight: normal;">Client Signature ............. </th>
+           <th style=" padding: 5px 20px;
+           white-space: nowrap;        
+           font-weight: normal;">Verified By..{{userInfoTblService.ObjectReciever.value?.name}}</th>
+           
+        </tr>
+        <tr>
+          <th>
+            <div style=" padding: 5px 20px;
+            color: #5D6975;
+            
+            white-space: nowrap;        
+            font-weight: normal;">NOTICE:Invoice was created on a computer and is valid without the signature and seal.</div>
+          </th>
+        </tr>
+      </table>
+      <!-- <div id="notices">
+        
+        <div class="notice"></div>
+      </div> -->
+    </main>
+    <!-- <footer>
+ 
+    </footer> -->
+  </body>
+</html>
+ 
+
+  

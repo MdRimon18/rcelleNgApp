@@ -1,0 +1,121 @@
+<div class="login-page">
+  <div class="container d-flex align-items-center position-relative py-5">
+    <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
+      <div class="card-body p-0">
+        <div class="row gx-0 align-items-stretch animated-div">
+          <!-- Logo & Information Panel-->
+          <div class="col-lg-6">
+            <div class="info d-flex justify-content-center flex-column p-4 h-100">
+              <div class="py-5">
+                <h1 class="display-6 fw-bold">Sign-Up</h1>
+                <p class="fw-light mb-0">RCell_E is an E-Commerce,Inventory & Accounts  Software.
+                 <br> That has Manny Kind of Features like Product Management,
+                  Selling,Perchasing,Customer & Supplier Mangement,Product 
+                  Transfer,Accounts ,Reports ,ETC </p>
+              </div>
+            </div>
+          </div>
+          <!-- Form Panel    -->
+          <div class="col-lg-6 bg-white">
+            <div class="d-flex align-items-center px-4 px-lg-5 h-100">
+              <form  #form="ngForm" class="register-form py-5 w-100"   action="login.html">
+                <div class="form-group mb-0">
+                  <label class="name" for="register-username">User Name</label>
+                  <input #Name="ngModel" type="text" name="name" id="name" [(ngModel)]="singupObj.name"
+                    class="form-control form-control-sm form-rounded"
+                    required 
+                    placeholder="User Name"
+                    >
+                  <div *ngIf="Name.invalid && (Name.dirty || Name.touched)" class="text-danger">
+                    <div *ngIf="Name.errors.required">User name is required</div>
+                  </div>
+                </div>
+                <div class="form-group mb-0">
+                  <label class="phone">Mobile Number</label>
+                  <input #Phone="ngModel" type="text" name="phone" placeholder="Mobile Number" 
+                    [(ngModel)]="singupObj.phone" class="form-control form-control-sm form-rounded"   
+                    required>
+                  <div *ngIf="Phone.invalid && (Phone.dirty || Phone.touched)" class="text-danger">
+                    <div *ngIf="Phone.errors.required">Mobile number is required</div>
+                  </div>
+                </div>
+                <div class="form-group mb-0">
+                  <label class="pass">Password</label>
+                  <input #Pass="ngModel" type="password" name="pass" id="pass" placeholder="Password"
+                    [(ngModel)]="singupObj.pass" class="form-control form-control-sm form-rounded" 
+                    required>
+                  <div *ngIf="Pass.invalid && (Pass.dirty || Pass.touched)" class="text-danger">
+                    <div *ngIf="Pass.errors.required">Password is required</div>
+                  </div>
+                </div>
+                <div class="form-group mb-0">
+                  <label class="userType">Select User Type</label>
+                  <select #userType="ngModel" name="userType"  
+                  [(ngModel)]="singupObj.userType" class="form-control form-control-sm form-rounded mb-3" name="account" required>
+                    <option value="">  {{languageService.productEntry.selectType}}</option>
+                    <option *ngFor="let s of UserTypeList" [value]="s.name">{{s.name}}</option>
+                  </select>
+                  <div *ngIf="userType.invalid && (userType.dirty || userType.touched)" class="text-danger">
+                    <div *ngIf="userType.errors.required">User type is required</div>
+                  </div>
+                </div>
+               
+
+                <!-- <div class="form-check mb-0">
+                  <input class="form-check-input" id="register-agree" name="registerAgree"
+                   type="checkbox" required value="1" data-validate-field="registerAgree">
+                  <label class="form-check-label form-label" for="register-agree">I agree with the terms and policy                        </label>
+                </div> -->
+                <div type="hidden" id="recaptcha-container"></div>
+                <button class="btn btn-primary mb-3" id="login" [disabled]="
+                singupObj.userType==''||singupObj.name==''||singupObj.phone==''||singupObj.pass==''
+              " type="button"     (click)="getGenuinUser()">Register</button><br>
+                <small class="text-gray-500">Already have an account?  </small>
+                <a class="text-sm text-paleBlue" [routerLink]="['/login']">Login</a>
+                <br>
+                <a class="text-sm text-paleBlue" [routerLink]="['/features-pricing']"><strong>Features & Pricing</strong> </a><br>
+                <a class="text-sm text-paleBlue" [routerLink]="['/how-to-use']"><strong>How to Use?</strong> </a><br>
+                <!-- <a class="text-sm text-paleBlue" [routerLink]="['/help']"><strong>Help?</strong> </a> -->
+              </form>
+           
+          
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isShowVerificationCode" class="row gx-0 align-items-stretch animated-div">
+          <!-- Logo & Information Panel-->
+          <div class="col-lg-6">
+          
+          </div>
+          <!-- Form Panel    -->
+          <div class="col-lg-6 bg-white">
+            <div class="d-flex align-items-center px-4 px-lg-5 h-100">
+           
+              <form #codeForm="ngForm" (ngSubmit)="getGenuinUser()" class="register-form py-2 w-100">
+                <div class="form-group">
+                  <label for="code">Verification Code</label>
+                  <input placeholder="Verification Code" class="form-control form-control-sm form-rounded" type="text" id="code" name="code" [(ngModel)]="code" required>
+                  <div *ngIf="code.invalid && code.touched" class="text-danger">
+                    <div *ngIf="code.errors.required">Verification code is required</div>
+                  </div>
+                </div>
+                <button class="btn btn-primary btn-sm" type="submit" [disabled]="!codeForm.valid">Code Verify</button>
+              </form>
+
+            </div>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center position-absolute bottom-0 start-0 w-100 z-index-20">
+    <div class="copyright">
+      <p>Copyright &copy; Designed & Developed by <a routerLink="/features-pricing" target="_blank">rcell_e.tech</a> 2020</p>
+  </div>
+  </div>
+</div>
+
+ 
+
+ 

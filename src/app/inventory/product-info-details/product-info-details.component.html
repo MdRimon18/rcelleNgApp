@@ -1,0 +1,26 @@
+<mat-card class="example-card">
+  <mat-card-header>
+     
+    <mat-card-title>{{product?.name}}</mat-card-title>
+    <mat-card-subtitle>{{product?.catagory}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="product?.imageLink" alt="{{product?.name}}">
+  <mat-card-content>
+     <p>Sub Category: {{product?.subCategory}}</p>
+     <p>       Unit: {{product?.unit}}</p>
+     <p>       Price: {{product?.cost}}</p>
+     <p>       Discount: {{product?.discountAmount}}</p>
+     <p>       Remarks: {{product?.remarks}}</p>
+     <p>       Description: {{product?.Desc}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="product?.quantity==0" type="button" class="btn btn-warning btn-sm mr-1 mb-2">
+      <i class="fas fa-shopping-cart pr-2"></i>Stock Finish
+    </button>
+    <button (click)="addToCart(product)" *ngIf="product?.quantity>0" type="button" class="btn btn-success btn-sm mr-1 mb-2">
+      <i class="fas fa-shopping-cart pr-2"></i>Add to cart
+    </button>
+    <!-- <button mat-button>SHARE</button> -->
+      
+  </mat-card-actions>
+</mat-card>

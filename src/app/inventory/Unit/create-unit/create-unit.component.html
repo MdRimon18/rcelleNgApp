@@ -1,0 +1,50 @@
+<div class="card-header crdHdr"> <h3 class="h4 mb-0">
+  <button (click)="backToProductInfo()"
+  class="btn"
+><i class="fas fa-arrow-left"></i>
+</button>
+{{languageService.unitEntry.unitEntryTitle}}</h3></div>
+<div class="card-body">
+ <form action="">
+  <div class="row gx-5 bg-white ">
+      
+    <div class="col-sm-3 animated-div">
+      <div class="form-group">
+        <label for="name" class="label">{{languageService.unitEntry.name}}</label>
+         <input name="name"  #name="ngModel"
+         [(ngModel)]="unitObj.name" type="text"
+         class="form-control form-rounded form-control-sm"
+           id="name" placeholder="{{languageService.unitEntry.name}}" required>
+           <div class="text-left text-danger"
+           *ngIf="name.invalid&&name.touched">
+           {{languageService.unitEntry.requiredMessage}}!
+         </div>
+      </div>
+    </div>
+  </div>
+  <button  class="btn btn-primary"  [disabled]="unitObj.name==''" 
+     (click)="save()">{{languageService.unitEntry.SaveButton}}</button>
+ </form>
+</div>
+
+
+
+
+ 
+   
+  
+     
+    
+         
+            
+             
+             
+           
+            
+         
+     
+    
+     
+  
+ 
+ 

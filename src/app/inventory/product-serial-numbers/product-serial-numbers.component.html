@@ -1,0 +1,228 @@
+
+  <div class="row card-header  crdHdr">
+    
+    <div class="col-lg-1 col-md-1 col-sm-1"> 
+      <button  [ngStyle]="{'color':'#44B244'}"class="btn addMore float-left" title="{{languageService.SalesReturnInfo.allAddTootip}}" (click)="productSerialNumbersService.ProductSerialNumbersFormAction()"> <mat-icon>add_circle</mat-icon></button>
+    </div>
+    <div class="col-lg-10 col-md-10 col-sm-10">
+     
+      <h5 align="left" class="h4 mb-0">  Product Serial Numbers ({{data.catagory}},{{data.subCategory}},{{data.name}})
+        <button class="float-right ml-5" mat-button (click)="onClose()">
+          <mat-icon class="float-right mt-2">close</mat-icon>
+        </button>
+      </h5></div>
+    </div>
+ 
+  <mat-card-content>
+    <div class="card-body">
+    
+      <div class="row animated-div">
+        <div class="col-sm-3">
+      
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input type="text"
+                    placeholder="{{languageService.InvoiceEntry.ChooseSerialNumber}}"
+                    aria-label="Number"
+                    matInput 
+                    name="serialName"
+                    [(ngModel)]="serialName"
+                    (keyup.enter)="onSerach()"
+                    >
+                    
+              
+              <button  mat-icon-button matSuffix aria-label="clear" (click)="resetFilter()" >
+                <mat-icon title="{{languageService.productEntry.productSearchWordCancelEffect}}" class="addMore">close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        
+        </div>
+      </div>
+   
+      <div class="row gx-5 bg-white">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+    
+    
+          <div class="col-md-12" style="overflow-x: scroll;">
+            <div class="smart-table-container" style="width:110%;">
+              <form>
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Action</th>
+                      <th *ngIf="data.addItemVisibilty" scope="col">
+                        <!-- <input type="checkbox" [(ngModel)]="selectAll" (change)="onCheckboxChanged()">  -->
+                        <mat-checkbox name="selectAll" [(ngModel)]="selectAll" (change)="onCheckboxChanged()" class="example-margin"></mat-checkbox>
+                        Select/Unselect
+                     </th>
+      <th scope="col">Serial Number</th>
+      <th scope="col">Rate</th>
+      <th scope="col">Date</th>
+      <th scope="col">Tag Supplier</th>
+      <th scope="col">Supplier Name</th>
+      <th scope="col">Supplier Org. Name</th>
+      <th scope="col">Remarks</th>
+      <th scope="col">Sales Status</th>
+      
+                     
+                    </tr>
+                  </thead>
+               
+                    <tbody [formGroup]="fg"
+                    *ngFor="let fg of productSerialNumbersService.ProductSerialNumbersForm.controls;let i=index" >
+                      <tr>
+                        <td> 
+                           <div class="row">
+                              <div class="col-md-6">
+                                <button  class="btn btn-light ml-1  form-control form-rounded form-control-sm " 
+                                (click)="onDelete(fg.value.key,i)"
+                                >
+                                    <i class="far fa-trash-alt fa-lg text-danger"></i>
+                                    
+                                </button>
+                              </div>
+                              <!-- <div class="col-md-6">
+                                <button
+                                class="btn float-right"
+                                (click)="productSerialNumbersService.ProductSerialNumbersFormAction()"
+                              >
+                                <i class="fa fa-plus"></i>
+                              </button>
+                              </div> -->
+                           </div> 
+                            
+                       
+                        </td>
+      
+                         
+                        <td *ngIf="data.addItemVisibilty">
+                          <mat-checkbox name="isSelected"  formControlName="isSelected" class="example-margin">Check me!</mat-checkbox>
+                        </td>
+      
+            
+            <td>
+            <input
+              class="form-control form-rounded form-control-sm less-bold-lebel"
+              type="text"
+              
+              placeholder="Serial Number"
+              formControlName="serialNumber"
+            />
+            
+            </td>
+      
+            <td>
+              <input
+              class="form-control form-rounded form-control-sm less-bold-lebel"
+              type="number"
+              
+              placeholder="Rate"
+              formControlName="rate"
+            />
+            
+            </td>
+            <td>
+              <input
+              class="form-control form-rounded form-control-sm "
+              type="date"
+              
+              placeholder="Date"
+              formControlName="date"
+            />
+            
+            </td>
+            <td style="width: 15%;">
+      
+                <input type="text"
+                       placeholder="Supplier Mobile"
+                       aria-label="Number"
+                       (keyup)="onkeyupSupplier($event)"
+                       class="form-control form-rounded form-control-sm less-bold-lebel"
+                       formControlName="supplierNumber"
+                       [matAutocomplete]="customer">
+                       
+                <mat-autocomplete autoActiveFirstOption #customer="matAutocomplete">
+                 
+                  <mat-option *ngFor="let option of filteredSupplier" (click)="supplierSelection(option,i)" [value]="option.phone">
+                 {{option.phone}}
+               
+                
+                  </mat-option>
+                </mat-autocomplete>
+                 
+             
+            </td>
+      
+            <td>
+              <input  type="text"     formControlName="supplierName"  
+              class="form-control form-rounded form-control-sm  less-bold-lebel"   placeholder="Supplier Name" >
+            </td>
+            <td>
+              <input  type="text"     formControlName="suplierOrgName"     
+              class="form-control form-rounded form-control-sm less-bold-lebel"    placeholder="Org. Name" >
+            </td>
+            <td>
+            <input
+              class="form-control form-rounded form-control-sm "
+              type="text"
+              
+              placeholder="Remarks"
+              formControlName="remarks"
+            />
+            
+            </td>
+           
+            <td>
+             
+              <select name="isSell" 
+              formControlName="isSell"      
+              class="form-control form-rounded form-control-sm ">
+                          <option value='Yes'>Yes</option>
+                          <option value='No'>No</option>
+                        
+                      </select>
+                           
+              </td>
+      
+          
+                      </tr>
+      
+                      <input
+                      class="form-control form-rounded form-control-sm "
+                      type="hidden"
+                      
+                      placeholder="Product Key"
+                      formControlName="productKey"
+                    />
+                    <input
+                    class="form-control form-rounded form-control-sm "
+                    type="hidden"
+                   
+                    formControlName="key"
+                  />
+      
+                      
+                    </tbody>
+               
+                 
+                </table>
+              </form>
+      
+            </div>
+          </div>
+    
+        </div>
+      </div>
+      <div class="card-footer footer">
+        <button [disabled]="productSerialNumbersService.ProductSerialNumbersForm.invalid" type="submit" 
+          (click)="onSubmit()" class="btn btn-primary btn-sm float-left">Submit</button>
+        <button *ngIf="data.addItemVisibilty" class="btn btn-primary btn-sm float-left btn-space" [disabled]="productSerialNumbersService.ProductSerialNumbersForm.invalid"
+          type="button" (click)="onClose()">Add</button>
+      </div>
+      
+     
+    </div>
+  </mat-card-content>
+
+

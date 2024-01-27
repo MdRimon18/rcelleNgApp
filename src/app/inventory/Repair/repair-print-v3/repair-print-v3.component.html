@@ -1,0 +1,166 @@
+<button (click)="toBack()" mat-raised-button color="accent">|<<</button>
+ 
+<button class="downloadBtn" (click)="captureScreen()" mat-raised-button color="accent">download</button>
+ 
+<div id="content" #content>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML to API - Invoice</title>
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<!-- <link rel="stylesheet" href="sass/main.css" media="screen" charset="utf-8"/> -->
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta http-equiv="content-type" content="text-html; charset=utf-8">
+
+</head>
+
+<body>
+	<header class="clearfix">
+		<div class="container">
+			<img class="invlggo"  style="height: 80px;width: 80px;"     [src]="this.base64Image" >
+			<div class="company-info">
+				<h2 class="title">{{user.orgName}}</h2>
+				<div class="address">
+					<span class="icon"><img src="data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zOnNrZXRjaD0iaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoL25zIg0KCSB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjYuNDIycHgiIGhlaWdodD0iNi43OTJweCINCgkgdmlld0JveD0iMCAwIDYuNDIyIDYuNzkyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2LjQyMiA2Ljc5MiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8dGl0bGU+RmlsbCAxICsgRmlsbCAyPC90aXRsZT4NCjxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPg0KPGc+DQoJPGVsbGlwc2UgZmlsbD0ibm9uZSIgY3g9IjMuMjExIiBjeT0iMS45MzciIHJ4PSIxLjAwNiIgcnk9IjAuOTY4Ii8+DQoJPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTQuNzkyLDQuODMySDQuMTUxQzQuMDg5LDQuOTMxLDQuMDMsNS4wMjMsMy45Nyw1LjExNGgwLjY4M2wxLjE2NCwxLjM5OUgwLjYwNUwxLjc3LDUuMTE0aDAuNjgxDQoJCWMtMC4wNTktMC4wOTEtMC4xMTktMC4xODMtMC4xOC0wLjI4MkgxLjYyOUwwLDYuNzkyaDYuNDIzTDQuNzkyLDQuODMyeiIvPg0KCTxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik01LjIyMiwxLjkzN0M1LjIyMiwwLjg2OSw0LjMyMywwLDMuMjA5LDBDMi4wOTgsMCwxLjE5OCwwLjg2OSwxLjE5OCwxLjkzNw0KCQljMCwxLjA3MSwyLjAxMiwzLjg3NSwyLjAxMiwzLjg3NVM1LjIyMiwzLjAwOCw1LjIyMiwxLjkzN3ogTTIuMjA1LDEuOTM3YzAtMC41MzUsMC40NTEtMC45NjgsMS4wMDYtMC45NjgNCgkJYzAuNTU2LDAsMS4wMDcsMC40MzUsMS4wMDcsMC45NjhjMCwwLjUzNi0wLjQ1MSwwLjk3LTEuMDA3LDAuOTdTMi4yMDUsMi40NzMsMi4yMDUsMS45Mzd6Ii8+DQo8L2c+DQo8L3N2Zz4NCg==" alt="">
+					</span>
+					<p>
+						{{user.AddressLineOne}},<br>
+						{{user.AddressLineTwo}},{{user.State}}
+					</p>
+				</div>
+				<div class="phone">
+					<span class="icon">
+						<img src="data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zOnNrZXRjaD0iaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoL25zIg0KCSB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUuNXB4IiBoZWlnaHQ9IjUuNDk2cHgiDQoJIHZpZXdCb3g9IjAuMjUgMC4yNSA1LjUgNS40OTYiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMC4yNSAwLjI1IDUuNSA1LjQ5NiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8dGl0bGU+RmlsbCAxPC90aXRsZT4NCjxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPg0KPGcgaWQ9IlBhZ2UtMSIgc2tldGNoOnR5cGU9Ik1TUGFnZSI+DQoJPGcgaWQ9IklOVk9JQ0UtMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQyNS4wMDAwMDAsIC03OC4wMDAwMDApIiBza2V0Y2g6dHlwZT0iTVNBcnRib2FyZEdyb3VwIj4NCgkJPGcgaWQ9IlpBR0xBVkxKRSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAuMDAwMDAwLCAyNS4wMDAwMDApIiBza2V0Y2g6dHlwZT0iTVNMYXllckdyb3VwIj4NCgkJCTxnIGlkPSJQSE9ORSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzkzLjAwMDAwMCwgNTEuMDAwMDAwKSIgc2tldGNoOnR5cGU9Ik1TU2hhcGVHcm91cCI+DQoJCQkJPHBhdGggaWQ9IkZpbGwtMSIgZmlsbD0iI0ZGRkZGRiIgZD0iTTcuNjY2LDYuODJMNi44OTIsNy41OUM2Ljg1Niw3LjYyOCw2LjgxMSw3LjY2MSw2Ljc1NSw3LjY4OA0KCQkJCQlDNi42OTgsNy43MTUsNi42NDMsNy43MzIsNi41ODksNy43NGMtMC4wMDQsMC0wLjAxNiwwLjAwMi0wLjAzNSwwLjAwNFM2LjUxLDcuNzQ2LDYuNDc5LDcuNzQ2DQoJCQkJCWMtMC4wNzQsMC0wLjE5My0wLjAxMi0wLjM1OC0wLjAzN1M1Ljc1Myw3LjYyMSw1LjUxNSw3LjUyMmMtMC4yMzktMC4wOTktMC41MS0wLjI0Ny0wLjgxMi0wLjQ0Ng0KCQkJCQlDNC4zOTksNi44NzksNC4wNzcsNi42MDcsMy43MzYsNi4yNjJDMy40NjQsNS45OTQsMy4yMzksNS43MzgsMy4wNjEsNS40OTNDMi44ODIsNS4yNDksMi43MzgsNS4wMjIsMi42MjksNC44MTUNCgkJCQkJQzIuNTIxLDQuNjA3LDIuNDM5LDQuNDE5LDIuMzg1LDQuMjVjLTAuMDU0LTAuMTY5LTAuMDkxLTAuMzE0LTAuMTEtMC40MzdjLTAuMDItMC4xMjMtMC4wMjctMC4yMTktMC4wMjMtMC4yODkNCgkJCQkJczAuMDA2LTAuMTA4LDAuMDA2LTAuMTE2YzAuMDA4LTAuMDU0LDAuMDI1LTAuMTEsMC4wNTItMC4xNjZjMC4wMjctMC4wNTYsMC4wNi0wLjEwMiwwLjA5OS0wLjEzN2wwLjc3NC0wLjc3NA0KCQkJCQlDMy4yMzcsMi4yNzcsMy4yOTksMi4yNSwzLjM2OSwyLjI1YzAuMDUsMCwwLjA5NSwwLjAxNSwwLjEzNCwwLjA0M2MwLjAzOSwwLjAyOSwwLjA3MiwwLjA2NSwwLjA5OSwwLjEwOGwwLjYyMywxLjE4Mg0KCQkJCQlDNC4yNiwzLjY0Niw0LjI3LDMuNzEzLDQuMjU0LDMuNzg3UzQuMjA2LDMuOTIzLDQuMTU1LDMuOTc0TDMuODcsNC4yNTlDMy44NjIsNC4yNjcsMy44NTUsNC4yNzksMy44NDksNC4yOTYNCgkJCQkJQzMuODQzLDQuMzE0LDMuODQsNC4zMjksMy44NCw0LjM0QzMuODU2LDQuNDIyLDMuODkxLDQuNTE1LDMuOTQ1LDQuNjJDMy45OTIsNC43MTMsNC4wNjMsNC44MjYsNC4xNjEsNC45Ng0KCQkJCQljMC4wOTcsMC4xMzQsMC4yMzUsMC4yODgsMC40MTQsMC40NjNDNC43NDksNS42MDIsNC45MDQsNS43NCw1LjA0LDUuODRjMC4xMzYsMC4wOTksMC4yNSwwLjE3MiwwLjM0LDAuMjE4DQoJCQkJCUM1LjQ3Miw2LjEwNCw1LjU0MSw2LjEzMyw1LjU5LDYuMTQzbDAuMDczLDAuMDE0YzAuMDA4LDAsMC4wMjEtMC4wMDIsMC4wMzgtMC4wMDhTNS43Myw2LjEzNiw1LjczOCw2LjEyOEw2LjA3LDUuNzkNCgkJCQkJYzAuMDctMC4wNjIsMC4xNTEtMC4wOTMsMC4yNDQtMC4wOTNjMC4wNjYsMCwwLjExOSwwLjAxMiwwLjE1OCwwLjAzNWwxLjEyOSwwLjY2M0M3LjY4NCw2LjQ0Niw3LjczMiw2LjUxLDcuNzQ4LDYuNTg4DQoJCQkJCUM3Ljc1OSw2LjY3Nyw3LjczMiw2Ljc1NSw3LjY2Niw2LjgyeiIvPg0KCQkJPC9nPg0KCQk8L2c+DQoJPC9nPg0KPC9nPg0KPC9zdmc+DQo=" alt="">
+					</span>
+					<a href="tel:602-519-0450">{{user.phone}}</a>
+				</div>
+				<div class="email">
+					<span class="icon"><img src="data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjZweCIgaGVpZ2h0PSI0cHgiIHZpZXdCb3g9IjAgMCA2IDQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCAzLjQuMSAoMTU2ODEpIC0gaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoIC0tPgogICAgPHRpdGxlPmVtYWlsMTk8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBza2V0Y2g6dHlwZT0iTVNQYWdlIj4KICAgICAgICA8ZyBpZD0iSU5WT0lDRS0zIiBza2V0Y2g6dHlwZT0iTVNBcnRib2FyZEdyb3VwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDI1LjAwMDAwMCwgLTkzLjAwMDAwMCkiIGZpbGw9IiNGRkZGRkYiPgogICAgICAgICAgICA8ZyBpZD0iTUFJTCIgc2tldGNoOnR5cGU9Ik1TTGF5ZXJHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDIzLjAwMDAwMCwgOTAuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMiw3IEw4LDcgTDgsMyBMMiwzIEwyLDcgWiBNNC45OTk4MTU2Miw1LjQ3MDEzMjgyIEwyLjUzOTEzNTI0LDMuMjk2NjA4NzkgTDcuNDYwODY0NzYsMy4yOTY2MDg3OSBMNC45OTk4MTU2Miw1LjQ3MDEzMjgyIFogTTQuMDE5NTQ0NTcsNC45OTkzMDQ2MSBMMi4yOTQ5MjAyNSw2LjUyMjU4ODcyIEwyLjI5NDkyMDI1LDMuNDc1OTI3NzcgTDQuMDE5NTQ0NTcsNC45OTkzMDQ2MSBaIE00LjI0MzIwMDg5LDUuMTk2NjExMTEgTDQuOTk5ODE1NjIsNS44NjQ4Mzg1NSBMNS43NTY0MzAzNSw1LjE5NjYxMTExIEw3LjQ2MjMzOTgyLDYuNzAzMjk4NDkgTDIuNTM3NjYwMTgsNi43MDMyOTg0OSBMNC4yNDMyMDA4OSw1LjE5NjYxMTExIFogTTUuOTgwMDg2NjYsNC45OTkzMDQ2MSBMNy43MDQ3MTA5OCwzLjQ3NTkyNzc3IEw3LjcwNDcxMDk4LDYuNTIyNTg4NzIgTDUuOTgwMDg2NjYsNC45OTkzMDQ2MSBaIiBpZD0iZW1haWwxOSIgc2tldGNoOnR5cGU9Ik1TU2hhcGVHcm91cCI+PC9wYXRoPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=" alt="">
+					</span>
+					<a href="mailto:company@example.com">{{user.storeType}}</a>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<section>
+		<div class="container">
+			<div class="details clearfix">
+				<div class="client left">
+					<p class="name">{{invoiceDetails.clienName}}</p>
+					<p>{{invoiceDetails.mobile}},</p>
+					<a href="mailto:john@example.com">customer@info.com</a>
+				</div>
+				<div class="data right">
+					<div class="title">Invoice {{invoiceDetails.invoiceNo}}</div>
+					<div class="date">
+						Date of Invoice: {{invoiceDetails.entryDate}}<br>
+						Due Date: {{todayDate}}<br>
+						Sales By:{{invoiceDetails.salesBy}}
+					</div>
+				</div>
+			</div>
+
+			<table border="0" cellspacing="0" cellpadding="0">
+				<thead>
+					<tr>
+						<th class="desc">Description</th>
+						<th class="qty">Quantity</th>
+						<th class="qty">Unit</th>
+						<th class="qty">Wrnty/Grnty</th>
+					 
+						<th class="qty">Vat</th>
+						<th class="qty">Discount</th>
+						<th class="unit">Unit price</th>
+						<th class="total">Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of items; index as i;">
+            <td class="desc"><h3>{{item.ProductCategory}},{{item.ProductSubCategory}},{{item.ProductBrand}}</h3>{{item.serials}}  </td>
+						<td class="qty">{{item.Quantity}}</td>
+						<td class="qty">{{item.unit}}</td>
+						<td class="qty">{{item.warantyNgurenty}}</td>
+						<td class="qty">{{item.vatPercent}}</td>
+						<td class="qty">{{item.discountPercent}}</td>
+					
+						<td class="unit">{{item.Rate}}</td>
+						<td class="total">{{item.Amount}}</td>
+					</tr>
+					 
+				</tbody>
+			</table>
+			<div class="no-break">
+				<table class="grand-total boldClr">
+					<tbody>
+						<tr class="total">
+							<td class="qty"></td>
+							<td class="desc"></td>
+							<td class="unit">SUBTOTAL:</td>
+							<td class="total">{{invoiceDetails.SubTotal}} .TK</td>
+						</tr>
+            <tr class="total">
+							<td class="qty"></td>
+							<td class="desc"></td>
+							<td class="unit">Vat:</td>
+							<td class="total">{{invoiceDetails.totalVat}}</td>
+						</tr>
+            <tr class="total">
+							<td class="qty"></td>
+							<td class="desc"></td>
+							<td class="unit">Discount:</td>
+							<td class="total">{{invoiceDetails.totalDiscount}}</td>
+						</tr>
+            <tr class="total">
+							<td class="qty"></td>
+							<td class="desc"></td>
+							<td class="unit">Prev. Due:</td>
+							<td class="total">{{invoiceDetails.PrevDue}}</td>
+						</tr>
+						<tr class="total">
+							<td class="qty"></td>
+							<td class="desc"></td>
+							<td class="unit">Special Discount:</td>
+							<td class="total">{{invoiceDetails.totalAddiDiscnt}} .TK</td>
+						</tr>
+						<tr class="total">
+							<td class="qty"></td>
+							<td class="desc"></td>
+							<td class="unit"> Paid Amount:</td>
+							<td class="total">{{invoiceDetails.PaidAmount}} .TK</td>
+						</tr>
+					 
+						<tr class="total">
+							<td class="qty"></td>
+							<td class="desc"></td>
+							<td class="unit">Due Amount:</td>
+							<td class="total">{{invoiceDetails.DueAmount}} .TK</td>
+						</tr>
+						<tr class="total">
+							<td class="grand-total" colspan="4"><div><span>GRAND TOTAL:</span>{{invoiceDetails.totalAmount}} .TK</div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+
+		<div class="container">
+      <div class="signature">Author Signature.............</div>
+      <div class="signature">Client Signature.............</div>
+  
+			<div class="thanks">Thank you!</div>
+			<!-- <div class="notice">
+				<div>NOTICE:</div>
+				<div>A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+			</div> -->
+			<div class="end">Invoice was created on a computer and is valid without the signature and seal.</div>
+		</div>
+	</footer>
+
+</body>
+
+</html>
+</div>

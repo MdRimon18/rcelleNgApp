@@ -1,0 +1,33 @@
+ 
+ 
+ <div class="card-header crdHdr"> <h3 class="h4 mb-0">
+  <button (click)="backTo()"
+  class="btn"
+><i class="fas fa-arrow-left"></i>
+</button>
+  {{languageService.SalesReturnInfo.productCategoryInfo}}</h3></div>
+ <div class="card-body animated-div">
+  <form action="">
+   <div class="row gx-5">
+  
+<div class="col-sm-5">
+  <div class="form-group">
+    <label for="ProductName" class="label text-dark">{{languageService.SalesReturnInfo.productCategoryInfo}}</label><span class="text-danger">*</span>       
+    <input required name="ProductName"  #productNm="ngModel"
+    [(ngModel)]="productCategoryObj.ProductName" type="text" 
+    class="form-control form-rounded"
+      id="ProductName" placeholder="{{languageService.SalesReturnInfo.productCategoryInfo}}" >
+      <div class="text-left text-danger"
+      *ngIf="productNm.invalid&&productNm.touched">
+      {{languageService.SalesReturnInfo.productCategoryName}}{{languageService.SalesReturnInfo.required}}
+      
+    </div>
+  </div>
+</div>
+</div>
+<input type="hidden" name="key" [(ngModel)]="productCategoryObj.key" >
+<button *ngIf="isButtonShow==false" [disabled]="productCategoryObj.ProductName==''||productCategoryObj.ProductName==nul||productCategoryObj.ProductName==undefined" class="btn btn-primary"  (click)="save()">{{languageService.unitEntry.SaveButton}}</button>
+<button *ngIf="isButtonShow==true"  [disabled]="productCategoryObj.ProductName==''||productCategoryObj.ProductName==nul||productCategoryObj.ProductName==undefined" class="btn btn-primary"  (click)="edit()">{{languageService.unitEntry.SaveButton}}</button>
+</form>
+</div>
+ 

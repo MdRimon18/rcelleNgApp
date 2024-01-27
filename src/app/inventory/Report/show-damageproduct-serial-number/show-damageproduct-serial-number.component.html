@@ -1,0 +1,122 @@
+<nb-card>
+  <div class="example-header">
+    <h5>  
+      <button class="float-right ml-5" mat-button (click)="onClose()">
+        <mat-icon class="float-right mt-2">close</mat-icon>
+      </button> </h5>
+  </div>
+
+  <nb-card-body>
+   
+    <div class="col-md-12" style="overflow-x: scroll;">
+      <div class="smart-table-container" style="width:2500px;">
+        <form>
+          <table class="">
+            <thead>
+              <tr>
+                <!-- <th scope="col">Action</th> -->
+              
+<th scope="col">Serial Number</th>
+
+<th scope="col">Sales Status</th>
+<th scope="col">Select/Unselect</th>
+<th scope="col">Tag Supplier</th>
+<th scope="col">Supplier Name</th>
+<th scope="col">Supplier Org. Name</th>
+<th scope="col">Remarks</th>
+              
+              </tr>
+            </thead>
+        
+              <tbody [formGroup]="fg"
+              *ngFor="let fg of productSerialNumbersService.ProductSerialNumbersForm.controls;let i=index" >
+                <tr>
+                
+      <td>
+      <input
+        class="form-control form-rounded form-control-sm "
+        type="text"
+        
+        placeholder="Serial Number"
+        formControlName="serialNumber"
+      />
+      
+      </td>
+
+      
+      
+      <td>
+      
+        <select name="isSell" 
+        formControlName="isSell" class="form-control">
+                    <option value='Yes'>Yes</option>
+                    <option value='No'>No</option>
+                  
+                </select>
+        </td>
+        <td>
+          <mat-checkbox name="isSelected"  formControlName="isSelected" class="example-margin">Check me!</mat-checkbox>
+        </td>
+        <td>
+        
+            <input type="text"
+                  placeholder="Supplier Mobile"
+                  readonly
+                  class="form-control form-rounded form-control-sm "
+                  
+                  formControlName="supplierNumber"
+                >
+
+        </td>
+  
+        <td>
+          <input  type="text"
+          readonly     
+          formControlName="supplierName"    
+          class="form-control form-rounded form-control-sm "   
+            placeholder="Supplier Name" >
+        </td>
+        <td>
+          <input  type="text" 
+          readonly
+              formControlName="suplierOrgName" 
+              class="form-control form-rounded form-control-sm "
+                    placeholder="Org. Name" >
+        </td>
+        <td>
+          <input
+            class="form-control form-rounded form-control-sm "
+            type="text"
+            
+            placeholder="Remarks"
+            formControlName="remarks"
+          />
+          
+          </td>
+                </tr>
+
+                <input
+                class="form-control form-rounded form-control-sm "
+                type="hidden"
+                
+                placeholder="Product Key"
+                formControlName="productKey"
+              />
+              <input
+              class="form-control form-rounded form-control-sm "
+              type="hidden"
+            
+              formControlName="key"
+            />
+
+                
+              </tbody>
+        
+          
+          </table>
+        </form>
+
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

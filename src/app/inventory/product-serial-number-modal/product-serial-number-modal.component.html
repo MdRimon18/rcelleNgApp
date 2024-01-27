@@ -1,0 +1,178 @@
+  
+  <div class="card-header row crdHdr" > 
+    <div class="col-sm-9 col-md-9 col-lg-9"> 
+       <h3 class="h4 mb-0">Select Serial Numbers</h3> 
+      </div>
+     <div class="col-sm-3 col-md-3 col-lg-3">
+
+      <button class="float-right ml-5" mat-button (click)="onClose()">
+        <mat-icon class="float-right mt-2">close</mat-icon>
+      </button>
+     </div>
+    
+    
+  
+  </div>
+  
+  <nb-card>
+     
+    
+      <div  class="card-body">
+        <div class="col-sm-3">
+      
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input type="text"
+                    placeholder="{{languageService.InvoiceEntry.ChooseSerialNumber}}"
+                    aria-label="Number"
+                    matInput
+                    name="searchObjectName"
+                    [(ngModel)]="searchObjectName"
+                    (keyup.enter)="onSerach()"
+                    >
+                    
+              
+              <button  mat-icon-button matSuffix aria-label="clear" (click)="resetFilter()" >
+                <mat-icon title="{{languageService.productEntry.productSearchWordCancelEffect}}" class="addMore">close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        
+        </div>
+      </div>
+      <div class="col-md-12" style="overflow-x: scroll;">
+        <div class="smart-table-container" style="width:2500px;">
+          <form>
+            <table class="">
+              <thead>
+                <tr>
+                  <!-- <th scope="col">Action</th> -->
+                
+  <th scope="col">Serial Number</th>
+  <!-- <th scope="col">Rate</th> -->
+
+  <th scope="col">Sales Status</th>
+  <th scope="col">
+     <!-- <input type="checkbox" [(ngModel)]="selectAll" (change)="onCheckboxChanged()">  -->
+     <mat-checkbox name="selectAll" [(ngModel)]="selectAll" (change)="onCheckboxChanged()" class="example-margin"></mat-checkbox>
+     Select/Unselect
+  </th>
+  <th scope="col">Tag Supplier</th>
+  <th scope="col">Supplier Name</th>
+  <th scope="col">Supplier Org. Name</th>
+  <th scope="col">Remarks</th>
+                
+                </tr>
+              </thead>
+          
+                <tbody [formGroup]="fg"
+                *ngFor="let fg of productSerialNumbersService.ProductSerialNumbersForm.controls;let i=index" >
+                  <tr>
+                  
+        <td>
+        <input
+          class="form-control form-rounded form-control-sm less-bold-lebel"
+          type="text"
+          
+          placeholder="Serial Number"
+          formControlName="serialNumber"
+        />
+        
+        </td>
+     
+          <input
+            class="form-control form-rounded form-control-sm "
+            type="hidden"
+            
+            placeholder="Rate"
+            formControlName="rate"  
+          />
+          <input
+            class="form-control form-rounded form-control-sm "
+            type="hidden"
+            
+            placeholder="date"
+            formControlName="date"  
+          />
+           
+        
+        
+        <td>
+        
+          <select name="isSell" 
+          formControlName="isSell" class="form-control">
+                      <option value='Yes'>Yes</option>
+                      <option value='No'>No</option>
+                    
+                  </select>
+          </td>
+          <td>
+            <mat-checkbox name="isSelected"  formControlName="isSelected" class="example-margin">Check me!</mat-checkbox>
+          </td>
+          <td>
+          
+              <input type="text"
+                    placeholder="Supplier Mobile"
+                    readonly
+                    class="form-control form-rounded form-control-sm less-bold-lebel"
+                    
+                    formControlName="supplierNumber"
+                  >
+  
+          </td>
+    
+          <td>
+            <input  type="text"
+            readonly     
+            formControlName="supplierName"    
+            class="form-control form-rounded form-control-sm less-bold-lebel"   
+              placeholder="Supplier Name" >
+          </td>
+          <td>
+            <input  type="text" 
+            readonly
+                formControlName="suplierOrgName" 
+                class="form-control form-rounded form-control-sm less-bold-lebel"
+                      placeholder="Org. Name" >
+          </td>
+          <td>
+            <input
+              class="form-control form-rounded form-control-sm "
+              type="text"
+              
+              placeholder="Remarks"
+              formControlName="remarks"
+            />
+            
+            </td>
+                  </tr>
+
+                  <input
+                  class="form-control form-rounded form-control-sm "
+                  type="hidden"
+                  
+                  placeholder="Product Key"
+                  formControlName="productKey"
+                />
+                <input
+                class="form-control form-rounded form-control-sm "
+                type="hidden"
+              
+                formControlName="key"
+              />
+
+              
+                </tbody>
+          
+            
+            </table>
+          </form>
+
+        </div>
+      </div>
+   
+     
+    <nb-card-footer class="footer">
+      <button class="btn btn-primary btn-sm float-left" [disabled]="productSerialNumbersService.ProductSerialNumbersForm.invalid"   type="submit" (click)=" onSubmit()" >Add</button>
+    </nb-card-footer>
+  </nb-card>

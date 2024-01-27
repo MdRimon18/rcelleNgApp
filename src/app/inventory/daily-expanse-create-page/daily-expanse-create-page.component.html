@@ -1,0 +1,121 @@
+<div class="card">
+  <div class="card-body">
+  
+
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>  
+        <button (click)="backToExpenseInfo()"
+        class="btn btn-outline-success "
+        
+      >
+      <i class="fas fa-arrow-left"></i>
+      </button> Create Daily Expanse 
+    </nb-card-header>
+        <nb-card-body>
+          <form>
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="date" class="label">Date</label>
+                    <input
+                    class="form-control form-control-sm form-rounded"
+                    type="date"
+                    name="date" 
+                    #eDate="ngModel"
+                    [(ngModel)]="dailyIncomeExpanse.date"
+                    placeholder="Select Date"
+                    required >
+                  
+                
+                    <div class="text-left text-danger"
+                    *ngIf="dailyIncomeExpanse.date==''&&eDate.touched">
+                    Date is required 
+                  </div>
+                </div>
+              
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="country">Account Head</label>
+                  <select class="form-control form-control-sm form-rounded"
+                   id="accountHead" name="accountHead"  [(ngModel)]="dailyIncomeExpanse.accountHead"
+                    required #country="ngModel"
+                    (change)="onChangeAccountHead()"
+                    >
+                    <option *ngFor="let head of accountHeads" [value]="head.name">{{ head.name }}</option>
+                  </select>
+                  
+                  <div *ngIf="country.invalid && country.touched" class="alert alert-danger">
+                    Account Head is required.
+                  </div>
+                </div>
+              </div>
+          
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="totalExpense" class="label">Total Expense</label>
+                   <input name="totalExpense"  #totalExpense="ngModel"
+                   [(ngModel)]="dailyIncomeExpanse.totalExpense" type="number"  class="form-control form-control-sm form-rounded"
+                     id="totalExpense" placeholder="Total Expense" required>
+                     <div class="text-left text-danger"
+                     *ngIf="totalExpense.invalid&&totalExpense.touched">
+                     Total Expense is Required !
+                   </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="purpose" class="label">Remarks</label>
+                  <textarea  id="" cols="30" rows="2"
+                  name="purpose"  #purpose="ngModel"
+                  [(ngModel)]="dailyIncomeExpanse.purpose" type="text" class="form-control form-control-sm form-rounded" class="form-control"
+                    id="purpose" placeholder="Remarks" 
+                  ></textarea>
+                  
+                    <!-- <div class="text-left text-danger"
+                    *ngIf="purpose.invalid&&purpose.touched">
+                  Purpose is Required !
+                  </div> -->
+                </div>
+              </div>
+            
+            </div>
+            
+            <input name="account"
+                   [(ngModel)]="dailyIncomeExpanse.account" type="hidden"  
+                     id="account" placeholder="Account">
+          
+             <div class="row">
+              <div class="col-sm-3 ">
+                <div class="form-group ">
+                  <button *ngIf="editkey==null" class="btn btn-primary btn-sm mr-1"   (click)="save(dailyIncomeExpanse)">Submit</button>
+                  <button *ngIf="editkey!=null" class="btn btn-primary btn-sm mr-1"   (click)="edit(dailyIncomeExpanse)">Update</button>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                 
+                </div>
+              </div>
+            </div> 
+            
+          </form>
+        </nb-card-body>
+     
+    </nb-card>
+  </div>
+</div>
+</div>
+</div>

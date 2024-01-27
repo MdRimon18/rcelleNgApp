@@ -1,0 +1,128 @@
+<div class="page-contain single-product">
+  <div class="container">
+
+      <!-- Main content -->
+      <div id="main-content" class="main-content">
+          
+          <!-- summary info -->
+          <div class="sumary-product single-layout">
+              <div class="media">   
+                  <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
+                      <li  class="image-container"><img  [src]="product?.imageLink" alt="{{product?.name}}" width="550" height="900"></li>
+                     
+                  </ul>
+                  <ul class="biolife-carousel slider-nav" data-slick='{"arrows":false,"dots":false,"centerMode":false,"focusOnSelect":true,"slidesMargin":10,"slidesToShow":4,"slidesToScroll":1,"asNavFor":".slider-for"}'>
+                      <li><img src="assets/e-images/details-product/thumb_01.jpg" alt="" width="88" height="88"></li>
+                      <li><img src="assets/e-images/details-product/thumb_02.jpg" alt="" width="88" height="88"></li>
+                      <li><img src="assets/e-images/details-product/thumb_03.jpg" alt="" width="88" height="88"></li>
+                      <li><img src="assets/e-images/details-product/thumb_04.jpg" alt="" width="88" height="88"></li>
+                      <li><img src="assets/e-images/details-product/thumb_05.jpg" alt="" width="88" height="88"></li>
+                      <li><img src="assets/e-images/details-product/thumb_06.jpg" alt="" width="88" height="88"></li>
+                      <li><img src="assets/e-images/details-product/thumb_07.jpg" alt="" width="88" height="88"></li>
+                  </ul>
+              </div>
+              <div class="product-attribute">
+                  <!-- <h3 class="title"></h3> -->
+                  <div class="rating">
+                      <p class="star-rating"><span class="width-80percent"></span></p>
+                      <!-- <span class="review-count">(04 Reviews)</span>
+                      <span class="qa-text">Q&A</span>
+                      <b class="category">By: Natural food</b> -->
+                  </div>
+                  <span class="sku"><h3>{{product?.catagory}} {{product?.subCategory}} {{product?.name}}</h3></span>
+                  <p class="excerpt">{{product?.Desc}}</p>
+                  <div class="price">
+                      <ins><span class="price-amount"><span class="currencySymbol">TK.</span>{{product?.cost}}</span></ins>
+                      <del><span class="price-amount"><span class="currencySymbol">TK.</span>{{product?.previousCost}}</span></del>
+                  </div>
+                  <div class="product-atts">
+                      <div class="atts-item">
+                          <span class="title">Brand:{{product?.brand}}</span>
+                          <br><span class="title">Color:{{product?.color}}</span>
+                          <br><span class="title">Size:{{product?.size}}</span>
+                          <!-- <ul class="color-list">
+                              <li class="color-item"><a href="#" class="c-link"><span class="symbol img-color"></span>Multi</a></li>
+                              <li class="color-item"><a href="#" class="c-link"><span class="symbol hex-code color-01"></span>Red</a></li>
+                              <li class="color-item"><a href="#" class="c-link"><span class="symbol hex-code color-02"></span>Orrange</a></li>
+                              <li class="color-item"><a href="#" class="c-link"><span class="symbol hex-code color-03"></span>Other</a></li>
+                          </ul> -->
+                      </div>
+                  </div>
+                  <div class="shipping-info">
+                      <p *ngIf="product?.shippingDay>0" class="shipping-day">{{product?.shippingDay}}-Day Shipping</p>
+                      <!-- <p class="for-today">Pree Pickup Today</p> -->
+                  </div>
+              </div>
+              <div class="action-form">
+                  <div class="quantity-box">
+                      <span class="title"> Quantity:</span>
+                     <strong>{{itemCartTblService.totalQty()}}</strong> 
+                  </div>
+                  <div class="total-price-contain">
+                      <span class="title">Total Price:</span>
+                      <p class="price">&#x9F3;{{itemCartTblService.totalCount()}}</p>
+                  </div>
+                  <div class="buttons">
+                      <a  (click)="itemCartTblService.addToCart(product)" *ngIf="product?.quantity>0" class="btn add-to-cart-btn">add to cart</a>
+                      <a    *ngIf="product?.quantity==0" class="btn add-to-cart-btn">Stock Finish</a>
+                      <!-- <p class="pull-row">
+                          <a href="#" class="btn wishlist-btn">wishlist</a>
+                          <a href="#" class="btn compare-btn">compare</a>
+                      </p> -->
+                  </div>
+                  <!-- <div class="location-shipping-to">
+                      <span class="title">Ship to:</span>
+                      <select name="shipping_to" class="country">
+                          <option value="-1">Select Country</option>
+                          <option value="america">America</option>
+                          <option value="france">France</option>
+                          <option value="germany">Germany</option>
+                          <option value="japan">Japan</option>
+                      </select>
+                  </div>
+                  <div class="social-media">
+                      <ul class="social-list">
+                          <li><a href="#" class="social-link"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                          <li><a href="#" class="social-link"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                          <li><a href="#" class="social-link"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                          <li><a href="#" class="social-link"><i class="fa fa-share-alt" aria-hidden="true"></i></a></li>
+                          <li><a href="#" class="social-link"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                      </ul>
+                  </div> -->
+                  <div class="acepted-payment-methods">
+                      <ul class="payment-methods">
+                          <li><img src="assets/e-images/card1.jpg" alt="" width="51" height="36"></li>
+                          <li><img src="assets/e-images/card2.jpg" alt="" width="51" height="36"></li>
+                          <li><img src="assets/e-images/card3.jpg" alt="" width="51" height="36"></li>
+                          <li><img src="assets/e-images/card4.jpg" alt="" width="51" height="36"></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Tab info -->
+          <div class="product-tabs single-layout biolife-tab-contain">
+              <div class="tab-head">
+                <mat-tab-group dynamicHeight>
+                    <mat-tab label="Addition Information">
+                      <div class="example-small-box mat-elevation-z4">
+                        {{product?.additionDesc}}
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Shipping & Delivery Info">
+                      <div class="example-large-box mat-elevation-z4">
+                        {{product?.shippingDetails}}
+                      </div>
+                    </mat-tab>
+                  </mat-tab-group>
+
+
+                 
+              </div>
+               
+          </div>
+        
+       
+      </div>
+  </div>
+</div>

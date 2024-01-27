@@ -1,0 +1,83 @@
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-icon (click)="itemCardExpand()" matBadge="{{itemCartTblService.ObjectReciever.value.length}}" matBadgeColor="warn">home</mat-icon> -->
+ <div class="row">
+  <div class="form-group">
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Choose Product"
+             aria-label="Number"
+              
+             matInput
+             [formControl]="myControlProduct"
+             [matAutocomplete]="customer">
+             
+      <mat-autocomplete autoActiveFirstOption #customer="matAutocomplete">
+       
+        <mat-option *ngFor="let option of filteredOptionsProduct | async" [value]="option.name">
+       {{option.name}}
+        <button class="btn btn-outline-success" (click)="productSelection(option)">
+                  <i class="fa fa-plus" ></i> 
+              </button>
+      
+        </mat-option>
+      </mat-autocomplete>
+      <button mat-icon-button matSuffix aria-label="clear" (click)="applyFilter()" >
+        <mat-icon title="close" class="addMore">close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+ </div>
+ 
+ <div class="row" >
+  
+
+   <div class="col-md-4 mb-3" *ngFor="let user of productInfosFiltered| paginate: { itemsPerPage:9, currentPage: p }; index as i;" >
+
+    <mat-card class="example-card">
+      <!-- <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      <!-- <img *ngIf="!user.imageLink" mat-card-md-image src="assets/images2/tomato.jpg" > -->
+     <img *ngIf="user.imageLink" mat-card-md-image [src]="user.imageLink" >
+       
+      <mat-card-content>
+        <!-- <p>This card indeterminates progress bar. {{i}}</p> -->
+        <!-- <p>{{longText}}</p> -->
+      </mat-card-content>
+      <div class="card-body text-center">
+    
+        <h5>{{user.name}}</h5>
+        <p class="small text-muted text-uppercase mb-2">{{user.catagory}}</p>
+        
+        <hr>
+        <h6 class="mb-3">
+          <!-- <span class="text-danger mr-1">{{user.cost}}</span> -->
+          <span class="text-grey">TK. {{user.cost}}</span>
+        </h6>
+          <button *ngIf="user.quantity==0" type="button" class="btn btn-warning btn-sm mr-1 mb-2">
+            <i class="fas fa-shopping-cart pr-2"></i>Stock Finish
+          </button>
+          <button *ngIf="user.quantity>0" (click)="addToCart(user)" type="button" class="btn btn-success btn-sm mr-1 mb-2">
+            <i class="fas fa-shopping-cart pr-2" ></i>Add to cart
+          </button>
+        <button type="button" (click)="Details(user.key)" class="btn btn-light btn-sm mr-1 mb-2">
+          <i class="fas fa-info-circle pr-2"></i>Details
+        </button>
+        <!-- <button type="button" class="btn btn-danger btn-sm px-3 mb-2 material-tooltip-main" data-toggle="tooltip" data-placement="top" title="Add to wishlist">
+          <i class="far fa-heart"></i>
+        </button> -->
+    
+      </div>
+    </mat-card>
+   </div>
+ </div>
+
+ <pagination-controls (pageChange)="p = $event"></pagination-controls>

@@ -1,0 +1,55 @@
+     
+.make-gold {
+  background-color: #bfdeff;
+}
+.mat-row:hover,
+.mat-row:hover .mat-column-name {
+  background-color: #d1d3e0;
+}
+p {
+  font-family: Lato;
+}
+
+.d-none {
+  display: none;
+}
+
+.table-container {
+
+
+  overflow: auto;
+  height:350px;
+  table {
+    width: 100%;
+  }
+  th,
+  td {
+    padding: 0 1rem;
+    background: none;
+  
+  }
+  th:nth-child(1) {
+    width: 20px;
+  }
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+  .no-default-height {
+    height: unset;
+  }
+  .filters-container {
+    overflow: hidden;
+    max-height: 0px;
+    transition: max-height 0.5s ease-in-out;
+    &.animate {
+      max-height: 60px !important;
+    }
+  }
+}
+
+.mat-header-row{
+  position: sticky;
+  top:0;
+  z-index:1;
+  background: white;
+  } 

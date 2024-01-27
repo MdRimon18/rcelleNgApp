@@ -1,0 +1,122 @@
+  <!-- Sign up form -->
+  <section class="signup">
+    <div class="container">
+        <div class="signup-content ">
+          <div class="row">
+              <div class="col-md-5">
+                  
+                
+                      <h2 class="form-title">Create Application User</h2>
+                      <form method="POST" #form="ngForm" class="register-form" id="register-form">
+                          <div class="form-group">
+                              <label for="name">User Name</label>
+                              <input #Name="ngModel" type="text" name="name" id="name"
+                              class="form-control form-control-sm form-rounded" 
+                              [(ngModel)]="singupObj.name" placeholder="{{languageService.productEntry.Name}}"/>
+                              <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.name==''&&
+                               Name.touched
+                              "
+                            >
+                            {{languageService.productEntry.nameRequird}} 
+                            </div>
+                          </div>
+                         
+                          <div class="form-group">
+                            
+                            <!-- <div class="row"> -->
+                              <!-- <div class="col-md-9" > -->
+                                <label for="phone">User Phone No</label>
+                                <input required #Phone="ngModel" type="text" name="phone" 
+                                class="form-control form-control-sm form-rounded"
+                                id="phone" [(ngModel)]="singupObj.phone" 
+                                placeholder=" {{languageService.productEntry.mobile}}"/> 
+                              <!-- </div> -->
+                              <!-- <div class="col-md-3"><Button type="button" (click)="findExistingSystemCustomer()" class="btn btn-primary">Search</Button></div> -->
+                              
+                            <!-- </div> -->
+                            
+                                <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.phone==''&&
+                              Phone.touched
+                              "
+                            >
+                            {{languageService.productEntry.mobileRequired}}"
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="name">User Password</label>
+                          <input #pass="ngModel" type="password" name="pass" id="pass"
+                          class="form-control form-control-sm form-rounded"
+                           [(ngModel)]="singupObj.pass" placeholder="  {{languageService.productEntry.password}}"/>
+                          <div
+                          class="text-left text-danger"
+                          *ngIf="
+                          singupObj.pass==''&&
+                          pass.touched
+                          "
+                        >
+                        {{languageService.productEntry.passwordRequird}}
+                        </div>
+                      </div>
+                          <!-- <div class="form-group">
+                              <label for="userType"><i class="fas fa-user-lock"></i></label>
+                              <select #userType="ngModel" name="userType"  
+                              [(ngModel)]="singupObj.userType" class="form-control">
+                                <option value="">  {{languageService.productEntry.selectType}}</option>
+                                <option *ngFor="let s of UserTypeList" [value]="s.name">{{s.name}}</option>
+                            </select>
+                            <div
+                                  class="text-left text-danger"
+                                  *ngIf="
+                                  singupObj.userType==''&&
+                                  userType.touched
+                                  "
+                                >
+                                {{languageService.productEntry.typeRequird}}
+                                </div>
+                          </div> -->
+                          <div class="form-group">
+                            <label for="designation">Designation</label>
+                            <input required #Designation="ngModel" 
+                            type="text" name="designation" id="designation" 
+                            class="form-control form-control-sm form-rounded"
+                            [(ngModel)]="singupObj.designation" 
+                            placeholder="{{languageService.productEntry.designation}}"/>
+                            <!-- <div
+                          class="text-left text-danger"
+                          *ngIf="
+                          singupObj.name==''&&
+                          Name.touched
+                          "
+                        >
+                        Customer Name is required
+                        </div> -->
+                        </div>
+                          <div class="form-group form-button mt-2">
+                              <input [disabled]="
+                              singupObj.userType==''||singupObj.name==''||singupObj.phone=='' 
+                            " type="button" name="signup" id="signup" (click)="signUp()" class="btn btn-primary btn-sm" value="Register"/>
+                          </div>
+                      </form>
+                  
+              </div>
+              <div class="col-md-6">
+                  
+                      <figure><img src="assets/images2/emp.jpg" alt="sing up image"></figure>
+                     
+                  
+              </div>
+        </div>
+           
+           
+        </div>
+    </div>
+  </section>
+  
+  
+  

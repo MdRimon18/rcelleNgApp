@@ -1,0 +1,385 @@
+ 
+   <div class="card-header crdHdr"> 
+   
+    <h3 class="h4 mb-0">
+     <button (click)="backToProductInfo()"
+     class="btn"
+   ><i class="fas fa-arrow-left"></i>
+   </button>
+  {{languageService.productEntry.productEntryTitle}}</h3></div>
+  <div class="card-body">
+  
+    <div class="row gx-5">
+    
+           <div class="row">
+             <div class="col-sm-3 animated-div animated-div">
+               <div class="form-group">
+                 <label for="catagory" class="label text-dark"> {{languageService.productEntry.productCategory}}</label><span class="text-danger">*</span>              
+                 <select required name="catagory"  #catagory="ngModel" 
+                 (change)="OnCategoryDDLChange(Product.catagory)"
+                 [(ngModel)]="Product.catagory" class="form-control form-rounded">
+                   <option value="">{{languageService.productEntry.Select}} {{languageService.productEntry.productCategory}}  </option>
+                   <option *ngFor="let productCategorie of productCategories" [value]="productCategorie.ProductName">{{productCategorie.ProductName}}</option>
+               </select>
+                    <div class="text-left text-danger"
+                    *ngIf="catagory.invalid&&catagory.touched">
+                    {{languageService.productEntry.productCategory}} {{languageService.productEntry.Required}}! !
+                  </div>
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div animated-div">
+               <div class="form-group">
+                 <label for="subCategory" class="label text-dark">{{languageService.productEntry.subCategory}}</label>               
+                 <select name="subCategory"  #subCategory="ngModel"
+                 [(ngModel)]="Product.subCategory" class="form-control form-rounded">
+                   <option value=''>{{languageService.productEntry.Select}} {{languageService.productEntry.subCategory}} </option>
+                   <option *ngFor="let productSubCategorie of productSubCategories"  [value]="productSubCategorie.SubCategoreisName">{{productSubCategorie.SubCategoreisName}}</option>
+               </select>
+                    
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="name" class="label text-dark">{{languageService.productEntry.productName}}</label><span class="text-danger">*</span> 
+                  <input name="name"  #name="ngModel"
+                  [(ngModel)]="Product.name" type="text" class="form-control form-rounded" 
+                    id="name" placeholder="{{languageService.productEntry.productName}}" required>
+                    <div class="text-left text-danger"
+                    *ngIf="name.invalid&&name.touched">
+                    {{languageService.productEntry.productName}} {{languageService.productEntry.Required}}!
+                  </div>
+               </div>
+             </div>
+             
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="serialNumber" class="label text-dark">{{languageService.productEntry.serialNumber}}</label>
+                  <input readonly name="serialNumber"  #SerialNumber="ngModel"
+                  [(ngModel)]="Product.serialNumber" type="text" class="form-control form-rounded" 
+                    id="serialNumber" placeholder="{{languageService.productEntry.serialNumber}}" required>
+                   
+               </div>
+             </div>
+         
+            
+            
+           </div>
+           <div class="row">
+             <div class="col-sm-3 animated-div">
+               <div class="form-group" >
+                 <label for="quantity" class="label text-dark">{{languageService.productEntry.OpeningQuantity}}</label><span class="text-danger">*</span>
+                 <input (change)="vatAmountNDiscountCalculation()"  name="quantity"   #quantity="ngModel"
+                 [(ngModel)]="Product.quantity" type="number" class="form-control form-rounded" 
+                   id="quantity" placeholder="{{languageService.productEntry.OpeningQuantity}}" required>
+                   <div class="text-left text-danger"
+                   *ngIf="quantity.invalid&&quantity.touched">
+                   {{languageService.productEntry.OpeningQuantity}} {{languageService.productEntry.Required}}!
+                 </div>
+               </div>
+               
+             </div>  
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="alertQuantity" class="label text-dark">{{languageService.productEntry.AlertQuantity}}</label>
+                 <input name="alertQuantity"  #alertQuantity="ngModel"
+                 [(ngModel)]="Product.alertQuantity" type="number" class="form-control form-rounded"
+                   id="alertQuantity" placeholder="{{languageService.productEntry.AlertQuantity}}">
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="alertQuantity.invalid&&alertQuantity.touched">
+                   Alert Quantity is Required !
+                 </div> -->
+               </div>
+             </div>
+           
+             
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="productBuyingPrice" class="label text-dark">{{languageService.productEntry.BuyingPrice}}</label><span class="text-danger">*</span>
+                  <input name="productBuyingPrice"  
+                      #productBuyingPrice="ngModel"
+                    [(ngModel)]="Product.productBuyingPrice" type="number" 
+                    class="form-control form-rounded" 
+                    placeholder="{{languageService.productEntry.BuyingPrice}}" 
+                    required>
+                    <div class="text-left text-danger"
+                    *ngIf="productBuyingPrice.invalid&&productBuyingPrice.touched">
+                    {{languageService.productEntry.BuyingPrice}} {{languageService.productEntry.Required}}!
+                  </div>  
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="cost" class="label text-dark">{{languageService.productEntry.SellingPrice}} </label><span class="text-danger">*</span>
+                  <input (change)="vatAmountNDiscountCalculation()"  name="cost"  #cost="ngModel"
+                  [(ngModel)]="Product.cost" type="number" class="form-control form-rounded"
+                    id="cost" placeholder="{{languageService.productEntry.SellingPrice}}" required>
+                    <div class="text-left text-danger"
+                    *ngIf="cost.invalid&&cost.touched">
+                    {{languageService.productEntry.SellingPrice}} {{languageService.productEntry.Required}}!
+                  </div>
+               </div>
+             </div>
+           </div>
+           <div class="row">
+              
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label  class="label text-dark"> {{languageService.productEntry.UnitType}}</label><span class="text-danger">*</span>               
+                 <select name="unit"  #Unit="ngModel"  required
+                 [(ngModel)]="Product.unit" class="form-control form-rounded">
+                   <option value=''> {{languageService.productEntry.UnitType}} {{languageService.productEntry.Select}}</option>
+                   <option *ngFor="let u of UnitList" [value]="u.name">{{u.name}}</option>
+               </select>
+                    <div class="text-left text-danger"
+                    *ngIf="Unit.invalid&&Unit.touched">
+                    {{languageService.productEntry.UnitType}} {{languageService.productEntry.Required}}! 
+                  </div>
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="barcode" class="label text-dark">{{languageService.productEntry.BarCode}}</label>
+                 <input name="barcode"  #barcode="ngModel"
+                 [(ngModel)]="Product.barcode" type="text"  class="form-control form-rounded"
+                   id="barcode" placeholder="{{languageService.productEntry.BarCode}}" >
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="barcode.invalid&&barcode.touched">
+                   barcode is Required !
+                 </div> -->
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label  class="label text-dark">{{languageService.productEntry.LinktoSupplier}} </label>               
+                 <select name="supplier"  #supplier="ngModel"  required
+                 [(ngModel)]="Product.supplier" class="form-control form-rounded">
+                   <option value=''>{{languageService.productEntry.LinktoSupplier}} {{languageService.productEntry.Select}}</option>
+                   <option *ngFor="let u of suppliers" [value]="u.phone">{{u.name}}/{{u.orgName}}</option>
+               </select>
+                     
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="imageLink" class="label text-dark">{{languageService.productEntry.ImageLink}} </label>
+                 <input name="imageLink"  (dblclick)="onLoadImageUpload()" 
+                 [(ngModel)]="Product.imageLink" type="text" class="form-control form-rounded" 
+                   id="imageLink" placeholder="double click" >
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="barcode.invalid&&barcode.touched">
+                   barcode is Required !
+                 </div> -->
+               </div>
+             </div>
+            
+           </div>
+           <div class="row">
+             
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="vatPercent" class="label text-dark">{{languageService.productEntry.Vatin}}</label>
+                 <input (change)="vatAmountNDiscountCalculation()" name="vatPercent"  #vatPercent="ngModel"
+                 [(ngModel)]="Product.vatPercent" type="number" class="form-control form-rounded"
+                   id="vatPercent" placeholder="{{languageService.productEntry.Vatin}}" >
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="barcode.invalid&&barcode.touched">
+                   barcode is Required !
+                 </div> -->
+               </div>
+             </div>
+             
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="vatAmount" class="label text-dark">{{languageService.productEntry.VatAmount}}</label>
+                 <input  name="vatAmount"   
+                 [(ngModel)]="Product.vatAmount" type="number" class="form-control form-rounded" 
+                   id="vatAmount" placeholder="{{languageService.productEntry.VatAmount}}" >
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="barcode.invalid&&barcode.touched">
+                   barcode is Required !
+                 </div> -->
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="discountPercent" class="label text-dark">{{languageService.productEntry.Discount}}</label>
+                 <input (change)="vatAmountNDiscountCalculation()" name="discountPercent"   
+                 [(ngModel)]="Product.discountPercent" type="number"  class="form-control form-rounded"
+                   id="discountPercent" placeholder="{{languageService.productEntry.Discount}}" >
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="barcode.invalid&&barcode.touched">
+                   barcode is Required !
+                 </div> -->
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="discountAmount" class="label text-dark">{{languageService.productEntry.DiscountAmount}}</label>
+                 <input name="discountAmount"   
+                 [(ngModel)]="Product.discountAmount" type="number" class="form-control form-rounded"
+                   id="discountAmount" placeholder="{{languageService.productEntry.DiscountAmount}}" >
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="barcode.invalid&&barcode.touched">
+                   barcode is Required !
+                 </div> -->
+               </div>
+             </div>
+           </div>
+           <div class="row">
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label  class="label text-dark">{{languageService.productEntry.Date}}</label>
+                   <input
+                    class="form-control form-rounded"
+                    type="date"
+                    name="entryDate" 
+                    #eDate="ngModel"
+                    [(ngModel)]="Product.date"
+                    placeholder="{{languageService.productEntry.Date}}"
+                     >
+                  
+                
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="Product.date==''&&eDate.touched">
+                   Date is required 
+                 </div> -->
+               </div>
+              
+             </div>
+              
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="importedForm" class="label text-dark">{{languageService.productEntry.ImportedFrom}}</label>
+                  <input name="importedForm"  #importedForm="ngModel"
+                  [(ngModel)]="Product.importedForm" type="text" class="form-control form-rounded" 
+                    id="importedForm" placeholder="{{languageService.productEntry.ImportedFrom}}" required>
+                   
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="warantyNgurenty" class="label text-dark">{{languageService.productEntry.warrentyOrGurrenty}}</label>
+                <textarea name="warantyNgurenty"   
+                [(ngModel)]="Product.warantyNgurenty" type="text" class="form-control form-rounded" 
+                  id="warantyNgurenty" placeholder="{{languageService.productEntry.warrentyOrGurrenty}}" cols="50" rows="2"></textarea>
+                  
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="barcode.invalid&&barcode.touched">
+                   barcode is Required !
+                 </div> -->
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 <label for="remarks" class="label text-dark">{{languageService.productEntry.Remarks}}</label>
+                <textarea name="remarks"   
+                [(ngModel)]="Product.remarks" type="text" class="form-control form-rounded" 
+                  id="remarks" placeholder="{{languageService.productEntry.Remarks}}" cols="50" rows="2"></textarea>
+                  
+                   <!-- <div class="text-left text-danger"
+                   *ngIf="barcode.invalid&&barcode.touched">
+                   barcode is Required !
+                 </div> -->
+               </div>
+             </div>
+           
+            
+           </div>
+           <div class="row">
+            <div class="col-sm-3 animated-div">
+              <div class="form-group">
+                <label for="brand" class="label text-dark">{{languageService.productEntry.brand}}</label>
+                 <input name="brand"  
+                 [(ngModel)]="Product.brand" type="text" class="form-control form-control-sm form-rounded" 
+                   id="brand" placeholder="{{languageService.productEntry.brand}}"  >
+                  
+              </div>
+            </div>
+            <div class="col-sm-3 animated-div">
+              <div class="form-group">
+                <label for="color" class="label text-dark">{{languageService.productEntry.color}}</label>
+                 <input name="color"   
+                 [(ngModel)]="Product.color" type="text" class="form-control form-control-sm form-rounded" 
+                   id="color" placeholder="{{languageService.productEntry.color}}"  >
+                  
+              </div>
+            </div>
+            <div class="col-sm-3 animated-div">
+              <div class="form-group">
+                <label for="size" class="label text-dark">{{languageService.productEntry.size}}</label>
+                 <input name="size"   
+                 [(ngModel)]="Product.size" type="text" class="form-control form-control-sm form-rounded" 
+                   id="size" placeholder="{{languageService.productEntry.size}}"  >
+                  
+              </div>
+            </div>
+            <div class="col-sm-3 animated-div">
+              <div class="form-group">
+                <label for="shippingDay" class="label text-dark">{{languageService.productEntry.shippingDay}}</label>
+                 <input name="shippingDay"   
+                 [(ngModel)]="Product.shippingDay" type="number" class="form-control form-control-sm form-rounded" 
+                   id="shippingDay" placeholder="{{languageService.productEntry.shippingDay}}"  >
+                  
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3 animated-div">
+              <div class="form-group">
+                <label for="previousCost" class="label text-dark">{{languageService.productEntry.previousCost}}</label>
+                 <input name="previousCost"  
+                 [(ngModel)]="Product.previousCost" type="number" class="form-control form-control-sm form-rounded" 
+                   id="previousCost" placeholder="{{languageService.productEntry.previousCost}}"  >
+                  
+              </div>
+            </div>
+           
+            <div class="col-sm-3 animated-div">
+              <div class="form-group">
+                <label for="Desc" class="label text-dark">{{languageService.productEntry.Desc}}</label>
+               <textarea name="Desc"   
+               [(ngModel)]="Product.Desc" type="text" class="form-control form-control-sm form-rounded"  
+                 id="Desc" placeholder="{{languageService.productEntry.Desc}}" cols="50" rows="2"></textarea>
+                 
+                  <!-- <div class="text-left text-danger"
+                  *ngIf="barcode.invalid&&barcode.touched">
+                  barcode is Required !
+                </div> -->
+              </div>
+            </div>
+            <div class="col-sm-3 animated-div">
+              <div class="form-group">
+                <label for="additionDesc" class="label text-dark">{{languageService.productEntry.additionalDesc}}</label>
+               <textarea name="additionDesc"   
+               [(ngModel)]="Product.additionDesc" type="text" class="form-control form-control-sm form-rounded"  
+                 id="Desc" placeholder="{{languageService.productEntry.additionalDesc}}" cols="50" rows="2"></textarea>
+                 
+                  <!-- <div class="text-left text-danger"
+                  *ngIf="barcode.invalid&&barcode.touched">
+                  barcode is Required !
+                </div> -->
+              </div>
+            </div>
+          </div>
+            <div class="row">
+             <div class="col-sm-3 animated-div ">
+               <div class="form-group ">
+                 <button class="btn btn-primary" type="submit" [disabled]="Product.catagory==''||Product.name==''||Product.unit==''||Product.cost==0||Product.cost==null|| Product.quantity==0|| Product.quantity==null"   (click)="edit(Product)">submit</button>
+                 
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 
+               </div>
+             </div>
+             <div class="col-sm-3 animated-div">
+               <div class="form-group">
+                 
+               </div>
+             </div>
+            
+           </div> 
+       </div> 
+        </div> 
+

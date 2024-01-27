@@ -1,0 +1,161 @@
+
+<div class="card-body ">
+  <div class="row gx-5 bg-white">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+  <div class="col-md-12" style = "overflow-x: scroll;">
+    <div class="smart-table-container" style = "width:120%;">
+
+      <div class="example-container mat-elevation-z8">
+        <div class="example-header">
+          <h5>Sign Up Approval</h5>
+          <mat-form-field>
+            <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+            <button mat-icon-button matSuffix aria-label="clear" *ngIf="filter.value" (click)="filter.value=''; applyFilter('');">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <mat-table #table [dataSource]="dataSource" matSort >
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="key">
+            <mat-header-cell *matHeaderCellDef class="text-dark"> Actions  
+           
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element" > 
+           
+            
+              <button *ngIf="element.key!=0"  mat-icon-button (click)="edit(element)" > <mat-icon>launch</mat-icon></button>
+              <button *ngIf="element.key!=0" mat-button (click)="delete(element)" ><i class="far fa-trash-alt fa-lg text-danger"></i></button>
+            </mat-cell>
+          
+          </ng-container>
+
+
+           
+        
+
+       
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">User Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="User Name" [value]="element.name" [(ngModel)]="element.name">
+            </mat-form-field>
+          
+        
+          </mat-cell>
+        
+        </ng-container>
+        <ng-container matColumnDef="phone">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">Phone</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="Phone" [value]="element.phone" [(ngModel)]="element.phone">
+            </mat-form-field>
+          
+        
+          </mat-cell>
+        
+        </ng-container>
+        <ng-container matColumnDef="userType">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">User Type</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-form-field floatLabel="never">
+              <mat-select   [(value)]="element.userType" placeholder="Select Catagory">
+                <mat-option value="">Select</mat-option>
+               
+             <mat-option *ngFor="let u of UserTypeList" [(value)]="u.name">{{u.name}}</mat-option> 
+              </mat-select>
+            </mat-form-field>
+          
+        
+          </mat-cell>
+        
+        </ng-container>
+        <ng-container matColumnDef="storeType">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">Store Type</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <mat-form-field floatLabel="never">
+              <mat-select   [(value)]="element.storeType" placeholder="Select Store Type">
+                <mat-option value="">Select</mat-option>
+               
+             <mat-option *ngFor="let u of shopTypeList" [(value)]="u.name">{{u.name}}</mat-option> 
+              </mat-select>
+            </mat-form-field>
+          
+        
+          </mat-cell>
+        
+        </ng-container>
+        <ng-container matColumnDef="cmpCode">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">Company Code</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+             
+             {{element.cmpCode}} 
+
+          </mat-cell>
+        
+        </ng-container>
+        <ng-container matColumnDef="entryDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">Entry Date</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+             
+             {{element.entryDate}} 
+
+          </mat-cell>
+        
+        </ng-container>
+        <ng-container matColumnDef="isApproved">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">Is Approved</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+             
+            <mat-checkbox class="example-margin" [(ngModel)]="element.isApproved">Is Approved</mat-checkbox> 
+
+          </mat-cell>
+        
+        </ng-container>
+        <ng-container matColumnDef="AddressLineOne">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">Address Line</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+             
+             {{element?.AddressLineOne}} 
+
+          </mat-cell>
+        
+        </ng-container>
+        <ng-container matColumnDef="pass">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">Pass</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+             
+             {{element?.pass}} 
+
+          </mat-cell>
+        
+        </ng-container>
+        <ng-container matColumnDef="orgName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">Org Name</mat-header-cell>
+          <mat-cell *matCellDef="let element">
+             
+             {{element?.orgName}} 
+
+          </mat-cell>
+        
+        </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      
+      </div>
+  
+    </div>
+  </div>
+  <div class="float-left">
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+</div>
+</div>
+ 

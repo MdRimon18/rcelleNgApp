@@ -1,0 +1,715 @@
+<div class="card-header crdHdr">
+
+  <div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1">
+      <button  title="{{languageService.productEntry.BackButtonhoverEffect}}"  
+      class="btn   addMore" (click)="backToInvoiceInfo()"
+    >
+    <i class="fas fa-arrow-left"></i>
+    </button>
+    </div>
+    <div class="col-lg-11 col-md-10 col-sm-11">
+      <h5 align="center" class="h4 mb-0">   {{languageService.InvoiceEntry.repairRequest}}</h5></div>
+    </div>
+ </div>
+
+
+<div class="card-body">
+  <div class="row gx-5">
+    <div class="row" >
+
+      <div class="col-sm-10 col-md-10 col-lg-10 animated-div"  >
+
+
+            <div class="row">
+              <div class="col-sm-1">
+                <div class="form-group">
+                  <button type="button"  title="Add New Supplier" *ngIf="!isShowCustomerAddBtn"  (click)="redirectForCreateNewSupplier()" class="btn btn-light btn-sm addMore">
+                    <i class="fas fa-plus"></i>
+                  </button>
+
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+
+              <div class="col-sm-3">
+
+                <div class="form-group">
+                  <label for="Category" class="label text-dark">Supplier Number</label>
+                    <input type="text"
+                           placeholder="{{languageService.InvoiceEntry.supplierNumber}}"
+                           aria-label="Number"
+                           class="form-control form-rounded form-control-sm"
+
+                           [formControl]="myControlCustomer"
+                           [matAutocomplete]="customer">
+
+                    <mat-autocomplete autoActiveFirstOption #customer="matAutocomplete">
+
+                      <mat-option (click)="customerSelection(option)" *ngFor="let option of filteredOptionsCustomer | async" [value]="option.phone">
+                     {{option.phone}}
+                    
+
+                      </mat-option>
+                    </mat-autocomplete>
+
+
+                </div>
+
+              </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="Category" class="label text-dark">Supplier Name</label>
+                    <input  type="text"  #cName="ngModel"  [(ngModel)]="clinentName"
+                    class="form-control form-rounded form-control-sm"  id="JobNo" placeholder="{{languageService.InvoiceEntry.supplierName}}" >
+                    <div class="text-left text-danger"
+                    *ngIf="clinentName==''&&cName.touched">
+                    {{languageService.InvoiceEntry.supplierName}} {{languageService.productEntry.Required}}
+                  </div>
+                  </div>
+
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="Category" class="label text-dark">Date</label>
+                      <input
+                      class="form-control form-rounded form-control-sm"
+                       type="date"
+                       name="entryDate"
+                       #eDate="ngModel"
+                       [(ngModel)]="entryDate"
+                       placeholder="Select Date"
+                       required >
+
+
+                      <div class="text-left text-danger"
+                      *ngIf="entryDate==''&&eDate.touched">
+                      Date is required
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="Category" class="label text-dark"> {{languageService.productEntry.productCategory}}</label><span class="text-danger">*</span>              
+                    <search-dropdown 
+                    [items]="dropdownValuesService.productCategories" 
+                    [size]="'small'" 
+                    [img]="'product'" 
+                    [label]="'ProductName'" 
+                    [uid]="'productId'" 
+                    [(ngModel)]="dropdownValuesService.Category">
+                  </search-dropdown>
+         
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="SubCategory" class="label text-dark">{{languageService.productEntry.subCategory}}</label>
+                  <select name="SubCategory"  #subCategory="ngModel"
+                  (change)="dropdownValuesService.OnSubCategoryDDLChange(dropdownValuesService.SubCategory)"
+                  [(ngModel)]="dropdownValuesService.SubCategory" class="form-control form-rounded form-control-sm">
+                    <option value=''>{{languageService.productEntry.Select}} {{languageService.productEntry.subCategory}} </option>
+                    <option *ngFor="let productSubCategorie of dropdownValuesService.filterproductSubCategories"  [value]="productSubCategorie.SubCategoreisName">{{productSubCategorie.SubCategoreisName}}</option>
+                </select>
+
+                </div>
+              </div>
+              <div class="col-sm-3">
+
+                <div class="form-group">
+                  <label for="SubCategory" class="label text-dark">{{languageService.InvoiceEntry.ChooseProduct}}</label>
+                    <input type="text"
+                          placeholder="{{languageService.InvoiceEntry.ChooseProduct}}"
+                          aria-label="Number"
+                          class="form-control form-rounded form-control-sm"
+                          [formControl]="dropdownValuesService.myControl"
+                          [matAutocomplete]="auto">
+
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+
+                      <mat-option (click)="productSelection(option.key)"  *ngFor="let option of dropdownValuesService.filteredOptions | async" [value]="option.name">
+                    {{option.name}}
+
+
+                      </mat-option>
+                    </mat-autocomplete>
+                    <!-- <button  mat-icon-button matSuffix aria-label="clear" (click)="dropdownValuesService.applyFilterMyControl()" >
+                      <mat-icon title="{{languageService.productEntry.productSearchWordCancelEffect}}" class="addMore">close</mat-icon>
+                    </button> -->
+
+                </div>
+
+              </div>
+
+              <div class="col-sm-3">
+
+                <div class="form-group">
+                  <label for="SubCategory" class="label text-dark">{{languageService.InvoiceEntry.ChooseSerialNumber}}</label>
+                    <input type="text"
+                          placeholder="{{languageService.InvoiceEntry.ChooseSerialNumber}}"
+                          aria-label="Number"
+                          class="form-control form-rounded form-control-sm"
+                          [formControl]="dropdownValuesService.myControlSerialNumber"
+                          [matAutocomplete]="autoSerialNo">
+
+                    <mat-autocomplete autoActiveFirstOption #autoSerialNo="matAutocomplete">
+
+                      <mat-option (click)="productSelection(option.key)"   *ngFor="let option of dropdownValuesService.filteredOptionsSerialNumber | async" [value]="option.serialNumber">
+                    {{option.serialNumber}}
+                     
+
+                      </mat-option>
+                    </mat-autocomplete>
+                    <!-- <button  mat-icon-button matSuffix aria-label="clear" (click)="dropdownValuesService.applyFilterSerial()" >
+                      <mat-icon title="{{languageService.productEntry.productSearchWordCancelEffect}}" class="addMore">close</mat-icon>
+                    </button> -->
+                 
+                </div>
+
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="memoNo" class="label text-dark">{{languageService.InvoiceEntry.memoNo}}</label>
+                  <input  type="text" name="memoNo"  
+                    [(ngModel)]="memoNo"   class="form-control form-rounded form-control-sm"
+                      id="memoNo" placeholder="{{languageService.InvoiceEntry.memoNo}}" >
+
+                  </div>
+                </div>
+
+            </div>
+
+          
+
+
+            <form  >
+              <div class="col-md-12 mt-3" style="overflow-x: scroll" >
+                <div class="smart-table-container" style="width:900px">
+                  <table >
+                    <thead class="thdchild">
+                      <tr *ngIf="invoiceEntryForm.length!=0">
+                        <th scope="col">{{languageService.InvoiceEntry.ProductName}}</th>
+                        <!-- <th scope="col">Product Category</th> -->
+                        <th scope="col">{{languageService.InvoiceEntry.Quantity}}<span class="text-danger">*</span></th>
+                        <th scope="col">{{languageService.InvoiceEntry.Unit}}</th>
+                        <th scope="col">{{languageService.productEntry.waranty}}</th>
+                        <th scope="col">{{languageService.InvoiceEntry.repairIssue}}</th>
+                        <!-- <th scope="col">{{languageService.InvoiceEntry.Rate}}</th>
+                        <th scope="col">{{languageService.InvoiceEntry.Vatin}}</th>
+                        <th scope="col">{{languageService.InvoiceEntry.Discount}}</th> -->
+                        <th scope="col">{{languageService.InvoiceEntry.Amount}}</th>
+                        <th scope="col">{{languageService.InvoiceEntry.Action}}</th>
+                        <!-- <th scope="col">{{languageService.InvoiceEntry.More}}</th> -->
+                      </tr>
+                    </thead>
+                    <tbody class="tbdChild">
+                      <tr [formGroup]="fg" *ngFor="let fg of invoiceEntryForm.controls; let i=index;" (submit)="recordSubmit(fg)">
+                      
+                        <td>
+                          <input type="text" class="form-control "    
+                          readonly  formControlName="ProductBrand"
+                            
+                          >
+                        </td>
+                        <!-- <td>
+                          <input  type="text" class="form-control"   
+                          readonly  formControlName="ProductCategory">
+                              </td> -->
+                        <td>
+                          <input  type="number" 
+                          class="form-control"   
+                              (change)="OnChangeActions()"   placeholder="Quantity" formControlName="Quantity">
+                              <div class="text-danger" *ngIf="fg.value.Quantity<=0">Qty is Requird</div>
+                            </td>
+                            <td>
+                              <input  type="text" 
+                              class="form-control"   
+                                  readonly   placeholder="Unit" formControlName="unit">
+                                </td>
+                                <td>
+                                  <input  type="text" 
+                                  class="form-control"   
+                                      readonly   placeholder=""
+                                       formControlName="warantyNgurenty">
+                                    </td>
+                                <td>
+                                  <textarea  class="form-control"
+                                   name="remarks" id="" cols="20" rows="3"
+                                  formControlName="remarks"
+                                  placeholder="{{languageService.InvoiceEntry.repairIssue}}"></textarea>
+                                  
+                                    </td>
+                        <!-- <td><input  type="number" (change)="OnChangeActions()" class="form-control"  id="Rate" placeholder="Rate" formControlName="Rate"></td>
+                        <td><input  type="number" (change)="OnChangeActions()" class="form-control"  id="" placeholder="V(%)" formControlName="vatPercent"></td>
+                        <td><input  type="number" (change)="OnChangeActions()" class="form-control"  id="" placeholder="D(%)" formControlName="discountPercent"></td> -->
+                      
+                        <td><input (change)="OnChangeActions()"  type="number" 
+                          class="form-control"   formControlName="Amount"
+                              placeholder="{{languageService.InvoiceEntry.Amount}}" ></td>
+                              
+                              
+                             
+                        <td><button  title="{{languageService.productEntry.productDeleteButtonOherEffect}}"  class="btn btn-light ml-1 addMore" (click)="onDelete(invoiceEntryForm,i)"
+                          >
+                              <i class="far fa-trash-alt fa-lg text-danger "></i>
+                              
+                            </button> </td>
+                          
+                            <!-- <td>  <i class="fas fa-info-circle pr-2 addMore" title="{{fg.value.moreDtls}}"></i></td> -->
+                      </tr>
+                    
+                    </tbody>
+                  </table>
+                </div></div>
+
+              
+              <!-- <button  (click)="reset()"  type="text" class="btn btn-primary  float-right ml-1"
+              ><i class="fas fa-retweet"></i>
+                  Refresh
+          </button>
+              <button  [disabled]="invoiceEntryForm.invalid"  type="submit" class="btn btn-primary  float-right"  (click)="allSubmit(invoiceEntryForm)"
+              ><i
+                  class="far fa-save fa-lg"></i>
+                  Submit
+          </button>
+          <button type="button" (click)="printPreviw()" class="btn btn-light btn-sm  ml-2">
+            <i class="fas fa-info-circle pr-2"></i> {{languageService.InvoiceEntry.PrintMemo}}
+          </button> -->
+
+
+<div class="float-right">
+  <button  [disabled]="invoiceEntryForm.invalid"  type="submit" class="btn btn-primary"  (click)="allSubmit()"
+  ><i
+      class="far fa-save fa-lg"></i>
+      {{languageService.productEntry.Save}}
+</button>
+<button  (click)="reset()"  type="text" class="btn btn-primary ml-1"   
+><i class="fas fa-retweet"></i>
+{{languageService.InvoiceEntry.Refresh}}
+</button>
+<button type="button" (click)="printPreviw()" class="btn btn-light btn-sm ml-1 ">
+<i class="fas fa-info-circle pr-2"></i> {{languageService.InvoiceEntry.PrintMemo}}
+</button>
+</div>
+
+         
+            </form>
+
+
+
+
+
+
+      </div>
+
+      <div class="col-sm-2 col-md-2 col-lg-2  mb-3"  >
+        <div class="col-md-12" style="overflow-x: scroll" >
+          <div class="smart-table-container" style="width:125px">
+
+            <mat-card class="example-card">
+
+
+              <mat-card-content>
+                    <div class="form-group">
+                      <label  class=""><strong>{{languageService.InvoiceEntry.Total}}</strong> </label>
+                      <input  type="number"
+                      [(ngModel)]="totalAmount"
+                      class="form-control form-rounded" readonly   id="JobNo" placeholder="Total Amount">
+    
+                    </div>
+                    <!-- <div class="form-group">
+                      <label    class=""><strong>{{languageService.InvoiceEntry.Vat}}</strong> </label>
+                      <input [(ngModel)]="totalVat" readonly type="number" class="form-control form-rounded"  id="Amount" name="Amount"
+                      >
+                    </div>
+                    <div class="form-group">
+                      <label  class=""><strong>{{languageService.InvoiceEntry.Dis}}</strong> </label>
+                      <input  [(ngModel)]="totalDiscount" readonly type="number" class="form-control form-rounded"  id="Amount" name="Amount"
+                      >
+                    </div> -->
+                    <div class="form-group">
+                      <label  class=""><strong>{{languageService.InvoiceEntry.AdditionalDiscount}}</strong> </label>
+                      <input  [(ngModel)]="additionalDiscount"  (change)="calculateAdditionalDiscount()" type="number" class="form-control form-rounded"  id="additionalDiscount" name="additionalDiscount"
+                      >
+                    </div>
+    
+    
+                    <!-- <div class="form-group">
+                      <label  class=""><strong>{{languageService.InvoiceEntry.PreviousDue}}</strong></label>
+                      <input [(ngModel)]="PreviousDue" type="number" class="form-control" readonly  id="PreviousDue" name="PreviousDue"
+                      >
+                    </div> -->
+    
+                    <div class="form-group">
+                      <label  class=""><strong>{{languageService.InvoiceEntry.TotalPayable}}</strong></label>
+                      <input  type="number" class="form-control form-rounded" readonly [(ngModel)]="totalPayable"  id="totalPayable" name="totalPayable"
+                      >
+                    </div>
+                    <div class="form-group">
+                      <label  class=""><strong>{{languageService.InvoiceEntry.payable}}</strong> </label>
+                      <input  type="number" [(ngModel)]="PaidAmount"    class="form-control form-rounded" (change)="currentDueClcltn()" id="" placeholder="Receive">
+                      <input  type="hidden" [(ngModel)]="salesInvoiceNo"    class="form-control form-rounded"   >
+    
+                    </div>
+                    <div class="form-group">
+                      <label  class=""><strong>{{languageService.InvoiceEntry.CurrentDue}}</strong></label>
+                      <input  type="number" class="form-control form-rounded" readonly [(ngModel)]="totalCurrentDue"  id="totalCurrentDue" name="totalCurrentDue"
+                      >
+                    </div>
+              </mat-card-content>
+    
+    
+    
+    
+            </mat-card>
+          </div></div>
+        
+      </div>
+    </div>
+
+
+</div>
+</div>
+
+
+
+<!-- previous code  -->
+
+<!-- <div class="card-body">
+  <div class="row gx-5 bg-white">
+    
+<div class="row" >
+  <div class="col-sm-10 col-md-10 col-lg-10">
+    <nb-card>
+      
+      <nb-card-body class="nbcrdbdy">
+        <div class="row">
+          
+          <div class="col-sm-3">
+          
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input type="text"
+                      placeholder="{{languageService.InvoiceEntry.CustomerMobile}}"
+                      aria-label="Number"
+                      
+                      matInput
+                      [formControl]="myControlCustomer"
+                      [matAutocomplete]="customer">
+                      
+                <mat-autocomplete autoActiveFirstOption #customer="matAutocomplete">
+                
+                  <mat-option (click)="customerSelection(option)" *ngFor="let option of filteredOptionsCustomer | async" [value]="option.phone">
+                {{option.phone}}
+                 
+                
+                  </mat-option>
+                </mat-autocomplete>
+                
+              </mat-form-field>
+            </div>
+          
+          </div>
+    
+            <div class="col-sm-3">
+              <div class="form-group">
+                <input  type="text"  #cName="ngModel"  [(ngModel)]="clinentName"  class="form-control"  id="JobNo" placeholder="{{languageService.InvoiceEntry.ClientName}}" >
+                <div class="text-left text-danger"
+                *ngIf="clinentName==''&&cName.touched">
+                {{languageService.InvoiceEntry.ClientName}} {{languageService.productEntry.Required}}  
+              </div>
+              </div>
+            
+            </div>
+            
+            
+            <div class="col-sm-1">
+              <div class="form-group">
+                <button type="button"  title="{{languageService.InvoiceEntry.AddNewCustomer}}" *ngIf="!isShowCustomerAddBtn"  (click)="addNewCustomer()" class="btn btn-light btn-sm addMore">
+                  <i class="fas fa-plus"></i>
+                </button>
+                
+                </div>
+              </div>
+             
+        </div>
+        <div class="row">
+          
+          
+            <div class="col-sm-3">
+              <div class="form-group">
+                  <input
+                  class="form-control"
+                  type="date"
+                  name="entryDate" 
+                  #eDate="ngModel"
+                  [(ngModel)]="entryDate"
+                  placeholder="Select Date"
+                  required >
+                
+              
+                  <div class="text-left text-danger"
+                  *ngIf="entryDate==''&&eDate.touched">
+                  Date is required 
+                </div>
+              </div>
+            
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                  <input
+                  class="form-control"
+                  type="text"
+                  name="receivedBy" 
+                 
+                  [(ngModel)]="receivedBy"
+                  placeholder="{{languageService.InvoiceEntry.receivedBy}}"
+                    >
+
+              </div>
+            
+            </div>
+           
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="Category" class="label text-dark"> {{languageService.productEntry.productCategory}}</label><span class="text-danger">*</span>              
+              <select   name="Category"  #category="ngModel" 
+              (change)="dropdownValuesService.OnCategoryDDLChange(dropdownValuesService.Category)"
+              [(ngModel)]="dropdownValuesService.Category" class="form-control">
+                <option value="">{{languageService.productEntry.Select}} {{languageService.productEntry.productCategory}}  </option>
+                <option *ngFor="let productCategorie of dropdownValuesService.productCategories" [value]="productCategorie.ProductName">{{productCategorie.ProductName}}</option>
+            </select>
+          
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="SubCategory" class="label text-dark">{{languageService.productEntry.subCategory}}</label>               
+              <select name="SubCategory"  #subCategory="ngModel"
+              (change)="dropdownValuesService.OnSubCategoryDDLChange(dropdownValuesService.SubCategory)"
+              [(ngModel)]="dropdownValuesService.SubCategory" class="form-control">
+                <option value=''>{{languageService.productEntry.Select}} {{languageService.productEntry.subCategory}} </option>
+                <option *ngFor="let productSubCategorie of dropdownValuesService.filterproductSubCategories"  [value]="productSubCategorie.SubCategoreisName">{{productSubCategorie.SubCategoreisName}}</option>
+            </select>
+                 
+            </div>
+          </div>
+          <div class="col-sm-3">
+   
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input type="text"
+                      placeholder="{{languageService.InvoiceEntry.ChooseProduct}}"
+                      aria-label="Number"
+                      matInput
+                      [formControl]="dropdownValuesService.myControl"
+                      [matAutocomplete]="auto">
+                      
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                
+                  <mat-option (click)="productSelection(option.key)"  *ngFor="let option of dropdownValuesService.filteredOptions | async" [value]="option.name">
+                {{option.name}}  
+                 
+                
+                  </mat-option>
+                </mat-autocomplete>
+                <button  mat-icon-button matSuffix aria-label="clear" (click)="dropdownValuesService.applyFilterMyControl()" >
+                  <mat-icon title="{{languageService.productEntry.productSearchWordCancelEffect}}" class="addMore">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          
+          </div>
+          
+          <div class="col-sm-3">
+   
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input type="text"
+                      placeholder="{{languageService.InvoiceEntry.ChooseSerialNumber}}"
+                      aria-label="Number"
+                      matInput
+                      [formControl]="dropdownValuesService.myControlSerialNumber"
+                      [matAutocomplete]="autoSerialNo">
+                      
+                <mat-autocomplete autoActiveFirstOption #autoSerialNo="matAutocomplete">
+                
+                  <mat-option (click)="productSelection(option.key)"  *ngFor="let option of dropdownValuesService.filteredOptionsSerialNumber | async" [value]="option.serialNumber">
+                {{option.serialNumber}}
+              
+                
+                  </mat-option>
+                </mat-autocomplete>
+                <button  mat-icon-button matSuffix aria-label="clear" (click)="dropdownValuesService.applyFilterSerial()" >
+                  <mat-icon title="{{languageService.productEntry.productSearchWordCancelEffect}}" class="addMore">close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          
+          </div>
+             
+              
+        </div>
+         
+        
+        <form>
+          <table class="table table-sm">
+            <thead class="thdchild">
+              <tr *ngIf="invoiceEntryForm.length!=0">
+                <th scope="col">{{languageService.InvoiceEntry.ProductName}}</th>
+              
+                <th scope="col">{{languageService.InvoiceEntry.Quantity}}<span class="text-danger">*</span></th>
+                <th scope="col">{{languageService.InvoiceEntry.Unit}}</th>
+                <th scope="col">{{languageService.InvoiceEntry.Rate}}</th>
+                <th scope="col">{{languageService.InvoiceEntry.Vatin}}</th>
+                <th scope="col">{{languageService.InvoiceEntry.Discount}}</th>
+                <th scope="col">{{languageService.InvoiceEntry.Amount}}</th>
+                <th scope="col">{{languageService.InvoiceEntry.Action}}</th>
+               
+              </tr>
+            </thead>
+            <tbody class="tbdChild">
+              <tr [formGroup]="fg" *ngFor="let fg of invoiceEntryForm.controls; let i=index;" (submit)="recordSubmit(fg)">
+              
+                <td>
+                  <input type="text" class="form-control "    
+                  readonly  formControlName="ProductBrand"
+                    
+                  >
+                </td>
+              
+                <td>
+                  <input  type="number" 
+                  class="form-control"   
+                      (change)="OnChangeActions()"   placeholder="Quantity" formControlName="Quantity">
+                      <div class="text-danger" *ngIf="fg.value.Quantity<=0">Qty is Requird</div>
+                    </td>
+                    <td>
+                      <input  type="text" 
+                      class="form-control"   
+                          readonly   placeholder="Unit" formControlName="unit">
+                        </td>
+                <td><input  type="number" (change)="OnChangeActions()" class="form-control"  id="Rate" placeholder="Rate" formControlName="Rate"></td>
+                <td><input  type="number" (change)="OnChangeActions()" class="form-control"  id="" placeholder="V(%)" formControlName="vatPercent"></td>
+                <td><input  type="number" (change)="OnChangeActions()" class="form-control"  id="" placeholder="D(%)" formControlName="discountPercent"></td>
+              
+                <td><input readonly type="number" class="form-control"  id="Amount" name="Amount" 
+                      placeholder="{{fg.value.Amount}}" ></td>
+                      
+                      
+                      <td> 
+                  
+                         <button (click)="onAddSeialNumbera(fg.value)" mat-stroked-button color="primary">Add serial</button></td>         
+                <td><button  title="{{languageService.productEntry.productDeleteButtonOherEffect}}"  class="btn btn-light ml-1 addMore" (click)="onDelete(invoiceEntryForm,i)"
+                  >
+                      <i class="far fa-trash-alt fa-lg text-danger "></i>
+                      
+                    </button> </td>
+                  
+                   
+              </tr>
+            
+            </tbody>
+          </table>
+         
+          <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+             
+             
+              <button  [disabled]="invoiceEntryForm.invalid"  type="submit" class="btn btn-outline-success"  (click)="allSubmit()"
+              ><i
+                  class="far fa-save fa-lg"></i>
+                  {{languageService.productEntry.Save}}
+          </button>
+          <button  (click)="reset()"  type="text" class="btn btn-outline-success ml-2"   
+          ><i class="fas fa-retweet"></i>
+          {{languageService.InvoiceEntry.Refresh}}
+          </button>
+          <button type="button" (click)="printPreviw()" class="btn btn-light btn-sm  ml-2">
+            <i class="fas fa-info-circle pr-2"></i> {{languageService.InvoiceEntry.PrintMemo}}
+          </button>
+            </div>
+          </div>
+         
+      
+        </form>
+
+        
+
+      </nb-card-body>
+    </nb-card>
+
+  </div>
+
+  <div class="col-sm-2 col-md-2 col-lg-2  mb-3"  >
+
+  <mat-card class="example-card">
+    
+    
+    <mat-card-content>
+          <div class="form-group">
+            <label  class=""><strong>{{languageService.InvoiceEntry.Total}}</strong> </label>
+            <input  type="number"
+            [(ngModel)]="totalAmount" 
+            class="form-control" readonly   id="JobNo" placeholder="Total Amount">
+            
+          </div>
+          <div class="form-group">
+            <label    class=""><strong>{{languageService.InvoiceEntry.Vat}}</strong> </label>
+            <input [(ngModel)]="totalVat" readonly type="number" class="form-control"  id="Amount" name="Amount" 
+            >
+          </div>
+          <div class="form-group">
+            <label  class=""><strong>{{languageService.InvoiceEntry.Dis}}</strong> </label>
+            <input  [(ngModel)]="totalDiscount" readonly type="number" class="form-control"  id="Amount" name="Amount" 
+            >
+          </div>
+          <div class="form-group">
+            <label  class=""><strong>{{languageService.InvoiceEntry.AdditionalDiscount}}</strong> </label>
+            <input  [(ngModel)]="additionalDiscount"  (change)="calculateAdditionalDiscount()" type="number" class="form-control"  id="additionalDiscount" name="additionalDiscount" 
+            >
+          </div>
+        
+        
+      
+          
+          <div class="form-group">
+            <label  class=""><strong>{{languageService.InvoiceEntry.TotalPayable}}</strong></label>
+            <input  type="number" class="form-control" readonly [(ngModel)]="totalPayable"  id="totalPayable" name="totalPayable" 
+            >
+          </div>
+          <div class="form-group">
+            <label  class=""><strong>{{languageService.InvoiceEntry.Receive}}</strong> </label>
+            <input  type="number" [(ngModel)]="PaidAmount"    class="form-control" (change)="currentDueClcltn()" id="" placeholder="Receive">
+            <input  type="hidden" [(ngModel)]="salesInvoiceNo"    class="form-control"   >
+            
+          </div>
+          <div class="form-group">
+            <label  class=""><strong>{{languageService.InvoiceEntry.CurrentDue}}</strong></label>
+            <input  type="number" class="form-control" readonly [(ngModel)]="totalCurrentDue"  id="totalCurrentDue" name="totalCurrentDue" 
+            >
+          </div>
+    </mat-card-content>
+    
+     
+
+    
+  </mat-card>
+  </div>
+</div>
+
+</div>
+</div> -->
+
+

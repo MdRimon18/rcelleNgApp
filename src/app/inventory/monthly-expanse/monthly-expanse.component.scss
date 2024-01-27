@@ -1,0 +1,21 @@
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    
+  }
+  
+  .example-header {
+    min-height: 100px;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+  font-size: 18px;
+    width: 70%;
+  }
+  .mat-header-cell{
+  font-size:20px;
+  width: 100%;;
+  }

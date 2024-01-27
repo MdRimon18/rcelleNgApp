@@ -1,0 +1,567 @@
+ 
+  <!-- HEADER -->
+  <header id="header" class="header-area style-01 layout-03"
+   >
+    <div class="header-top bg-main hidden-xs">
+        <div class="container">
+            <div class="top-bar left">
+                <ul class="horizontal-menu">
+                    <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i>{{dataSharingService.companyInfo.value.email}}</a></li>
+                    <!-- <li><a routerLink="/e-commerce-store">Find Company</a></li> -->
+                </ul>
+            </div>
+            <div class="top-bar right">
+                <!-- <ul class="social-list">
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                </ul> -->
+                <ul class="horizontal-menu">
+                    <!-- <li class="horz-menu-item currency">
+                        <select name="currency">
+                            <option value="eur">€ EUR (Euro)</option>
+                            <option value="usd" selected>$ USD (Dollar)</option>
+                            <option value="usd">£ GBP (Pound)</option>
+                            <option value="usd">¥ JPY (Yen)</option>
+                        </select>
+                    </li>
+                    <li class="horz-menu-item lang">
+                        <select name="language">
+                            <option value="fr">French (EUR)</option>
+                            <option value="en" selected>English (USD)</option>
+                            <option value="ger">Germany (GBP)</option>
+                            <option value="jp">Japan (JPY)</option>
+                        </select>
+                    </li> -->
+                    <li><a routerLink="/login" class="login-link"><i class="biolife-icon icon-login"></i>Login/Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header-middle biolife-sticky-object" (onscroll)="onscroll()" [ngClass]="navbarfixed?'fixed':'nofixed'">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-2  col-sm-2 col-xs-2">
+                    <a (click)="onClickHome()"  class="biolife-logo"><img [src]="dataSharingService.companyInfo.value?.ImageLink" alt="logo Image"  width="135" height="36"></a>
+                </div>
+                <div class="col-lg-6 col-md-7s col-sm-7 col-xs-7">
+                    <div class="primary-menu">
+                        <ul class="menu biolife-menu clone-main-menu clone-primary-menu" id="primary-menu" data-menuname="main menu">
+                            <!-- <li class="menu-item hme"><a routerLink="/e-commerce/home">Home</a></li> -->
+                            <li class="menu-item menu-item-has-children has-megamenu">
+                                <a   class="menu-name" data-title="Shop" >Shop</a>
+                                <div class="wrap-megamenu lg-width-900 md-width-750">
+                                    <div class="mega-content" *ngFor="let item of ProductMenu">
+                                        <div class="col-lg-3 col-md-3 col-xs-12 md-margin-bottom-0 xs-margin-bottom-25">
+                                            <div class="wrap-custom-menu vertical-menu">
+                                                <h4 class="menu-title" ><a class="serach-category" (click)="SearchByCatg(item.ProductName)" > {{item.ProductName}}</a></h4>
+                                                <ul class="menu" *ngIf="item.subCategories.length>0">
+                                                    <li  *ngFor="let i of item.subCategories"><a class="subCtegClick" (click)="SearchByCatgNSubCat(item.ProductName,i.SubCategoreisName)">{{i.SubCategoreisName}}</a><strong>|</strong></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- dont remove the comment line code
+                            <li class="menu-item menu-item-has-children has-child" >
+                                <a   class="menu-name" data-title="Product">Product</a>
+                                <ul class="sub-menu">
+                                   <div *ngFor="let item of ProductMenu">
+                                    <li class="menu-item" *ngIf="item.subCategories.length==0"><a class="serach-category" (click)="SearchByCatg(item.ProductName)">{{item.ProductName}}</a></li>
+                                    <li class="menu-item menu-item-has-children has-child" *ngIf="item.subCategories.length>0">
+                                        <a  (click)="SearchByCatg(item.ProductName)" class="menu-name serach-category" data-title="{{item.ProductName}}">{{item.ProductName}}</a>
+                                        <ul class="sub-menu" >
+                                            <li class="menu-item" *ngFor="let i of item.subCategories"><a class="subCtegClick" (click)="SearchByCatgNSubCat(item.ProductName,i.SubCategoreisName)">{{i.SubCategoreisName}}</a></li>
+                                           
+                                        </ul> 
+                                    </li>
+                                   </div>
+                                  
+                                  
+                                  
+                                     
+                                </ul>
+                            </li> -->
+                          
+                        </ul>
+                    </div>
+                      
+               
+                </div>
+                <div class="col-lg-3 col-md-3  col-sm-3 col-xs-3">
+                   
+                    <div class="biolife-cart-info">
+                       
+                        <div class="mobile-search">
+                            <!-- <a href="javascript:void(0)" class="open-searchbox"><i class="biolife-icon icon-search"></i></a> -->
+                            <div class="mobile-search-content">
+
+                             
+                                <form action="#" class="form-search" name="mobile-seacrh" method="get">
+                                    <a href="#" class="btn-close"><span class="biolife-icon icon-close-menu"></span></a>
+                                    <input type="text" name="searchTerm" class="input-text"   [(ngModel)]="searchTerm" (keyup)="onKeyUp()" placeholder="Search here...">
+                                    <!-- <select name="category">
+                                        <option value="-1" selected>All Categories</option>
+                                       
+                                        <option value="papaya_crisps">Papaya & Crisps</option>
+                                        <option value="oatmeal">Oatmeal</option>
+                                    </select>
+                                     -->
+                                   
+                                    <button type="submit" class="btn-submit">go</button>
+                                </form>
+                              
+                            </div>
+
+                        </div>
+                        <!-- <div class="wishlist-block hidden-sm hidden-xs">
+                            <a href="#" class="link-to">
+                                <span class="icon-qty-combine">
+                                    <i class="icon-heart-bold biolife-icon"></i>
+                                    <span class="qty">4</span>
+                                </span>
+                            </a>
+                        </div> -->
+                        <div class="minicart-block">
+                            <div class="minicart-contain">
+                                <a href="javascript:void(0)" class="link-to">
+                                    <span class="icon-qty-combine">
+                                      
+                                         <img class="icon-cart-mini biolife-icon" src="assets/e-images/cart_icon.png" alt=""  style="width: 40px; height: 40px;">
+                                              
+                                        <span class="qty">{{itemCartTblService.totalQty()}}</span>
+                                    </span>
+                                    <!-- <span class="title">My Cart -</span> -->
+                                    <span class="sub-total">&#x9F3;{{itemCartTblService.totalCount()}}</span>
+                                </a>
+                                <div class="cart-content">
+                                    <div class="cart-inner">
+                                        <ul class="products">
+                                            <li *ngFor="let item of itemCartTblService.ObjectReciever.value">
+                                                <div class="minicart-item">
+                                                    <div class="thumb">
+                                                        <a href="#"><img [src]="item.imageLink" width="90" height="90" alt="National Fresh"></a>
+                                                    </div>
+                                                    <div class="left-info">
+                                                        <div class="product-title"><a href="#" class="product-name">{{item.name}}   </a></div>
+                                                        <div class="price">
+                                                            <ins><span class="price-amount"><span class="currencySymbol">&#x9F3;</span>{{item.cost}}  </span></ins>
+                                                                            <del><span class="price-amount"><span class="currencySymbol">&#x9F3;</span>95.00</span></del>
+                                                        </div>
+                                                        <div class="qty">
+                                                            <label for="cart[id123][qty]">Qty:</label>
+                                                            <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]" value="{{item.shippingQnty}}" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action">
+                                                        <a (click)="itemCartTblService.incrementItem(item)"  ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                        <a (click)="itemCartTblService.decrementItem(item)"  ><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                                        <a (click)="itemCartTblService.deleteItem(item.key)"   ><i class="fa fa-close color-danger" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                           
+                                            
+                                        </ul>
+                                        <p class="btn-control">
+                                            <a   class="btn view-cart" (click)="viewCart()">view cart</a>
+                                            <a routerLink="/e-commerce/shipping-address" class="btn">checkout</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-3">
+                    <!-- <mat-form-field>
+                        <mat-label style="color: green;" ><strong>Favorite food</strong> </mat-label>
+                        <mat-select [(ngModel)]="selectedValue" name="food">
+                          <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+                </div>
+                <div class="col-lg-9 col-md-8 padding-top-2px">
+                    <div class="header-search-bar layout-01">
+                        <form action="#" class="form-search" name="desktop-seacrh" method="get">
+                            
+                            <input type="text"  name="searchTerm" class="input-text"   [(ngModel)]="searchTerm" (keyup)="onKeyUp()" placeholder="Search here...">
+                          
+                            
+                        </form>
+                    </div>
+                    <div class="live-info">
+                        <p class="telephone"><i class="fa fa-phone" aria-hidden="true"></i><b class="phone-number">(+88) {{this.dataSharingService.companyInfo.value.phone}}</b></p>
+                        <p class="working-time">Working Hour:{{this.dataSharingService.companyInfo.value.startEndTime}},Off Days:{{this.dataSharingService.companyInfo.value.offDayName}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+ 
+<div  class="page-contain">
+    
+<div class="" *ngIf="searchByCriteria==''">
+    <router-outlet></router-outlet>
+</div>
+ 
+    <div *ngIf="searchByCriteria!=''" class="page-contain category-page left-sidebar">
+      <div class="container">
+          <div class="row">
+              <!-- Main content -->
+              <div id="main-content" class="main-content col-lg-9 col-md-8 col-sm-12 col-xs-12">
+   
+                  <div class="product-category list-style">
+   
+                      <div class="row">
+                          <div><strong> {{productInfosFiltered.length}} Item Found !</strong></div>
+                          <ul class="products-list">
+  
+                              <li class="product-item col-lg-12 col-md-12 col-sm-12 col-xs-12" *ngFor="let item of productInfosFiltered| paginate: { itemsPerPage:6, currentPage: p }; index as i;">
+                                  <div class="contain-product pr-detail-layout" >
+                                      <div class="product-thumb">
+                                          <a (click)="redirectToSingleProduct(cmpnyName, item.key)" class="link-to-product">
+                                              <img [src]="item.imageLink" alt="dd" width="270" height="270" class="product-thumnail">
+                                          </a>
+                                      </div>
+                                      <div class="info">
+                                          <b (click)="redirectToSingleProduct(cmpnyName, item.key)" class="categories">{{item.catagory}}</b>
+                                          <h4 class="product-title">
+                                            <a (click)="redirectToSingleProduct(cmpnyName, item.key)" class="pr-name">{{item.name}}</a></h4>
+                                          <p class="excerpt">{{item.Desc}}</p>
+                                          <div (click)="redirectToSingleProduct(cmpnyName, item.key)" class="price">
+                                              <ins><span class="price-amount"><span class="currencySymbol">tk.</span>{{item.cost}}</span></ins>
+                                              <del><span class="price-amount"><span class="currencySymbol">tk.</span>{{item.previousCost}}</span></del>
+                                          </div>
+                                          <div class="buttons">
+                                              <a   class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                              <a   class="btn add-to-cart-btn" *ngIf="item.quantity>0" (click)="itemCartTblService.addToCart(item)">add to cart</a>
+                                              <a   class="btn add-to-cart-btn" *ngIf="item.quantity==0" (click)="itemCartTblService.addToCart(item)">Stock Finised</a>
+                                              <a   class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
+                                          </div>
+                                      </div>
+                                      <div class="advance-info">
+                                          <ul (click)="redirectToSingleProduct(cmpnyName, item.key)" class="list">
+                                            {{item.additionDesc}}
+                                              <!-- <li>100% real fruit ingredients</li>
+                                              <li>All Sugar comes naturally</li>
+                                              <li>Non-GMO Project Verified</li> -->
+                                          </ul>
+                                          <!-- <div class="shipping-info">
+                                              <p class="shipping-day">3-Day Shipping</p>
+                                              <p class="for-today">Pree Pickup Today</p>
+                                          </div> -->
+                                      </div>
+                                  </div>
+                              </li>
+                             
+  
+                          </ul>
+                      </div>
+  
+                      <div class="biolife-panigations-block">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                      </div>
+  
+                  </div>
+  
+              </div>
+              <!-- Sidebar -->
+              <aside id="sidebar" class="sidebar col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                  <div class="biolife-mobile-panels">
+                      <span class="biolife-current-panel-title">Sidebar</span>
+                      <a class="biolife-close-btn" href="#" data-object="open-mobile-filter">&times;</a>
+                  </div>
+                  <div class="sidebar-contain">
+                     
+                       <div class="widget biolife-filter mb-0">
+                          <!-- <h4 class="wgt-title">Product Category</h4> -->
+                          <div class="wgt-content">
+                                <mat-form-field>
+                        <mat-label style="color: green;" ><strong>Select Category</strong> </mat-label>
+                        <mat-select [(ngModel)]="selectedCategory" name="selectedCategory" (change)="onClickNdGoSearch()">
+                            <mat-option [value]=""><strong>unselect</strong> </mat-option>
+                          <mat-option *ngFor="let item of ProductCategories" [value]="item.ProductName">
+                            {{item.ProductName}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>  
+                          </div>
+                      </div>  
+  
+                      <div class="widget price-filter biolife-filter mb-0">
+                          <h4 class="wgt-title mb-0">Price</h4>
+                          <div class="wgt-content mb-1">
+                              <div class="frm-contain">
+                                  <form action="#" name="price-filter" id="price-filter" method="get">
+                                    <p class="f-item">
+                                        <label for="pr-to"> tk</label>
+                                        <input class="input-number"  name="FromCost"     [(ngModel)]="FromCost"  type="number" >
+                                    </p>
+                                    <p class="f-item">
+                                          <label for="pr-from">to tk</label>
+                                          <input class="input-number" name="ToCost"     [(ngModel)]="ToCost"   type="number" >
+                                      </p>
+                                    
+                                      <p class="f-item"><button class="btn-submit" type="button" (click)="onClickNdGoSearch()">go</button></p>
+                                  </form>
+                              </div>
+                              <!-- <ul class="check-list bold single">
+                                  <li class="check-list-item"><a href="#" class="check-link">$0 - $5</a></li>
+                                  <li class="check-list-item"><a href="#" class="check-link">$5 - $10</a></li>
+                                  <li class="check-list-item"><a href="#" class="check-link">$15 - $20</a></li>
+                              </ul> -->
+                          </div>
+                      </div>
+  
+                      <div class="widget biolife-filter mb-1">
+                          <h4 class="wgt-title">Brand</h4>
+                          <div class="wgt-content mb-0">
+                              <ul class="check-list multiple" *ngFor="let b of BrandGroups">
+                                  <li class="checkbox-container">
+                                    <input type="checkbox" [id]="b.brand" (change)="onClickNdGoSearch()"
+                                      [(ngModel)]="selectedBrand[b.brand]" [value]="b.brand">
+                                    <label [for]="b.brand">{{ b.brand }}</label>
+                                    <!-- <a (click)="onClickNdGoSearch(b.brand)" class="check-link" >{{b.brand}}</a> -->
+                                </li>
+                                 
+                              </ul>
+                          </div>
+                      </div>
+  
+                      <div class="widget biolife-filter mb-1">
+                          <h4 class="wgt-title">Color</h4>
+                          <div class="wgt-content mb-0">
+                              <ul class="color-list" *ngFor="let c of colorGroups">
+                                <li class="checkbox-container mb-1">
+                                    <input type="checkbox" [id]="c.color" (change)="onClickNdGoSearch(c.color,selectedColor[c.color])"
+                                      [(ngModel)]="selectedColor[c.color]" [value]="c.color">
+                                    <label [for]="c.color">{{c.color}}</label>
+                                    <!-- <a (click)="onClickNdGoSearch(b.brand)" class="check-link" >{{b.brand}}</a> -->
+                                </li>
+                                  <!-- <li class="color-item" ><a  (click)="onClickNdGoSearch(c.color)" class="c-link" ><span class="symbol hex-code"></span>{{c.color}}</a></li> -->
+            
+                              </ul>
+                          </div>
+                      </div>
+  
+                      <div class="widget biolife-filter mb-0">
+                          <h4 class="wgt-title">Popular Size</h4>
+                          <div class="wgt-content mb-1">
+                              <ul class="check-list bold multiple" *ngFor="let s of SizeGroups">
+                                  <!-- <li class="check-list-item"><a (click)="onClickNdGoSearch(s.size)" class="check-link">{{s.size}}</a></li> -->
+                                  <li class="checkbox-container mb-1">
+                                    <input type="checkbox" [id]="s.size" (change)="onClickNdGoSearch(s.size,selectedSize[s.size])"
+                                      [(ngModel)]="selectedSize[s.size]" [value]="s.size">
+                                    <label [for]="s.size">{{s.size}}</label>
+                                    <!-- <a (click)="onClickNdGoSearch(b.brand)" class="check-link" >{{b.brand}}</a> -->
+                                </li>
+                              </ul>
+                          </div>
+                      </div>
+  
+                      <!-- <div class="widget biolife-filter">
+                          <h4 class="wgt-title">Number of Pieces</h4>
+                          <div class="wgt-content">
+                              <ul class="check-list bold">
+                                  <li class="check-list-item"><a href="#" class="check-link">1 to 9</a></li>
+                                  <li class="check-list-item"><a href="#" class="check-link">10 to 15</a></li>
+                              </ul>
+                          </div>
+                      </div> -->
+<!--   
+                      <div class="widget biolife-filter mb-0">
+                          <h4 class="wgt-title">Popular Product</h4>
+                          <div class="wgt-content">
+                              <ul class="products">
+                                  <li class="pr-item">
+                                      <div class="contain-product style-widget">
+                                          <div class="product-thumb">
+                                              <a href="#" class="link-to-product" tabindex="0">
+                                                  <img src="assets/e-images/products/p-13.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                              </a>
+                                          </div>
+                                          <div class="info">
+                                              <b class="categories">Fresh Fruit</b>
+                                              <h4 class="product-title"><a href="#" class="pr-name" tabindex="0">National Fresh Fruit</a></h4>
+                                              <div class="price">
+                                                  <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                  <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </li>
+                                  <li class="pr-item">
+                                      <div class="contain-product style-widget">
+                                          <div class="product-thumb">
+                                              <a href="#" class="link-to-product" tabindex="0">
+                                                  <img src="assets/e-images/products/p-14.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                              </a>
+                                          </div>
+                                          <div class="info">
+                                              <b class="categories">Fresh Fruit</b>
+                                              <h4 class="product-title"><a href="#" class="pr-name" tabindex="0">National Fresh Fruit</a></h4>
+                                              <div class="price">
+                                                  <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                  <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </li>
+                                  <li class="pr-item">
+                                      <div class="contain-product style-widget">
+                                          <div class="product-thumb">
+                                              <a href="#" class="link-to-product" tabindex="0">
+                                                  <img src="assets/e-images/products/p-10.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                              </a>
+                                          </div>
+                                          <div class="info">
+                                              <b class="categories">Fresh Fruit</b>
+                                              <h4 class="product-title"><a href="#" class="pr-name" tabindex="0">National Fresh Fruit</a></h4>
+                                              <div class="price">
+                                                  <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                  <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div> -->
+  
+                      <!-- <div class="widget biolife-filter">
+                          <h4 class="wgt-title">Product Tags</h4>
+                          <div class="wgt-content">
+                              <ul class="tag-cloud">
+                                  <li class="tag-item"><a href="#" class="tag-link">Fresh Fruit</a></li>
+                                  <li class="tag-item"><a href="#" class="tag-link">Natural Food</a></li>
+                                  <li class="tag-item"><a href="#" class="tag-link">Hot</a></li>
+                                  <li class="tag-item"><a href="#" class="tag-link">Organics</a></li>
+                                  <li class="tag-item"><a href="#" class="tag-link">Dried Organic</a></li>
+                              </ul>
+                          </div>
+                      </div> -->
+                  </div>
+  
+              </aside>
+          </div>
+      </div>
+  </div>  
+  
+
+</div> 
+<!-- FOOTER -->
+<footer id="footer" class="footer layout-03 page-contain">
+   
+      
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-9">
+                    <section class="footer-item">
+                        <a (click)="onClickHome()"  class="biolife-logo"><img [src]="dataSharingService.companyInfo.value?.ImageLink" alt="logo Image"  width="135" height="36"></a>
+                        <div class="footer-phone-info">
+                            <i class="biolife-icon icon-head-phone"></i>
+                            <p class="r-info">
+                                <span>Got Questions ?</span>
+                                <span>(+88) {{this.dataSharingService.companyInfo.value.phone}}</span>
+                            </p>
+                        </div>
+                        <!-- <div class="newsletter-block layout-01">
+                            <h4 class="title">Newsletter Signup</h4>
+                            <div class="form-content">
+                                <form action="#" name="new-letter-foter">
+                                    <input type="email" class="input-text email" value="" placeholder="Your email here...">
+                                    <button type="submit" class="bnt-submit" name="ok">Sign up</button>
+                                </form>
+                            </div>
+                        </div> -->
+                    </section>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+                    <section class="footer-item">
+                        <h3 class="section-title">About us</h3>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-6">
+                                <div class="wrap-custom-menu vertical-menu-2">
+                                    <ul class="menu" *ngFor="let lnk of dataSharingService.aboutUs;let even = even">
+                                        <li *ngIf="even"><a href="{{lnk.link}}" target="_blank">{{lnk.linkName}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-6">
+                                <div class="wrap-custom-menu vertical-menu-2">
+                                    <ul class="menu" *ngFor="let lnk of dataSharingService.aboutUs; let odd = odd">
+                                        <li *ngIf="odd"><a href="{{lnk.link}}" target="_blank">{{lnk.linkName}}</a></li>
+                                         
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 md-margin-top-5px sm-margin-top-50px xs-margin-top-40px">
+                    <section class="footer-item">
+                        <h3 class="section-title">Transport Offices</h3>
+                        <div class="contact-info-block footer-layout xs-padding-top-10px">
+                            <ul class="contact-lines">
+                                <li>
+                                    <p class="info-item" *ngFor="let p of dataSharingService.placeInfo;">
+                                        <!-- <i class="biolife-icon icon-location"></i> -->
+                                        <b class="desc mb-4">{{p.placeName}}</b> 
+                                    </p>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <div class="biolife-social inline">
+                            <ul class="socials">
+                                <li><a href="#" title="twitter" class="socail-btn"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#" title="facebook" class="socail-btn"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#" title="pinterest" class="socail-btn"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                <li><a href="#" title="youtube" class="socail-btn"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                                <li><a href="#" title="instagram" class="socail-btn"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="separator sm-margin-top-62px xs-margin-top-40px"></div>
+                </div>
+                <!-- <div class="col-lg-6 col-sm-6 col-xs-12">
+                   <div class="copy-right-text"><p><a href="templateshub.net">Templates Hub</a></p></div>
+                </div> -->
+                <div class="col-lg-6 col-sm-6 col-xs-12">
+                    <div class="payment-methods">
+                        <ul>
+                            <li><a   class="payment-link"><img src="assets/e-images/card1.jpg" width="51" height="36" alt=""></a></li>
+                            <li><a   class="payment-link"><img src="assets/e-images/card2.jpg" width="51" height="36" alt=""></a></li>
+                            <li><a   class="payment-link"><img src="assets/e-images/card3.jpg" width="51" height="36" alt=""></a></li>
+                            <li><a   class="payment-link"><img src="assets/e-images/card4.jpg" width="51" height="36" alt=""></a></li>
+                            <li><a  class="payment-link"><img src="assets/e-images/card5.jpg" width="51" height="36" alt=""></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+       
+    
+</footer>
+<div class="footer">
+    <div class="copyright">
+        <p>Copyright &copy; Designed & Developed by <a routerLink="/features-pricing" target="_blank">rcell_e.tech</a> 2020</p>
+    </div>
+  </div>
+  

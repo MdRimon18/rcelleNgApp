@@ -1,0 +1,157 @@
+  
+
+
+<div class="card-body">
+
+  <div class="row gx-5">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-6 animated-div">
+      
+        <h1>Company Information</h1>
+
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input  type="text" class="form-control form-control-sm form-rounded" id="name" placeholder="Enter your full name"
+                   name="name" [(ngModel)]="singupObj.name" required #name="ngModel">
+            <div *ngIf="name.invalid && name.touched" class="form-control form-control-sm form-rounded form-control form-control-sm form-rounded alert alert-danger">
+              Full Name is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input readonly  type="tel" class="form-control form-control-sm form-rounded" id="phone" placeholder="Enter your phone number"
+                   name="phone"   [(ngModel)]="singupObj.phone" required #phone="ngModel">
+            <div *ngIf="phone.invalid && phone.touched" class="form-control form-control-sm form-rounded alert alert-danger">
+              Phone number is required.
+            </div>
+          </div>
+           
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control form-control-sm form-rounded" id="email" placeholder="Enter your email"
+                   name="email" [(ngModel)]="singupObj.email" required #email="ngModel">
+            <div *ngIf="email.invalid && email.touched" class="form-control form-control-sm form-rounded alert alert-danger">
+              Email is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="orgName">Organization Name</label>
+            <input type="text" class="form-control form-control-sm form-rounded" id="orgName" placeholder="Enter your organization name"
+                   name="orgName" [(ngModel)]="singupObj.orgName" required #orgName="ngModel">
+            <div *ngIf="orgName.invalid && orgName.touched" class="form-control form-control-sm form-rounded alert alert-danger">
+              Organization Name is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="storeType" class="label text-dark"> Company Type</label><span class="text-danger">*</span>              
+            <select required name="storeType"  #storeType="ngModel" 
+           
+            [(ngModel)]="singupObj.storeType" class="form-control form-control-sm form-rounded" >
+              <option value="">{{languageService.productEntry.Select}} Company Type  </option>
+              <option *ngFor="let s of shopTypeList" [value]="s.name">{{s.name}}</option>
+          </select>
+               <div class="text-left text-danger"
+               *ngIf="storeType.invalid&&storeType.touched">
+              Company Types {{languageService.productEntry.Required}}! !
+             </div>
+          </div>
+          <div class="form-group">
+            <label for="countryCode">Country Code</label>
+            <select class="form-control form-control-sm form-rounded" id="countryCode" name="countryCode" [(ngModel)]="singupObj.countryCode" required #countryCode="ngModel">
+              <option value="BD">Bangladesh</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" class="form-control form-control-sm form-rounded" id="state" placeholder="Enter your state"
+                   name="state" [(ngModel)]="singupObj.state" required #state="ngModel">
+            <div *ngIf="state.invalid && state.touched" class="form-control form-control-sm form-rounded alert alert-danger">
+              State is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="address1">Address Line 1</label>
+            <input type="text" class="form-control form-control-sm form-rounded" id="address1" placeholder="Enter your address line 1"
+                   name="AddressLineOne" [(ngModel)]="singupObj.AddressLineOne" required #address1="ngModel">
+            <div *ngIf="address1.invalid && address1.touched" class="form-control form-control-sm form-rounded alert alert-danger">
+              Address Line 1 is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="address2">Address Line 2</label>
+            <input type="text" class="form-control form-control-sm form-rounded" id="address2" placeholder="Enter your address line 2 (optional)"
+                   name="AddressLineTwo" [(ngModel)]="singupObj.AddressLineTwo">
+          </div>
+        
+       
+          <div class="form-group">
+            <label for="offDayName">Off Day Name</label>
+            <input type="text" class="form-control form-control-sm form-rounded" id="offDayName" placeholder="Enter your off day name"
+                   name="offDayName" [(ngModel)]="singupObj.offDayName">
+          </div>
+          
+        
+          <div class="form-group">
+            <label for="startEndTime">Start and End Time</label>
+            <input type="text" class="form-control form-control-sm form-rounded" id="startEndTime" placeholder="Enter your start and end time"
+                   name="startEndTime" [(ngModel)]="singupObj.startEndTime" >
+            <!-- <div *ngIf="startEndTime.invalid && startEndTime.touched" class="form-control form-control-sm form-rounded alert alert-danger">
+              Start and end time is required.
+            </div> -->
+          </div>
+          
+          <div class="form-group">
+            <label for="ActiveStatus">Active Status</label>
+            <select class="form-control form-control-sm form-rounded" id="ActiveStatus" name="ActiveStatus" [(ngModel)]="singupObj.ActiveStatus">
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
+            </select>
+          </div>
+          
+          <!-- <div class="form-group">
+            <label for="ImageLink">Image Link</label>
+            <input   type="text" class="form-control form-control-sm form-rounded" id="ImageLink" placeholder="double click"
+                   name="ImageLink" [(ngModel)]="singupObj.ImageLink">
+          </div> -->
+
+      
+            <div class="form-group"  *ngIf="singupObj.ImageLink==''||singupObj.ImageLink==undefined">
+ 
+                <label for="exampleInputEmail1"> Upload Image</label>
+                <input 
+                 type="file" (change)="uploadImagesService.onFileSelectedForLog($event)" name="image" 
+                 class="form-control form-control-sm form-rounded" type="file" accept="image/*"
+                multiple="multiple" placeholder="image">
+               
+           </div>
+         
+          <mat-spinner class="small-spinner" *ngIf="isLoading"></mat-spinner>
+          <button type="submit" *ngIf="!isLoading" class="btn btn-primary btn-sm mt-2" [disabled]="form.invalid" >Save</button>
+        
+        </form>
+        
+        <div class="form-group" *ngIf="singupObj.ImageLink!=''">
+          <div class="image-container col-md-6" >
+            <img height="36px" width="135px" [src]="singupObj.ImageLink" alt="Selected Image">
+          <button (click)="onDeleteImage(singupObj)" [ngStyle]="{'color':'red'}" class="btn addMore hover-message"><mat-icon>delete_forever</mat-icon></button>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="singupObj.ImageLink==''">
+          <div  class="image-container col-md-6" >
+            <img height="36px" width="135px" [src]="uploadImagesService.selectedImage" alt="Selected Image">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div> 
+
+
+

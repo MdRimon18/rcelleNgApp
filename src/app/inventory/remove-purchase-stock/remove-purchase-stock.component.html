@@ -1,0 +1,474 @@
+
+<div class="card-header crdHdr">
+
+  <div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1">
+      <button  title="{{languageService.productEntry.BackButtonhoverEffect}}"  
+      class="btn   addMore" (click)="backToProductInfo()"
+    >
+    <i class="fas fa-arrow-left"></i>
+    </button>
+    </div>
+    <div class="col-lg-11 col-md-10 col-sm-11">
+      <h5 align="center" class="h4 mb-0"> {{languageService.productEntry.RemovePurchaseItemtoStockHeading}}
+      </h5></div>
+    </div>
+ </div>
+<div class="card-body">
+ 
+  <div class="row gx-5">
+    <div class="example-header">
+      <mat-card class="matcrd">
+        <p class="text-center fw-bold">{{languageService.productEntry.loadPurchaseItemtoStockHeading}}</p>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="Category" class="label text-dark"> {{languageService.productEntry.productCategory}}</label><span class="text-danger">*</span>              
+              <select   name="Category"  #category="ngModel" 
+              (change)="dropdownValuesService.OnCategoryDDLChange(dropdownValuesService.Category)"
+              [(ngModel)]="dropdownValuesService.Category" class="form-control form-rounded form-control-sm">
+                <option value="">{{languageService.productEntry.Select}} {{languageService.productEntry.productCategory}}  </option>
+                <option *ngFor="let productCategorie of dropdownValuesService.productCategories" [value]="productCategorie.ProductName">{{productCategorie.ProductName}}</option>
+            </select>
+          
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="SubCategory" class="label text-dark">{{languageService.productEntry.subCategory}}</label>               
+              <select name="SubCategory"  #subCategory="ngModel"
+              (change)="dropdownValuesService.OnSubCategoryDDLChange(dropdownValuesService.SubCategory)"
+              [(ngModel)]="dropdownValuesService.SubCategory" class="form-control form-rounded form-control-sm">
+                <option value=''>{{languageService.productEntry.Select}} {{languageService.productEntry.subCategory}} </option>
+                <option *ngFor="let productSubCategorie of dropdownValuesService.filterproductSubCategories"  [value]="productSubCategorie.SubCategoreisName">{{productSubCategorie.SubCategoreisName}}</option>
+            </select>
+                 
+            </div>
+          </div>
+          <div class="col-sm-3">
+   
+            <div class="form-group">
+              <label for="SubCategory" class="label text-dark">{{languageService.InvoiceEntry.ChooseProduct}}</label>               
+                <input class="form-control form-rounded form-control-sm" type="text"
+                      placeholder="{{languageService.InvoiceEntry.ChooseProduct}}"
+                      aria-label="Number"
+                      
+                      [formControl]="dropdownValuesService.myControl"
+                      [matAutocomplete]="auto">
+                      
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                
+                  <mat-option (click)="productSelection(option.key)"  *ngFor="let option of dropdownValuesService.filteredOptions | async" [value]="option.name">
+                {{option.name}}  
+                  <!-- <button class="btn btn-outline-success" >
+                            <i class="fa fa-plus" ></i> 
+                        </button> -->
+                
+                  </mat-option>
+                </mat-autocomplete>
+                <!-- <button  mat-icon-button matSuffix aria-label="clear" (click)="dropdownValuesService.applyFilterMyControl()" >
+                  <mat-icon title="{{languageService.productEntry.productSearchWordCancelEffect}}" class="addMore">close</mat-icon>
+                </button> -->
+              
+            </div>
+          
+          </div>
+          
+          <div class="col-sm-3">
+   
+            <div class="form-group">
+              <label  class="label text-dark">{{languageService.InvoiceEntry.ChooseSerialNumber}}</label>               
+                <input class="form-control form-rounded form-control-sm"  type="text"
+                      placeholder="{{languageService.InvoiceEntry.ChooseSerialNumber}}"
+                      aria-label="Number"
+                      
+                      [formControl]="dropdownValuesService.myControlSerialNumber"
+                      [matAutocomplete]="autoSerialNo">
+                      
+                <mat-autocomplete autoActiveFirstOption #autoSerialNo="matAutocomplete">
+                
+                  <mat-option (click)="productSelection(option.productKey)"  *ngFor="let option of dropdownValuesService.filteredOptionsSerialNumber | async" [value]="option.serialNumber">
+                {{option.serialNumber}}
+                  <!-- <button class="btn btn-outline-success" >
+                            <i class="fa fa-plus" ></i> 
+                        </button> -->
+                
+                  </mat-option>
+                </mat-autocomplete>
+                <!-- <button  mat-icon-button matSuffix aria-label="clear" (click)="dropdownValuesService.applyFilterSerial()" >
+                  <mat-icon title="{{languageService.productEntry.productSearchWordCancelEffect}}" class="addMore">close</mat-icon>
+                </button> -->
+            
+            </div>
+          
+          </div>
+             
+            
+        </div>
+      </mat-card>
+    
+</div>
+
+</div>
+</div>
+
+
+<div class="card-body">
+  
+  <div class="row gx-5 ">
+  <div class="col-sm-12 col-md-12 col-lg-12 animated-div">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="name" class="label text-dark">{{languageService.productEntry.productName}}</label><span class="text-danger">*</span> 
+           <input name="name"  #name="ngModel"
+           [(ngModel)]="Product.name" type="text" class="form-control form-rounded form-control-sm" 
+             id="name" placeholder="{{languageService.productEntry.productName}}" required>
+             <div class="text-left text-danger"
+             *ngIf="name.invalid&&name.touched">
+             {{languageService.productEntry.productName}} {{languageService.productEntry.Required}}!
+           </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="catagory" class="label text-dark"> {{languageService.productEntry.productCategory}}</label><span class="text-danger">*</span>              
+          <select required name="catagory"  #catagory="ngModel" 
+          (change)="OnCategoryDDLChange(Product.catagory)"
+          [(ngModel)]="Product.catagory" class="form-control form-rounded form-control-sm">
+            <option value="">{{languageService.productEntry.productCategory}} {{languageService.productEntry.Select}} </option>
+            <option *ngFor="let productCategorie of productCategories" [value]="productCategorie.ProductName">{{productCategorie.ProductName}}</option>
+        </select>
+             <div class="text-left text-danger"
+             *ngIf="catagory.invalid&&catagory.touched">
+             {{languageService.productEntry.productCategory}} {{languageService.productEntry.Required}}! !
+           </div>
+        </div>
+      </div>
+      <!-- <div class="col-sm-3">
+        <div class="form-group">
+          <label for="subCategory" class="label text-dark">{{languageService.productEntry.subCategory}}</label>               
+          <select name="subCategory"  #subCategory="ngModel"
+          [(ngModel)]="Product.subCategory" class="form-control form-rounded form-control-sm">
+            <option value=''> {{languageService.productEntry.subCategory}} {{languageService.productEntry.Select}}</option>
+            <option *ngFor="let productSubCategorie of productSubCategories"  [value]="productSubCategorie.SubCategoreisName">{{productSubCategorie.SubCategoreisName}}</option>
+        </select>
+             
+        </div>
+      </div> -->
+    
+      <div class="col-sm-3">
+        <div class="form-group" >
+          <label for="quantity" class="label text-dark">{{languageService.productEntry.PresentStockQuantity}}</label>
+          <input readonly   name="quantity"   #quantity="ngModel"
+          [(ngModel)]="Product.quantity" type="number" class="form-control form-rounded form-control-sm" 
+            id="quantity" placeholder="{{languageService.productEntry.PresentStockQuantity}}" required>
+    
+            
+    
+            <!-- <div class="text-left text-danger"
+            *ngIf="quantity.invalid&&quantity.touched">
+            {{languageService.productEntry.OpeningQuantity}} {{languageService.productEntry.Required}}!
+          </div> -->
+        </div>
+        
+      </div>
+    
+      <!-- <div class="col-sm-3">
+        <div class="form-group" >
+          <label for="quantity" class="label text-dark">{{languageService.productEntry.OpeningQuantity}}</label><span class="text-danger">*</span>
+          <input (change)="vatAmountNDiscountCalculation()"  name="quantity"   #quantity="ngModel"
+          [(ngModel)]="Product.quantity" type="number" class="form-control" class="form-control"
+            id="quantity" placeholder="{{languageService.productEntry.OpeningQuantity}}" required>
+            <div class="text-left text-danger"
+            *ngIf="quantity.invalid&&quantity.touched">
+            {{languageService.productEntry.OpeningQuantity}} {{languageService.productEntry.Required}}!
+          </div>
+        </div>
+        
+      </div> -->
+      <div class="col-sm-3">
+        <div class="form-group" >
+       
+          <label for="newQty" class="label text-dark">{{languageService.productEntry.RemovalQnty}}</label><span class="text-danger">*</span>
+          <input   name="newQty"   #newQty="ngModel"
+          [(ngModel)]="Product.newQty" type="number" class="form-control form-rounded form-control-sm" 
+            id="newQty" placeholder="{{languageService.productEntry.RemovalQnty}}" required>
+    
+            
+    
+            <div class="text-left text-danger"
+            *ngIf="newQty.invalid&&newQty.touched">
+            {{languageService.productEntry.NewQuantity}} {{languageService.productEntry.Required}}!
+          </div>
+        </div>
+        
+      </div> 
+    </div>
+    <div class="row">
+     
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="alertQuantity" class="label text-dark">{{languageService.productEntry.addSerial}}</label>
+          <input name="alertQuantity"   (dblclick)="onAddSeialNumbera(Product)"
+           type="number"  class="form-control form-rounded form-control-sm"
+              placeholder="{{languageService.productEntry.doubleClick}}">
+             
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="importedForm" class="label text-dark">{{languageService.productEntry.ImportedFrom}}</label>
+           <input name="importedForm"  #importedForm="ngModel"
+           [(ngModel)]="Product.importedForm" type="text" class="form-control form-rounded form-control-sm" 
+             id="importedForm" placeholder="{{languageService.productEntry.ImportedFrom}}" required>
+            
+        </div>
+      </div>
+      
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="productBuyingPrice" class="label text-dark">{{languageService.productEntry.BuyingPrice}}</label><span class="text-danger">*</span>
+           <input name="productBuyingPrice"  
+               #productBuyingPrice="ngModel"
+             [(ngModel)]="Product.productBuyingPrice" type="number" 
+             class="form-control form-rounded form-control-sm" 
+             placeholder="{{languageService.productEntry.BuyingPrice}}" 
+             required>
+             <div class="text-left text-danger"
+             *ngIf="productBuyingPrice.invalid&&productBuyingPrice.touched">
+             {{languageService.productEntry.BuyingPrice}} {{languageService.productEntry.Required}}!
+           </div>  
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="cost" class="label text-dark">{{languageService.productEntry.SellingPrice}} </label><span class="text-danger">*</span>
+           <input (change)="vatAmountNDiscountCalculation()"  name="cost"  #cost="ngModel"
+           [(ngModel)]="Product.cost" type="number" class="form-control form-rounded form-control-sm" 
+             id="cost" placeholder="{{languageService.productEntry.SellingPrice}}" required>
+             <div class="text-left text-danger"
+             *ngIf="cost.invalid&&cost.touched">
+             {{languageService.productEntry.SellingPrice}} {{languageService.productEntry.Required}}!
+           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+       
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label  class="label text-dark"> {{languageService.productEntry.UnitType}}</label><span class="text-danger">*</span>               
+          <select name="unit"  #Unit="ngModel"  required
+          [(ngModel)]="Product.unit" class="form-control form-rounded form-control-sm">
+            <option value=''> {{languageService.productEntry.UnitType}} {{languageService.productEntry.Select}}</option>
+            <option *ngFor="let u of UnitList" [value]="u.name">{{u.name}}</option>
+        </select>
+             <div class="text-left text-danger"
+             *ngIf="Unit.invalid&&Unit.touched">
+             {{languageService.productEntry.UnitType}} {{languageService.productEntry.Required}}! 
+           </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="barcode" class="label text-dark">{{languageService.productEntry.BarCode}}</label>
+          <input name="barcode"  #barcode="ngModel"
+          [(ngModel)]="Product.barcode" type="text"  class="form-control form-rounded form-control-sm"
+            id="barcode" placeholder="{{languageService.productEntry.BarCode}}" >
+            <!-- <div class="text-left text-danger"
+            *ngIf="barcode.invalid&&barcode.touched">
+            barcode is Required !
+          </div> -->
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label  class="label text-dark">{{languageService.productEntry.LinktoSupplier}} </label>               
+          <select name="supplier"  #supplier="ngModel"  required
+          [(ngModel)]="Product.supplier" class="form-control form-rounded form-control-sm">
+            <option value=''>{{languageService.productEntry.LinktoSupplier}} {{languageService.productEntry.Select}}</option>
+            <option *ngFor="let u of suppliers" [value]="u.phone">{{u.name}}/{{u.orgName}}</option>
+        </select>
+              
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="imageLink" class="label text-dark">{{languageService.productEntry.ImageLink}} </label>
+          <input name="imageLink"   
+          [(ngModel)]="Product.imageLink" type="text" class="form-control form-rounded form-control-sm" 
+            id="imageLink" placeholder="{{languageService.productEntry.ImageLink}}" >
+            <!-- <div class="text-left text-danger"
+            *ngIf="barcode.invalid&&barcode.touched">
+            barcode is Required !
+          </div> -->
+        </div>
+      </div>
+     
+    </div>
+    <div class="row">
+      
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="vatPercent" class="label text-dark">{{languageService.productEntry.Vatin}}</label>
+          <input (change)="vatAmountNDiscountCalculation()" name="vatPercent"  #vatPercent="ngModel"
+          [(ngModel)]="Product.vatPercent" type="number" class="form-control form-rounded form-control-sm" 
+            id="vatPercent" placeholder="{{languageService.productEntry.Vatin}}" >
+            <!-- <div class="text-left text-danger"
+            *ngIf="barcode.invalid&&barcode.touched">
+            barcode is Required !
+          </div> -->
+        </div>
+      </div>
+      
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="vatAmount" class="label text-dark">{{languageService.productEntry.VatAmount}}</label>
+          <input  name="vatAmount"   
+          [(ngModel)]="Product.vatAmount" type="number" class="form-control form-rounded form-control-sm" 
+            id="vatAmount" placeholder="{{languageService.productEntry.VatAmount}}" >
+            <!-- <div class="text-left text-danger"
+            *ngIf="barcode.invalid&&barcode.touched">
+            barcode is Required !
+          </div> -->
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="discountPercent" class="label text-dark">{{languageService.productEntry.Discount}}</label>
+          <input (change)="vatAmountNDiscountCalculation()" name="discountPercent"   
+          [(ngModel)]="Product.discountPercent" type="number"  class="form-control form-rounded form-control-sm"
+            id="discountPercent" placeholder="{{languageService.productEntry.Discount}}" >
+            <!-- <div class="text-left text-danger"
+            *ngIf="barcode.invalid&&barcode.touched">
+            barcode is Required !
+          </div> -->
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="discountAmount" class="label text-dark">{{languageService.productEntry.DiscountAmount}}</label>
+          <input name="discountAmount"   
+          [(ngModel)]="Product.discountAmount" type="number" class="form-control form-rounded form-control-sm" 
+            id="discountAmount" placeholder="{{languageService.productEntry.DiscountAmount}}" >
+            <!-- <div class="text-left text-danger"
+            *ngIf="barcode.invalid&&barcode.touched">
+            barcode is Required !
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label  class="label text-dark">{{languageService.productEntry.Date}}</label>
+            <input
+             class="form-control form-rounded form-control-sm"
+             type="date"
+             name="entryDate" 
+             #eDate="ngModel"
+             [(ngModel)]="Product.date"
+             placeholder="{{languageService.productEntry.Date}}"
+              >
+           
+         
+            <!-- <div class="text-left text-danger"
+            *ngIf="Product.date==''&&eDate.touched">
+            Date is required 
+          </div> -->
+        </div>
+       
+      </div>
+      <!-- <div class="col-sm-3">
+        <div class="form-group">
+                <label for="date" class="label text-dark">Select Date</label>               
+                <input
+                class="form-control"
+                [matDatepicker]="picker"
+                name="date" 
+                 #date="ngModel"
+                readonly
+                [(ngModel)]="Product.date"
+                 
+                 placeholder="{{Product.date}}"
+                required >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+             
+                  <div class="text-left text-danger"
+                  *ngIf="date.invalid&&date.touched">
+                  Date is Required !
+               
+               </div>
+                
+        </div>
+        
+      </div> -->
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="remarks" class="label text-dark">{{languageService.productEntry.Remarks}}</label>
+         <textarea name="remarks"   
+         [(ngModel)]="Product.remarks" type="text" class="form-control form-rounded form-control-sm" 
+           id="remarks" placeholder="{{languageService.productEntry.Remarks}}" cols="50" rows="2"></textarea>
+           
+            <!-- <div class="text-left text-danger"
+            *ngIf="barcode.invalid&&barcode.touched">
+            barcode is Required !
+          </div> -->
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="Desc" class="label text-dark">{{languageService.productEntry.Desc}}</label>
+         <textarea name="Desc"   
+         [(ngModel)]="Product.Desc" type="text" class="form-control form-rounded form-control-sm" 
+           id="Desc" placeholder="{{languageService.productEntry.Desc}}" cols="50" rows="2"></textarea>
+           
+            <!-- <div class="text-left text-danger"
+            *ngIf="barcode.invalid&&barcode.touched">
+            barcode is Required !
+          </div> -->
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="Desc" class="label text-dark">Damage Remark/Removal Reasons<span class="text-danger">*</span></label>
+         <textarea name="Desc"  
+         #DamageRemark="ngModel"
+         required 
+         [(ngModel)]="damageRemark" type="text" class="form-control form-rounded form-control-sm" 
+           id="damageRemark" placeholder="Removal Remark" cols="50" rows="2"></textarea>
+           
+            <div class="text-left text-danger"
+            *ngIf="DamageRemark.invalid&&DamageRemark.touched">
+            Removal Reason is Required !
+          </div>
+        </div>
+      </div>
+    </div>
+     <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group ">
+       
+          <button   [disabled]="damageRemark==''||Product.newQty==''||Product.name==''||Product.unit==''||Product.cost==0||Product.cost==null|| Product.quantity==0|| Product.quantity==null" class="btn btn-primary"  (click)="delete(Product)">{{languageService.productEntry.Save}}</button>
+        </div>
+      </div>
+    
+     
+    </div> 
+
+  
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+ 

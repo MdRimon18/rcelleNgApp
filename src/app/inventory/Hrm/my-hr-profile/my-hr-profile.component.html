@@ -1,0 +1,220 @@
+  
+
+  <div class="card-header crdHdr"> 
+   
+    <h3 class="h4 mb-0">
+     <button (click)="backTo()"
+     class="btn"
+   ><i class="fas fa-arrow-left"></i>
+   </button>
+   {{languageService.productEntry.hrProfile}}</h3></div>
+   <div class="card-body">
+      
+          <div class="row gx-5 animated-div">
+              <div class="col-md-5">
+                  
+                
+                    
+                      <form method="POST" #form="ngForm" class="register-form" id="register-form">
+                        
+                        <div class="form-group">
+                          
+                          <div class="row">
+                          
+                              <label for="phone">{{languageService.productEntry.mobile}}</label>
+                              <input required #Phone="ngModel" type="text" name="phone" id="phone"
+                              class="form-control form-rounded form-control-sm"
+                               [(ngModel)]="singupObj.phone" placeholder="{{languageService.productEntry.mobile}}"/> </div>
+                            <!-- <div class="col-md-3">
+                              <Button type="button" (click)="findExistingSystemCustomer()" class="btn btn-primary">{{languageService.SalesReturnInfo.search}}</Button>
+                            </div> -->
+                            
+                          
+                          
+                          <div
+                            class="text-left text-danger"
+                            *ngIf="
+                            singupObj.phone==''&&
+                            Phone.touched
+                            "
+                          >
+                          {{languageService.productEntry.mobileRequired}}
+                          </div>
+                      </div>
+                        <div class="form-group">
+                              <label for="name">{{languageService.productEntry.Name}}</label>
+                              <input required #Name="ngModel" type="text" name="name" id="name"
+                              class="form-control form-rounded form-control-sm"
+                               [(ngModel)]="singupObj.name" placeholder="{{languageService.productEntry.Name}}"/>
+                              <div
+                            class="text-left text-danger"
+                            *ngIf="
+                            singupObj.name==''&&
+                            Name.touched
+                            "
+                          >
+                          {{languageService.productEntry.nameRequird}}
+                          </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="department">{{languageService.productEntry.department}}</label>
+                            <input   #Department="ngModel" type="text" name="department" id="department"
+                            class="form-control form-rounded form-control-sm" 
+                            [(ngModel)]="singupObj.department" placeholder="{{languageService.productEntry.department}}"/>
+                            
+                        </div>
+                        <div class="form-group">
+                          <label for="designation">{{languageService.productEntry.designation}}</label>
+                          <input   #Designarion="ngModel" type="text" name="designation" id="designation"
+                          class="form-control form-rounded form-control-sm" 
+                           [(ngModel)]="singupObj.designation" placeholder="{{languageService.productEntry.designation}}"/>
+                          
+                      </div>
+                     
+                    <div class="form-group">
+                      <label for="grade">{{languageService.productEntry.grade}}</label>
+                      <input   #Grade="ngModel" type="text" name="grade" id="grade" 
+                      class="form-control form-rounded form-control-sm" 
+                      [(ngModel)]="singupObj.grade" placeholder="{{languageService.productEntry.grade}}"/>
+                      
+                  </div>
+                  <div class="form-group">
+                    <label for="salary">{{languageService.productEntry.salary}}</label>
+                    <input   #Salary="ngModel" type="number" name="salary" id="salary" 
+                    class="form-control form-rounded form-control-sm"
+                    [(ngModel)]="singupObj.salary" placeholder="{{languageService.productEntry.salary}}"/>
+                    
+                </div>
+                          <div class="form-group">
+                              <label for="countryCode">{{languageService.productEntry.SelectCountry}}</label>
+                             
+                                      <select required #CountryCode="ngModel" name="countryCode"  
+                                      class="form-control form-rounded form-control-sm"
+                                      #countryCode="ngModel" 
+                          [(ngModel)]="singupObj.countryCode"  >
+                            <option value=""> {{languageService.productEntry.SelectCountry}}</option>
+                            <option *ngFor="let cntry of countryList" [value]="cntry.name">{{cntry.name}}</option>
+                        </select>
+                        <div
+                            class="text-left text-danger"
+                            *ngIf="
+                            singupObj.countryCode==''&&
+                            CountryCode.touched
+                            "
+                          >
+                          {{languageService.productEntry.CountryRerquired}}
+                          </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="State">{{languageService.productEntry.stateName}} </label>
+                              <input required #State="ngModel" type="text" name="State" id="State" 
+                              class="form-control form-rounded form-control-sm"
+                              [(ngModel)]="singupObj.State" placeholder=" {{languageService.productEntry.stateName}}"/>
+                              <!-- <div
+                            class="text-left text-danger"
+                            *ngIf="
+                            singupObj.State==''&&
+                            State.touched
+                            "
+                          >
+                          State is required
+                          </div> -->
+                          </div>
+                          <div class="form-group">
+                              <label for="AddressLineOne">{{languageService.productEntry.addressLineOne}}</label>
+                              <input required #AddressLineOne="ngModel" type="text" name="AddressLineOne" id="AddressLineOne"
+                              class="form-control form-rounded form-control-sm"
+                               [(ngModel)]="singupObj.AddressLineOne" placeholder="{{languageService.productEntry.addressLineOne}}"/>
+                              <!-- <div
+                            class="text-left text-danger"
+                            *ngIf="
+                            singupObj.AddressLineOne==''&&
+                            AddressLineOne.touched
+                            "
+                          >
+                          AddressLine One is required
+                          </div> -->
+                          </div>
+                          <div class="form-group">
+                            <label for="AddressLineTwo">{{languageService.productEntry.addressLineTwo}}</label>
+                              <input required #AddressLineTwo="ngModel" type="text" name="AddressLineTwo" id="AddressLineTwo"
+                              class="form-control form-rounded form-control-sm"
+                               [(ngModel)]="singupObj.AddressLineTwo" placeholder="{{languageService.productEntry.addressLineTwo}}"/>
+                              <!-- <div
+                            class="text-left text-danger"
+                            *ngIf="
+                            singupObj.AddressLineTwo==''&&
+                            AddressLineTwo.touched
+                            "
+                          >
+                          AddressLine Two is required
+                          </div> -->
+                          </div>
+                          <!-- <div class="form-group">
+                            <label for="storeType"><i class="fas fa-i-cursor"></i></label>
+                           
+                                    <select required #StoreType="ngModel" name="storeType"  #countryCode="ngModel" 
+                        [(ngModel)]="singupObj.storeType" class="form-control">
+                          <option value=""> Select Customer Type</option>
+                          <option *ngFor="let s of shopTypeList" [value]="s.code">{{s.name}}</option>
+                      </select>
+                      <div
+                            class="text-left text-danger"
+                            *ngIf="
+                            singupObj.storeType==''&&
+                            StoreType.touched
+                            "
+                          >
+                          Customer Type is required
+                          </div>
+                        </div> -->
+                        <div class="form-group">
+                          <label for="email">{{languageService.productEntry.email}}</label>
+                          <input required #Email="ngModel" type="text" name="email" id="email"
+                          class="form-control form-rounded form-control-sm"
+                           [(ngModel)]="singupObj.email" placeholder="{{languageService.productEntry.email}}"/>
+                          <!-- <div
+                            class="text-left text-danger"
+                            *ngIf="
+                            singupObj.email==''&&
+                            Email.touched
+                            "
+                          >
+                          Email is required
+                          </div> -->
+                      </div>
+                      
+                       
+                    <div class="form-group">
+                      <label for="ImageLink">{{languageService.productEntry.ImageLink}}</label>
+                      <input type="text" name="ImageLink" id="ImageLink" 
+                      class="form-control form-rounded form-control-sm"
+                      [(ngModel)]="singupObj.ImageLink" placeholder="{{languageService.productEntry.ImageLink}}"/>
+                  </div>
+                          <div class="form-group form-button">
+                              <input type="button"  [disabled]="
+                              
+                              singupObj.phone==''||
+                             
+                              singupObj.countryCode==''
+                             
+                            " name="" id="" (click)="saveMyCustomer()" class="btn btn-info" value="{{languageService.productEntry.Save}}"/>
+                          </div>
+                          
+                      </form>
+                  
+              </div>
+              <div class="col-md-4">
+                  
+                     <img height="50%" width="70%"  src="assets/images2/supplierProfile.jpg" alt="sing up image"> 
+                      <!-- <a href="#" class="signup-image-link">I am already member</a> -->
+                  
+              </div>
+        </div>
+           
+           
+        
+    
+ 
+
+

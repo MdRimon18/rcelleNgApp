@@ -1,0 +1,241 @@
+ 
+<div class="card-header crdHdr"> <h5 align="center" class="h4 mb-0">{{languageService.SalesReturnInfo.duePaymentDetails}}</h5></div>
+
+ 
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-3 col-nd-3 col-sm-3 animated-div">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="icon flex-shrink-0 bg-green"><i class="far fa-calendar"></i></div>
+              <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">{{totalAmount}}{{languageService.SalesReturnInfo.tk}}</strong><small class="text-uppercase text-gray-500 small d-block lh-1">  {{languageService.SalesReturnInfo.TotalAmount}}  </small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3  col-nd-3 col-sm-3 animated-div">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="icon flex-shrink-0 bg-green"><i class="far fa-calendar"></i></div>
+              <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1"> {{totalPaidAmount}} {{languageService.SalesReturnInfo.tk}}</strong><small class="text-uppercase text-gray-500 small d-block lh-1"> {{languageService.SalesReturnInfo.totalPaidAmount}} </small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3  col-nd-3 col-sm-3  animated-div">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="icon flex-shrink-0 bg-red"><i class="fas fa-tasks"></i></div>
+              <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">{{totalDueAmount}}{{languageService.SalesReturnInfo.tk}}</strong><small class="text-uppercase text-gray-500 small d-block lh-1">   {{languageService.SalesReturnInfo.totalDeuAmount}}  </small></div>
+            </div>
+          </div>
+        </div>
+     
+      </div>
+   
+    </div>
+   
+  <div class="row gx-5 bg-white">
+    <div class="col-sm-10 col-md-10 col-lg-10">
+      <div class="example-header">
+     
+        
+      <div class="table-container">
+        <table #paginator="matSort" matSort mat-table [dataSource]="dataSource">
+            <ng-container *ngFor="let column of columns; let i=index" [matColumnDef]="column.field">
+                <th mat-header-cell *matHeaderCellDef>
+                    <button *ngIf="i == 0" mat-icon-button matTooltip="Toggle Filters" (click)="toggleFilters= !toggleFilters">
+              <mat-icon>search</mat-icon>
+            </button>
+                    <span *ngIf="i > 0" mat-sort-header>{{column.header}}</span>
+                    <div class="filters-container" [class.animate]="!toggleFilters">
+                      <button *ngIf="i == 0" mat-icon-button matTooltip="Clear Filters" (click)="clearFilters()">
+                        <mat-icon>search_off</mat-icon>
+                      </button>
+                             
+
+                                <input class="form-rounded" [hidden]="i==0 ||i==7"    placeholder="{{languageService.stockInfo.search}}" [(ngModel)]="filtersModel[i]" (keyup)="search(filtersModel,i)">
+                          
+
+                    </div>
+                  
+ 
+                    
+                    
+                </th>
+                <td  mat-cell *matCellDef="let element"> {{
+                  element[column.field]
+                 
+                }} 
+                
+                <button *ngIf="element.key!=0&&i==7" (click)="moneyRecitByInvoice(element.invoiceNo)" mat-stroked-button color="primary">Receipt by Invoice</button>
+                <button *ngIf="element.key!=0&&i==7" (click)="moneyRecitByInvoice2(element.invoiceNo)" mat-stroked-button color="primary">Receipt by Invoice2</button>
+              </td>
+            </ng-container>
+            <ng-container  *ngFor="let headersFilter of headersFilters; let i=index" [matColumnDef]="headersFilter">
+              <th mat-header-cell *matHeaderCellDef>
+                  <div class="filters-container" [class.animate]="toggleFilters">
+                
+
+           
+
+              
+           
+              
+           
+            
+        
+                      <!-- <mat-form-field [hidden]="i>9" *ngIf="i > 0" appearance="outline">
+                    
+                          <input  [type]="i==6?'date':'text'"   matInput placeholder="Press 'Enter' to search" [(ngModel)]="filtersModel[i]" (keyup.enter)="search(filtersModel[i],i)">
+  
+            </mat-form-field> -->
+                  </div>
+              </th>
+          </ng-container>
+           
+    
+            <tr mat-header-row *matHeaderRowDef="headers;sticky: true"></tr>
+            <!-- Start: Add below "tr" for displaying filters -->
+            <tr mat-header-row class="no-default-height" 
+            *matHeaderRowDef="headersFilters;sticky: true"></tr>
+           
+            <tr  mat-row *matRowDef="let row; columns: headers;let i = index" [ngClass]="{'make-gold':i===selectedIndex}">
+                
+            </tr>
+            
+        </table>
+       
+    
+    </div>
+   
+
+
+
+
+      </div>
+    </div>
+    
+    </div>
+    <div class="float-left">
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+  </div>
+<!-- <nb-card>
+
+      
+  <div class="example-header">
+    <h5 class="ml-4">{{languageService.SalesReturnInfo.duePaymentDetails}}</h5>
+    <div class="row">
+      
+<div class="col-sm-2 ml-4">
+<div class="form-group">
+<input  type="text"  [(ngModel)]="mobileNo"  class="form-control"  id="mobileNo" placeholder="{{languageService.SalesReturnInfo.mobile}}">
+
+
+</div>
+</div>
+<div class="col-sm-2 ml-4">
+<div class="form-group">
+  <button   type="submit" class="btn btn-outline-success"   (click)="applyFilter(entryDate)"
+  >
+      
+  {{languageService.SalesReturnInfo.search}}
+</button>
+</div>
+</div>
+<div class="col-sm-2">
+<div class="form-group">
+ 
+      
+  <i class="fas fa-retweet" (click)="Refresh()"></i>
+
+</div>
+</div>
+</div>
+
+  </div>
+  <mat-card class="example-card">
+
+    <div class="row">
+
+      <mat-card class="mat-card">
+        <mat-card-title>{{totalAmount}}{{languageService.SalesReturnInfo.tk}}</mat-card-title>
+        {{languageService.SalesReturnInfo.TotalAmount}}  
+      </mat-card>
+      <mat-card class="mat-card">
+        <mat-card-title> {{totalPaidAmount}} {{languageService.SalesReturnInfo.tk}}</mat-card-title>
+        {{languageService.SalesReturnInfo.totalPaidAmount}} 
+      </mat-card>
+      <mat-card class="mat-card">
+        <mat-card-title> {{totalDueAmount}}{{languageService.SalesReturnInfo.tk}}</mat-card-title>
+        {{languageService.SalesReturnInfo.totalDeuAmount}}  
+      </mat-card>
+    </div>
+  </mat-card>
+
+  <mat-table #table [dataSource]="dataSource" matSort >
+  
+    <ng-container matColumnDef="memoNo">
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">  {{languageService.SalesReturnInfo.invoiceNo}}</mat-header-cell>
+    <mat-cell *matCellDef="let element" >{{element.invoiceNo}}</mat-cell>
+
+  </ng-container>
+
+  <ng-container matColumnDef="clienName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">{{languageService.SalesReturnInfo.ClientName}}</mat-header-cell>
+    <mat-cell *matCellDef="let element" >{{element.clienName}}</mat-cell>
+
+  </ng-container>
+
+ 
+  <ng-container matColumnDef="mobile">
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark"> {{languageService.SalesReturnInfo.mobile}}</mat-header-cell>
+    <mat-cell *matCellDef="let element" >{{element.mobile}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalAmount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark"> {{languageService.SalesReturnInfo.TotalAmount}}</mat-header-cell>
+      <mat-cell *matCellDef="let element" >{{element.totalAmount}}</mat-cell>
+
+    </ng-container>
+    <ng-container matColumnDef="PaidAmount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">{{languageService.SalesReturnInfo.PaidAmount}}</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.PaidAmount}}</mat-cell>
+
+
+    
+    </ng-container>
+
+    <ng-container matColumnDef="DueAmount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark">{{languageService.SalesReturnInfo.DueAmount}}</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+       <div *ngIf="element.DueAmount!=0"> {{element.DueAmount}} 
+        
+        <button   mat-raised-button color="accent" (click)="payment(element)"> {{languageService.SalesReturnInfo.pay}}</button>
+        </div>
+       <div *ngIf="element.DueAmount==0"> <strong>Paid</strong></div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Recit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark"></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+       <div >
+        <button (click)="moneyRecitByInvoice(element.invoiceNo)" mat-stroked-button color="primary">Receipt by Invoice</button>
+        <button (click)="moneyRecitByInvoice2(element.invoiceNo)" mat-stroked-button color="primary">Receipt by Invoice2</button>
+        </div>
+       
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+ 
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</nb-card> -->

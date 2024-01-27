@@ -1,0 +1,50 @@
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.span-input {
+  width: 100%;
+}
+
+.close-icon {
+  cursor: pointer;
+}
+
+/* Adjust the position of the icon */
+.close-icon i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+*{
+    margin: 0px;
+   // font-family: Arial, Helvetica, sans-serif;
+  }
+  .bigger-asterisk {
+    font-size: 24px; /* Adjust the value as per your desired size */
+  }
+// @keyframes slide-in {
+//     from {transform: translateY(50px);}
+//     to {transform: translateY(0);}
+// }
+.bold-input {
+    
+    font-weight: bold;
+    /* Additional styles if needed */
+  }
+  .less-bold-input {
+    font-weight: 500; 
+   // font-weight: bold;
+    /* Additional styles if needed */
+  }
+ 
+.thdchild{
+    background-color: aliceblue;
+}
+.tbdChild{
+    background-color: #94F6D6;
+}

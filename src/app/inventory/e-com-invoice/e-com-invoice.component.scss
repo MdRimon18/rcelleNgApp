@@ -1,0 +1,38 @@
+// @keyframes slide-in {
+//     from {transform: translateY(50px);}
+//     to {transform: translateY(0);}
+// }
+ 
+*{
+    margin: 0px;
+   // font-family: Arial, Helvetica, sans-serif;
+  }
+
+input[readonly] {
+    background-color: rgb(252,253,253);
+}
+.thdchild{
+    background-color: aliceblue;
+}
+.tbdChild{
+    background-color: #94F6D6;
+}
+
+// ::ng-deep .snackbar {
+//   background: green;
+// }
+
+
+::ng-deep {
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+      background-color:#ffffff;
+      
+  
+  }
+  
+  }
+  ::ng-deep .mat-form-field-underline {
+      display: none;
+   
+  }
+ 

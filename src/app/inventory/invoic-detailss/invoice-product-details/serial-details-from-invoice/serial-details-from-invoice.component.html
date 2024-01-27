@@ -1,0 +1,35 @@
+<nb-card>
+  <div class="example-header">
+    <h5> Serial details
+      <button class="float-right ml-5" mat-button (click)="onClose()">
+        <mat-icon class="float-right mt-2">close</mat-icon>
+      </button> </h5>
+  </div>
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Serial No.</th>
+        <th scope="col">Supplier Name</th>
+        <th scope="col">Suppler Number</th>
+        <th scope="col">Org. Name</th>
+        <th scope="col">Remarks</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+         <tr *ngFor="let item of this.serialNumber; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <th >{{item.serialNumber}}</th>
+        <th >{{item.supplierName}}</th>
+        <th>{{item.supplierNumber}}</th>
+        <th >{{item.suplierOrgName}}</th>
+        <th>{{item.remarks}}</th>
+ 
+      </tr> 
+       
+    </tbody>
+  </table>
+</nb-card>

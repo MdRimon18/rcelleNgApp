@@ -1,0 +1,168 @@
+ 
+<div class="row">
+  <div class="col-sm-12" style="text-align: center;margin-top:20px;">
+      <!-- <input type="button" value="Download Pdf" (click)="captureScreen()" /> -->
+      <button class="btn btn-primary" [printStyle]="{h3 : {'margin-top': '180px'}}" printSectionId="contentToConvert" ngxPrint>print</button>
+  </div>
+</div>
+<!-- end wrapper -->
+
+ 
+ 
+
+   <!-- 
+Invoice dynamically rendered into html using handlebars and converted into pdf
+using chrome-pdf recipe. The styles are extracted into separate asset for 
+better readability and later reuse.
+
+Data to this sample are mocked at the design time and should be filled on the 
+incoming API request.
+!-->
+
+ 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Example 1</title>
+      
+  </head>
+  <body id="contentToConvert" style=" position: relative;
+  width: 100%;  
+  height: 40.7cm; 
+  margin: 0 auto; 
+  color: #001028;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 12px; 
+  font-family: Arial;">
+
+<div class="container mt-5 mb-3" id="pdfTable" #pdfTable>
+
+   
+  <div class="row d-flex justify-content-center">
+      <div class="col-md-8">
+          <div class="card">
+              <div class="d-flex flex-row p-2">
+                  <div class="d-flex flex-column"> <span class="font-weight-bold">Memo No:#<strong>{{invoiceDetails.memoNo}}</strong></span> </div>
+                  
+              </div>
+              
+              <hr>
+              <div class="table-responsive p-2">
+                  <table class="table table-borderless">
+                      <tbody>
+                          <tr>
+                               <td><strong><h2>{{dataSharingService.companyInfo.value?.orgName}}</h2></strong></td>
+                              
+                          </tr>
+                          <tr class="content">
+                            
+                              <td class="font-weight-bold">{{dataSharingService.companyInfo.value?.AddressLineOne}}, <br>{{dataSharingService.companyInfo.value.AddressLineTwo}}, {{dataSharingService.companyInfo.value.State}}<br>{{dataSharingService.companyInfo.value.countryCode}}<br>Mobile:{{dataSharingService.companyInfo.value.phone}}</td>
+                       
+         
+                              <!-- <td class="font-weight-bold">Facebook <br> Attn: Jassa Right Polymont <br> USA</td> -->
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <hr>
+              <div class="products p-2">
+                  <table class="table table-borderless">
+                      <tbody>
+                          <tr class="add">
+                              <td><strong> Description</strong></td>
+                              <td><strong>Warranty</strong> </td>
+                              <td><strong>Quantity</strong> </td>
+                              <td><strong>Unit</strong></td>
+                              <td><strong>Price</strong></td>
+                              <td class="text-center"><strong>Total</strong></td>
+                          </tr>
+                          <tr class="content" *ngFor="let item of items; index as i;">
+                              <td>{{item.ProductCategory}},{{item.ProductSubCategory}},{{item.ProductBrand}} <br>{{item.serials}} </td>
+                              <td>{{item.warantyNgurenty}}</td>
+                              <td>{{item.Quantity}}</td>
+                              <td>{{item.unit}}</td>
+                              <td>{{item.Rate}}</td>
+                              
+                              <td class="text-center">{{item.Amount}}</td>
+                          </tr>
+                          
+                      </tbody>
+                  </table>
+              </div>
+              <hr>
+              <div class="products p-2">
+                  <table class="table table-borderless">
+                      <tbody>
+                          <tr class="add">
+                              <td></td>
+                              <td><strong>Total</strong></td>
+                              <td>Vat</td>
+                              <td>Discount</td>
+                          
+
+                             
+                          </tr>
+                          <tr class="content">
+                              <td></td>
+                              <td>৳{{invoiceDetails.OriginalAmount}}</td>
+                              <td>{{invoiceDetails.totalVat}}</td>
+                              <td>{{invoiceDetails.totalDiscount}}</td>
+                              
+              
+                               
+                          </tr>
+                      </tbody>
+                      <tbody>
+                        <tr class="add">
+                            <td></td>
+                            <td>Prev. Due</td>
+                            <td>Sub. Total</td>
+                            <td>Special Discount</td>
+             
+                        </tr>
+                        <tr class="content">
+                            <td></td>
+                            <td>{{invoiceDetails.PrevDue}}</td>
+                            <td>{{invoiceDetails.SubTotal}}</td>
+                            <td>{{invoiceDetails.totalAddiDiscnt}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                      <tr class="add">
+                          <td></td>
+                          <td><strong>Grand Total</strong></td>
+                          <td><strong> Paid Amount</strong></td>
+                          <td>Due Amount</td>
+                          <!-- <td class="text-center">Discount</td> -->
+                      </tr>
+                      <tr class="content">
+                          <td></td>
+                          <td>৳{{invoiceDetails.totalAmount}}</td>
+                          <td>{{invoiceDetails.PaidAmount}}</td>
+                          <td>{{invoiceDetails.DueAmount}}</td>
+                          <!-- <td class="text-center">$42,500</td> -->
+                      </tr>
+                  </tbody>
+                  </table>
+              </div>
+              <hr>
+              <div class="address p-2">
+                  <table class="table table-borderless">
+                      <tbody>
+                          <!-- <tr class="add">
+                              <td>Bank Details</td>
+                          </tr> -->
+                          <tr class="content">
+                              <td> Client Name: {{invoiceDetails.clienName}} <br> Client Mobile : {{invoiceDetails.mobile}} <br>  Purchase Return By :{{invoiceDetails.salesBy}} <br> Purchase Return Date :{{invoiceDetails.entryDate|date}} <br> </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+  </body>
+</html>

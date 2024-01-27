@@ -1,0 +1,24 @@
+.header {
+    background-color:  green;
+    padding:2px 10px;
+ 
+  }
+  .input-group {
+    position: relative;
+  }
+  
+  .clear-button {
+    position: absolute ;
+    right: 8px; /* Adjust the right position as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .clear-button i {
+    color: black; /* Adjust the color as needed */
+    font-size: 18px; /* Adjust the font size as needed */
+  }
+  

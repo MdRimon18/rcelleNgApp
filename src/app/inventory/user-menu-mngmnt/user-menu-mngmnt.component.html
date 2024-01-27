@@ -1,0 +1,423 @@
+
+<div class="row">
+  <div class="col-lg-12">
+    <mat-card>
+        <mat-card-header>
+        <button (click)="backTo()"
+        class="btn btn-outline-success ">
+      <i class="fas fa-arrow-left"></i></button>
+        Privilege Management</mat-card-header>
+        <mat-card-content>
+            <form #form="ngForm" >
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="GroupName" class="label text-dark">
+                      User Name <span class="text-danger">*</span></label
+                    >
+                    <select name="userId"
+                       (change)="onChangeUser()"
+                    #user="ngModel"
+                   [(ngModel)]="userId"
+                    class="form-control form-rounded form-control-sm">
+                      <option value="">Select User Name</option>
+                      <option
+                        *ngFor="let u of userList"
+                        [ngValue]="u.key"
+                        >{{ u.name }}</option
+                      >
+                    </select>
+                    <div
+                    class="text-left text-danger text-responsive"
+                    *ngIf="
+                   userId==0&&
+                    user.touched
+                    "
+                  >
+                  User name is required
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div> 
+                <label for="status" class="label text-dark">
+                  Select All/Unselect
+                  <mat-checkbox status="success"  name="selectAll"
+                  (change)="onChangeSelectAllBtn()"
+                  [(ngModel)]="
+                  selectAll
+                  "   [ngModelOptions]="{standalone: true}" >
+
+                  </mat-checkbox>
+                 <!-- <span>
+
+                  <input (change)="onChangeSelectAllBtn()"  class="form-control form-rounded form-control-sm" type="mat-checkbox" 
+                  name="selectAll"
+                  [(ngModel)]="
+                  selectAll
+                  ">
+
+                
+
+                 </span>  -->
+                </label>
+
+
+                </div>
+
+              <div>
+                <button
+                (click)="onSubmit()"
+                type="submit"
+                class="btn-outline-success"
+                nbButton
+                [disabled]="
+                userId== ''
+                "
+              >
+                Set Privilige
+              </button>
+              </div>
+              
+              <div class="just-padding">
+
+                <div *ngFor="let item of menu" class="list-group list-group-root well">
+                 
+                  <p  class="list-group-item">## {{ item.title}} <span> 
+     
+                    <mat-checkbox status="success" name="visibility" [(ngModel)]="item.visibility" [ngModelOptions]="{standalone: true}" >
+
+                  </mat-checkbox>
+                </span></p>
+                 
+                  <div class="list-group" *ngFor="let child of item.children" >
+                    
+                    <p  class="list-group-item"> >> {{ child.title}} <span>
+                      
+                      <mat-checkbox status="success" name="visibility" [(ngModel)]="child.visibility" [ngModelOptions]="{standalone: true}" >Visibility</mat-checkbox>
+                      <mat-checkbox status="success" name="isSave" [(ngModel)]="child.isSave" [ngModelOptions]="{standalone: true}" >Save</mat-checkbox>
+                      <mat-checkbox status="success" name="isEdit"  [(ngModel)]="child.isEdit" [ngModelOptions]="{standalone: true}" >Edit</mat-checkbox>
+                      <mat-checkbox status="success" name="isDelete" [(ngModel)]="child.isDelete" [ngModelOptions]="{standalone: true}" >Delete</mat-checkbox>
+                      <mat-checkbox status="success" name="isShowReport" [(ngModel)]="child.isShowReport" [ngModelOptions]="{standalone: true}" >Show Report</mat-checkbox>
+                      </span>
+                     
+
+                    </p>
+ 
+                  </div>
+ 
+                </div>
+                  
+                </div>
+      
+              </form>
+        </mat-card-content>
+    </mat-card>
+  </div>  
+</div>  
+
+       <!-- <div *ngFor="let item of dropdownValueService.erpMenuList">
+           <ul class="col-lg-3" >
+             <li >{{ item.title}}
+               <ul *ngFor="let child of item.children" class="col-lg-8">
+                <li>{{ child.title}}</li>
+                   <ul *ngFor="let subChild of child.children" >
+                        <li>{{ subChild.title}}</li>
+                   </ul>
+               </ul>
+             </li>
+           </ul>
+       </div> -->
+      
+<!-- <div class="row">
+  <div class="col-lg-12">
+    <card>
+      <card-header>
+      <button (click)="backTo()"
+      class="btn btn-outline-success ">
+     <i class="fas fa-arrow-left"></i></button>
+      Privilege Management</card-header>
+      <card-body>
+        <form #form="ngForm" (submit)="onSubmit()">
+         <div class="row">
+    <div class="col-sm-3">
+    <div class="form-group">
+      <label for="UserId" class="label text-dark">
+      User ID
+      <span class="text-danger">*</span> </label>
+      <select
+        name="userId"
+        required
+        #UserId="ngModel"
+        [(ngModel)]="
+        privilegeManagementService.privilegeManagement.userId
+        "
+        id="UserId"
+        class="form-control form-rounded form-control-sm"
+      >
+      <option value=''>Select User ID</option>
+      <option
+        *ngFor="let item of dropdownValueService.userList"
+        [ngValue] ='item.userID '
+        >{{ item.fullName}}</option
+      >
+      </select>
+      <div
+        class="text-left text-danger text-responsive"
+        *ngIf="
+        privilegeManagementService.privilegeManagement.userId== '' && UserId.touched
+        "
+      >
+      User ID is required
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-3">
+    <div class="form-group">
+      <label for="ModuleId" class="label text-dark">
+      Module Name
+      <span class="text-danger">*</span> </label>
+      <select
+        name="moduleId"
+        required
+        #ModuleId="ngModel"
+        [(ngModel)]="
+        privilegeManagementService.privilegeManagement.moduleId
+        "
+        id="ModuleId"
+        class="form-control form-rounded form-control-sm"
+      >
+      <option value=''>Select Module Name</option>
+      <option
+        *ngFor="let item of dropdownValueService.erpModuleList"
+        [ngValue] ='item.moduleId '
+        >{{ item.moduleName}}</option
+      >
+      </select>
+      <div
+        class="text-left text-danger text-responsive"
+        *ngIf="
+        privilegeManagementService.privilegeManagement.moduleId== '' && ModuleId.touched
+        "
+      >
+      Module Name is required
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-3">
+    <div class="form-group">
+      <label for="PermissionLevel" class="label text-dark">
+       Permission Level
+      <span class="text-danger">*</span> </label>
+      <select
+        name="permissionLevel"
+        required
+        #PermissionLevel="ngModel"
+        [(ngModel)]="
+        privilegeManagementService.privilegeManagement.permissionLevel
+        "
+        id="PermissionLevel"
+        class="form-control form-rounded form-control-sm"
+      >
+      <option value=''>Select  Permission Level</option>
+      <option
+        *ngFor="let item of dropdownValueService.permissionTypeList"
+        [value]="item. value  "
+        >{{ item. value  }}</option
+      >
+      </select>
+      <div
+        class="text-left text-danger text-responsive"
+        *ngIf="
+        privilegeManagementService.privilegeManagement.permissionLevel== '' && PermissionLevel.touched
+        "
+      >
+       Permission Level is required
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-3">
+    <div class="form-group">
+      <label for="MainMenuId" class="label text-dark">
+      Menu Name
+      </label>
+      <select
+        name="mainMenuId"
+      
+        #MainMenuId="ngModel"
+        [(ngModel)]="
+        privilegeManagementService.privilegeManagement.mainMenuId
+        "
+        id="MainMenuId"
+        class="form-control form-rounded form-control-sm"
+      >
+      <option value=''>Select Menu Name</option>
+      <option
+        *ngFor="let item of dropdownValueService.menuNameList"
+       [ngValue] ='item.id'
+        >{{ item.name}}</option
+      >
+      </select>
+      
+    </div>
+  </div>
+    </div>
+<div class="row">
+    <div class="col-sm-3">
+    <div class="form-group">
+      <label for="SubMenuId" class="label text-dark">
+      Sub Menu
+      </label>
+      <select
+        name="subMenuId"
+      
+        #SubMenuId="ngModel"
+        [(ngModel)]="
+        privilegeManagementService.privilegeManagement.subMenuId
+        "
+        id="SubMenuId"
+        class="form-control form-rounded form-control-sm"
+      >
+      <option value=''>Select Sub Menu</option>
+      <option
+        *ngFor="let item of dropdownValueService.subMenuNameList"
+       [ngValue] ='item.id'
+        >{{ item.name}}</option
+      >
+      </select>
+      
+    </div>
+  </div>
+    
+    <div class="col-sm-3">
+    <div class="form-group">
+      <label for="SubSubMenuId" class="label text-dark">
+      Sub Sub Menu
+      </label>
+      <select
+        name="subSubMenuId"
+      
+        #SubSubMenuId="ngModel"
+        [(ngModel)]="
+        privilegeManagementService.privilegeManagement.subSubMenuId
+        "
+        id="SubSubMenuId"
+        class="form-control form-rounded form-control-sm"
+      >
+      <option value=''>Select Sub Sub Menu</option>
+      <option
+        *ngFor="let item of dropdownValueService.subSubMenuNameList "
+       [ngValue] ='item.id'
+        >{{ item.name}}</option
+      >
+      </select>
+      
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="status" class="label text-dark">
+      Visibility
+      </label>
+      <input   class="form-control form-rounded form-control-sm" type="mat-checkbox" 
+      name="visibility"
+      [(ngModel)]="
+      privilegeManagementService.privilegeManagement.visibility
+      ">
+      
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="status" class="label text-dark">
+      Insert
+      </label>
+      <input   class="form-control form-rounded form-control-sm" type="mat-checkbox" 
+      name="insert"
+      [(ngModel)]="
+      privilegeManagementService.privilegeManagement.insert
+      ">
+    </div>
+  </div>
+    </div>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="status" class="label text-dark">
+      Edit
+      </label>
+      <input   class="form-control form-rounded form-control-sm" type="mat-checkbox" 
+      name="edit"
+      [(ngModel)]="
+      privilegeManagementService.privilegeManagement.edit
+      ">
+      
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="status" class="label text-dark">
+      Delete
+      </label>
+      <input   class="form-control form-rounded form-control-sm" type="mat-checkbox" 
+      name="delete"
+      [(ngModel)]="
+      privilegeManagementService.privilegeManagement.delete
+      ">
+      
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="status" class="label text-dark">
+      Approve
+      </label>
+      <input   class="form-control form-rounded form-control-sm" type="mat-checkbox" 
+      name="approve"
+      [(ngModel)]="
+      privilegeManagementService.privilegeManagement.approve
+      ">
+      
+    </div>
+  </div>
+  <div class="col-sm-3">
+         <div class="form-group">
+           <label for="status" class="label text-dark">
+           Status
+           </label>
+           <select
+             name="status"
+           
+             #Status="ngModel"
+             [(ngModel)]="
+             privilegeManagementService.privilegeManagement.status
+             "
+             id="Status"
+             class="form-control form-rounded form-control-sm"
+           >
+           <option value="">Select Status</option>
+           <option
+             *ngFor="let item of dropdownValueService.statusList"
+             [value]="item.value"
+             >{{ item.value}}</option
+           >
+           </select>
+           
+         </div>
+       </div>
+      </div>
+          <button
+            type="submit"
+            nbButton
+            [disabled]="
+              form.invalid
+            "
+          >
+            Submit
+          </button>
+        </form>
+      </card-body>
+    </card>
+  </div>
+</div> -->

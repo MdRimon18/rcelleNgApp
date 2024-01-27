@@ -1,0 +1,185 @@
+<!-- <button [printStyle]="{h3 : {'margin-top': '180px'}}" printSectionId="content" ngxPrint>print</button>
+<button (click)="makePdf()">download</button> -->
+<button (click)="toBack()" mat-raised-button color="accent">|<<</button>
+ 
+<button class="downloadBtn" (click)="captureScreen()" mat-raised-button color="accent">download</button>
+ 
+<div id="content" #content>
+  <!DOCTYPE html>
+<html>
+<head>
+	<title>HTML to API - Invoice</title>
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<!-- <link rel="stylesheet" href="sass/main.css" media="screen" charset="utf-8"/> -->
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta http-equiv="content-type" content="text-html; charset=utf-8">
+ 
+</head>
+
+<body >
+	<header class="clearfix">
+		<div class="container">
+			<img class="invlggo"  style="height: 100px;width: 100px;"     [src]="this.base64Image" >
+			 
+			<div class="company-address">
+				<h1 class="title">{{dataSharingService.companyInfo.value?.orgName}}</h1>
+				<p style="font-weight: bold;">
+					{{dataSharingService.companyInfo.value?.AddressLineOne}},<br>
+					{{dataSharingService.companyInfo.value?.State}},
+					{{dataSharingService.companyInfo.value?.countryCode}} 
+				</p>
+			</div>
+			<div class="company-contact">
+				<div class="phone left">
+					<p  style="font-weight: bold;color: black;">phone</p>
+					<!-- <span class="circle" ><span class="helper"></span></span> -->
+					<a href="tel:602-519-0450" style="font-weight: bold;color: black;">{{dataSharingService.companyInfo.value?.phone}}</a>
+					<span class="helper"></span>
+				</div>
+				<!-- <div class="email right">
+					<span class="circle"><img src="data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zOnNrZXRjaD0iaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoL25zIg0KCSB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE0LjE3M3B4Ig0KCSBoZWlnaHQ9IjE0LjE3M3B4IiB2aWV3Qm94PSIwLjM1NCAtMi4yNzIgMTQuMTczIDE0LjE3MyIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwLjM1NCAtMi4yNzIgMTQuMTczIDE0LjE3MyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSINCgk+DQo8dGl0bGU+ZW1haWwxOTwvdGl0bGU+DQo8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4NCjxnIGlkPSJQYWdlLTEiIHNrZXRjaDp0eXBlPSJNU1BhZ2UiPg0KCTxnIGlkPSJJTlZPSUNFLTEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MTcuMDAwMDAwLCAtNTUuMDAwMDAwKSIgc2tldGNoOnR5cGU9Ik1TQXJ0Ym9hcmRHcm91cCI+DQoJCTxnIGlkPSJaQUdMQVZMSkUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwLjAwMDAwMCwgMTUuMDAwMDAwKSIgc2tldGNoOnR5cGU9Ik1TTGF5ZXJHcm91cCI+DQoJCQk8ZyBpZD0iS09OVEFLVEkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI2Ny4wMDAwMDAsIDM1LjAwMDAwMCkiIHNrZXRjaDp0eXBlPSJNU1NoYXBlR3JvdXAiPg0KCQkJCTxnIGlkPSJPdmFsLTEtX3gyQl8tZW1haWwxOSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTE3LjAwMDAwMCwgMC4wMDAwMDApIj4NCgkJCQkJPHBhdGggaWQ9ImVtYWlsMTkiIGZpbGw9IiM4QkMzNEEiIGQ9Ik0zLjM1NCwxNC4yODFoMTQuMTczVjUuMzQ2SDMuMzU0VjE0LjI4MXogTTEwLjQ0LDEwLjg2M0w0LjYyNyw2LjAwOGgxMS42MjZMMTAuNDQsMTAuODYzDQoJCQkJCQl6IE04LjEyNSw5LjgxMkw0LjA1LDEzLjIxN1Y2LjQwOUw4LjEyNSw5LjgxMnogTTguNjUzLDEwLjI1M2wxLjc4OCwxLjQ5M2wxLjc4Ny0xLjQ5M2w0LjAyOSwzLjM2Nkg0LjYyNEw4LjY1MywxMC4yNTN6DQoJCQkJCQkgTTEyLjc1NSw5LjgxMmw0LjA3NS0zLjQwM3Y2LjgwOEwxMi43NTUsOS44MTJ6Ii8+DQoJCQkJPC9nPg0KCQkJPC9nPg0KCQk8L2c+DQoJPC9nPg0KPC9nPg0KPC9zdmc+DQo=" alt=""><span class="helper"></span></span>
+					<a href="mailto:company@example.com">{{user.storeType}}</a>
+					<span class="helper"></span>
+				</div> -->
+			</div>
+		</div>
+	</header>
+
+	<section>
+		<div class="container">
+			<div class="details clearfix">
+				<div class="client left" style="font-weight: bold;">
+					<p>INVOICE TO:</p>
+					<p class="name">{{invoiceDetails.clienName}}</p>
+					<!-- <p>796 Silver Harbour, TX 79273, US</p> -->
+					<a href="mailto:john@example.com">{{invoiceDetails.mobile}}</a>
+				</div>
+				<div class="data right">
+					<div class="title">Invoice {{invoiceDetails.invoiceNo}}</div>
+					<div class="date" style="font-weight: bold;">
+						Date of Invoice:{{invoiceDetails.entryDate}}<br>
+						Due Date: {{todayDate}}<br>
+						Sales By: {{invoiceDetails.salesBy}}
+					</div>
+				</div>
+			</div>
+
+			<table border="0" cellspacing="0" cellpadding="0">
+				<thead>
+					<tr>
+						<th style="font-weight: bold;color: black;" class="float-left">Description</th>
+						<th style="font-weight: bold;color: black;" class="">Quantity</th>
+						<th style="font-weight: bold;color: black;" class="">Unit</th>
+						<th style="font-weight: bold;color: black;" class="">Warrenty</th>
+					 
+						<th style="font-weight: bold;color: black;" class="">Vat</th>
+						<th style="font-weight: bold;color: black;" class="">Discount</th>
+						<th style="font-weight: bold;color: black;" class="">Unit price</th>
+						<th style="font-weight: bold;color: black;" class="">Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of items; index as i;">
+						<td class="desc"><h3>{{item.ProductCategory}},{{item.ProductSubCategory}},{{item.ProductBrand}} </h3> {{item.serials}} </td>
+						<td class="qty" style="font-weight: bold;"><h4>{{item.Quantity}}</h4></td>
+						<td class="qty" style="font-weight: bold;"><h4>{{item.unit}}</h4></td>
+						<td class="qty" style="font-weight: bold;"><h5>{{item.warantyNgurenty}}</h5></td>
+						 
+						<td class="qty" style="font-weight: bold;"><h5>{{item.vatPercent}}</h5></td>
+						<td class="qty" style="font-weight: bold;"><h5>{{item.discountPercent}}</h5></td>
+						<td class="unit" style="font-weight: bold;"><h5>{{item.Rate}}</h5></td>
+						<td class="total" style="font-weight: bold;"><h5>{{item.Amount}}</h5></td>
+					</tr>
+					 
+				</tbody>
+			</table>
+			<div class="no-break">
+				<table class="grand-total">
+					<tbody>
+						<tr>
+							<td class="desc"></td>
+							<td class="qty"></td>
+							<td class="unit" style="font-weight: bold;color: black;">TOTAL:</td>
+							<td class="total" style="font-weight: bold;color: black;">{{invoiceDetails.OriginalAmount}} .TK</td>
+						</tr>
+						<tr>
+							<td class="desc"></td>
+							<td class="qty"></td>
+							<td class="unit" style="font-weight: bold;color: black;">TAX:</td>
+							<td class="total" style="font-weight: bold;color: black;">{{invoiceDetails.totalVat}}.TK</td>
+						</tr>
+						<tr>
+							<td class="desc"></td>
+							<td class="qty"></td>
+							<td class="unit" style="font-weight: bold;color: black;">Discount:</td>
+							<td class="total" style="font-weight: bold;color: black;">{{invoiceDetails.totalDiscount}}.TK</td>
+						</tr>
+						<tr>
+							<td class="desc"></td>
+							<td class="qty"></td>
+							<td class="unit" style="font-weight: bold;color: black;">Prev. Due:</td>
+							<td class="total" style="font-weight: bold;color: black;">{{invoiceDetails.PrevDue}}.TK</td>
+						</tr>
+						<tr>
+							<td class="desc"></td>
+							<td class="qty"></td>
+							<td class="unit" style="font-weight: bold;color: black;">SUBTOTAL:</td>
+							<td class="total" style="font-weight: bold;color: black;">{{invoiceDetails.SubTotal}} .TK</td>
+						</tr>
+						<tr>
+							<td class="desc"></td>
+							<td class="qty"></td>
+							<td class="unit" style="font-weight: bold;color: black;">Special Discount:</td>
+							<td class="total" style="font-weight: bold;color: black;">{{invoiceDetails.totalAddiDiscnt}} .TK</td>
+						</tr>
+						<tr>
+							<td class="desc"></td>
+							<td class="qty"></td>
+							<td class="unit" style="font-weight: bold;color: black;">GRAND TOTAL:</td>
+							<td class="total"  style="font-weight: bold;color: black;">{{invoiceDetails.totalAmount}} .TK</td>
+						</tr>
+						<!-- <tr>
+							<td class="desc"></td>
+							<td class="unit" colspan="2"></td>
+							<td class="total">{{invoiceDetails.totalAmount}} .TK</td>
+						</tr> -->
+						<tr>
+							<td class="desc"></td>
+							<td class="qty"></td>
+							<td class="unit" style="font-weight: bold;color: black;"> Paid Amount:</td>
+							<td class="total" style="font-weight: bold;color: black;">{{invoiceDetails.PaidAmount}} .TK</td>
+						</tr>
+						<tr>
+							<td class="desc"></td>
+							<td class="qty"></td>
+							<td class="unit" style="font-weight: bold;"> Due Amount:</td>
+							<td class="total" style="font-weight: bold;">{{invoiceDetails.DueAmount}} .TK</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<div class="container">
+			<div class="sign" >Author Signature.............</div>
+      <div class="sign">Client Signature.............</div>
+       
+			<div class="thanks " style="text-align:center;">Thank you!</div>
+			<!-- <div class="notice">
+				<div>NOTICE:</div>
+				<div>A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+			</div> -->
+			<div style="font-weight: bold;color: black;" class="end">Invoice was created on a computer and is valid without the signature and seal.</div>
+		</div>
+	
+	</footer>
+
+</body>
+
+</html>
+
+  
+</div>

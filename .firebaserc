@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "brainstemq": "brainstemq",
+    "default": "brainstemq",
+    "skysellbd": "skysellbd",
+    "esellpointbd": "esellpointbd",
+    "creativemelo": "creativemelo"
+  },
+  "targets": {}
+}

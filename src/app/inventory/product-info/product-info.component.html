@@ -1,0 +1,109 @@
+
+
+<div class="card-header crdHdr"> <h5 align="center" class="h4 mb-0">
+  <button  [ngStyle]="{'color':'#44B244'}"class="btn addMore float-left" title="{{languageService.SalesReturnInfo.allAddTootip}}" (click)="AddNewInpurRow()"> <mat-icon>add_circle</mat-icon></button>
+  <button class="btn addMore float-left" (click)="exportToCsv()">Export to <span [ngStyle]="{'color':'#44B244'}">CSV</span></button>
+  {{languageService.productEntry.productDisplayHeader}}</h5>
+ 
+</div>
+<div class="card-body ">
+  <div class="row gx-5">
+    <div class="col-sm-10 col-md-10 col-lg-10">
+      <div class="example-header">
+     
+        
+      <div class="table-container">
+        <table #paginator="matSort" matSort mat-table [dataSource]="dataSource">
+            <ng-container *ngFor="let column of columns; let i=index" [matColumnDef]="column.field">
+                <th mat-header-cell *matHeaderCellDef>
+                    <button *ngIf="i == 0" mat-icon-button matTooltip="Toggle Filters" (click)="toggleFilters= !toggleFilters">
+              <mat-icon>search</mat-icon>
+            </button>
+                    <span *ngIf="i > 0" mat-sort-header>{{column.header}}</span>
+                    <div class="filters-container" [class.animate]="!toggleFilters">
+                      <button *ngIf="i == 0" mat-icon-button matTooltip="Clear Filters" (click)="clearFilters()">
+                        <mat-icon>search_off</mat-icon>
+                      </button>
+                                <!-- <div class="col-xs-2">
+                                  <input class="form-rounded" *ngIf="i > 0" 
+                                   [type]="i==6?'date':'text'"   
+                                    placeholder="Press 'Enter' to search" 
+                                    [(ngModel)]="filtersModel[i]" 
+                                    (keyup)="search(filtersModel[i],i)">
+                                </div> -->
+
+
+                                <input class="form-rounded" [hidden]="i==6 || i==0"    placeholder="Type to search" [(ngModel)]="filtersModel[i]" (keyup)="search(filtersModel,i)">
+                            <input class="form-rounded" *ngIf="i==6&&i>0" [type]="i==6?'date':'text'"    placeholder="Press 'Enter' to search" [(ngModel)]="filtersModel[i]" (change)="search(filtersModel[i],i)">
+
+                    </div>
+                  
+ 
+                    
+                    
+                </th>
+                <td  mat-cell *matCellDef="let element"> {{
+                  element[column.field]
+                 
+                }} 
+                <button *ngIf="element.key!=0 && i==0" class="btn addMore" [ngStyle]="{'color':'#0197F6'}" title="{{languageService.SalesReturnInfo.allEditTootip}}" (click)="productUpdateV2(element)" ><mat-icon>edit</mat-icon></button>
+                <button  *ngIf="element.key!=0 && i==0" (click)="onDetails(element)" mat-stroked-button color="primary">Details</button>
+                <button *ngIf="element.key!=0 && i==0" (click)="onAddSeialNumbera(element)" mat-stroked-button color="primary">Add serial</button>
+                
+                <button *ngIf="element.key!=0 && i==10" title="{{languageService.productEntry.productDeleteButtonOherEffect}}" class="addMore"  mat-button (click)="delete(element)" ><i class="far fa-trash-alt fa-lg text-danger"></i></button>
+                <button *ngIf="element.key!=0 && i==10" (click)="onAddQRcode(element)" mat-stroked-button color="primary">QR Code</button>
+                <button *ngIf="element.key!=0 && i==10" (click)="onAddBar(element)" mat-stroked-button color="primary">B Code</button>
+              
+              </td>
+            </ng-container>
+            <ng-container  *ngFor="let headersFilter of headersFilters; let i=index" [matColumnDef]="headersFilter">
+              <th mat-header-cell *matHeaderCellDef>
+                  <div class="filters-container" [class.animate]="toggleFilters">
+                
+
+           
+
+              
+           
+              
+           
+            
+        
+                      <!-- <mat-form-field [hidden]="i>9" *ngIf="i > 0" appearance="outline">
+                    
+                          <input  [type]="i==6?'date':'text'"   matInput placeholder="Press 'Enter' to search" [(ngModel)]="filtersModel[i]" (keyup.enter)="search(filtersModel[i],i)">
+  
+            </mat-form-field> -->
+                  </div>
+              </th>
+          </ng-container>
+           
+    
+            <tr mat-header-row *matHeaderRowDef="headers;sticky: true"></tr>
+            <!-- Start: Add below "tr" for displaying filters -->
+            <tr mat-header-row class="no-default-height" 
+            *matHeaderRowDef="headersFilters;sticky: true"></tr>
+            <!-- End: Add above "tr" for displaying filters -->
+            <tr  mat-row *matRowDef="let row; columns: headers;let i = index" [ngClass]="{'make-gold':i===selectedIndex}">
+                
+            </tr>
+            
+        </table>
+       
+    
+    </div>
+   
+
+
+
+
+      </div>
+      <div class="float-left">
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  
+    </div>
+   
+    </div>
+   

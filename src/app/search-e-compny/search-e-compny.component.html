@@ -1,0 +1,67 @@
+   <!-- HEADER -->
+   <header id="header" class="header-area style-01 layout-03"
+   >
+    <div class="header-top bg-main hidden-xs">
+        <div class="container">
+            <div class="top-bar left">
+                <ul class="horizontal-menu">
+                   <li> <strong>Find  Product from Company/Online Store Near by You!</strong> 
+                     <div class="float-right">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+                      <a class="ml-5"  routerLink="/login" style="color: black;" ><i class="biolife-icon"></i><Strong> Login/Register</Strong></a>
+                    </div>
+                   
+                   </li>
+ 
+                </ul>
+                 
+            </div>
+          
+        </div>
+    </div>
+ 
+</header>
+
+
+<div class="container mt-5 animated-div">
+   
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="input-group input-wrapper mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-search"></i>
+          </span>
+        </div>
+        <input
+          type="text"
+          class="form-control rounded-pill"
+          placeholder="Search Company/Online Store Here..(by Typing Company Name/Type/Location)"
+          aria-label="Search"
+          aria-describedby="search-button"
+          [matAutocomplete]="auto"
+          [formControl]="companyCntrl"
+        />
+        <button   *ngIf="companyCntrl.value!==''&&companyCntrl.value!==null"
+         class="clear-button" type="button"   (click)="clearInput()">
+          <i class="fa fa-times-circle"></i>
+        </button>
+      </div>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option (click)="redirectToSpecificComp(user)" *ngFor="let user of filteredStates | async" [value]="user.compInfo">
+          <span><strong>{{ user.compInfo }}</strong></span>
+        </mat-option>
+      </mat-autocomplete>
+  
+    </div>
+  </div>
+</div>
+<div class="row" style="display: flex;  justify-content: center; align-items: center;">
+  <img src="assets/onlineStore.png" alt="Your Image" height="400" width="60%">
+</div>
+<div class="footer">
+  <div class="copyright">
+      <p>Copyright &copy; Designed & Developed by <a routerLink="/features-pricing" target="_blank">rcell_e.tech</a> 2020</p>
+  </div>
+</div>
+

@@ -1,0 +1,218 @@
+
+<div class="card-header crdHdr"> 
+   
+    <button class="btn addMore float-left" (click)="exportToCsv()"><span [ngStyle]="{'color':'#44B244'}">Download Template</span></button>
+    <h3 class="h4 mb-0">
+     <!-- <button (click)="backToProductInfo()"
+     class="btn"
+   ><i class="fas fa-arrow-left"></i>
+   </button> -->
+  
+  
+  {{languageService.productEntry.productEntryTitle}}
+  </h3>
+   
+ 
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <input type="file" (change)="onFileChange($event)" accept=".csv">
+    <button class="btn addMore" (click)="convertToJSON()"  [ngStyle]="{'color':'#44B244'}">Upload</button>
+    
+  </div>
+
+  
+ </div>
+<div class="col-md-12 mt-3" style="overflow-x: scroll" *ngIf="ProductEntryForm.length!=0">
+  <div class="smart-table-container" style="width:2500px">
+    <table class="table table-sm">
+      <thead class="thdchild">
+        <tr >
+          <th scope="col">{{languageService.InvoiceEntry.Action}}</th>
+           <th scope="col">{{languageService.productEntry.productCategory}}<span class="text-danger"><strong class="bigger-asterisk">*</strong></span></th>
+          <th scope="col">{{languageService.productEntry.subCategory}}</th>
+          <th scope="col">{{languageService.productEntry.productName}}<span class="text-danger">*</span> </th>
+          <!-- <th scope="col">{{languageService.productEntry.serialNumber}}</th> -->
+          <th scope="col">{{languageService.productEntry.OpeningQuantity}}<span class="text-danger"><strong class="bigger-asterisk">*</strong></span> </th>
+          <th scope="col">{{languageService.productEntry.AlertQuantity}}</th>
+          <th scope="col">{{languageService.productEntry.BuyingPrice}}<span class="text-danger"><strong class="bigger-asterisk">*</strong></span> </th>
+          <th scope="col">{{languageService.productEntry.SellingPrice}}<span class="text-danger"><strong class="bigger-asterisk">*</strong></span> </th>
+          
+          <th scope="col">{{languageService.productEntry.UnitType}} <span class="text-danger"><strong class="bigger-asterisk">*</strong></span></th>
+          <th scope="col">{{languageService.productEntry.BarCode}}</th>
+          <th scope="col">{{languageService.InvoiceEntry.Vatin}}</th>
+          <th scope="col">{{languageService.productEntry.VatAmount}}</th>
+          <th scope="col">{{languageService.productEntry.Discount}}</th>
+          <th scope="col">{{languageService.productEntry.DiscountAmount}}</th>
+          <th scope="col">{{languageService.productEntry.ImportedFrom}}</th>
+          <th scope="col">{{languageService.productEntry.warrentyOrGurrenty}}</th>
+          <th scope="col">{{languageService.productEntry.Remarks}}</th>
+           
+
+         
+        
+     
+        </tr>
+      </thead>
+      <tbody class="tbdChild animated-div">
+        <tr [formGroup]="fg" *ngFor="let fg of ProductEntryForm.controls; let i=index;" (submit)="recordSubmit(fg)">
+       <td>
+        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(i)"></i>
+         
+        <i class="fa fa-plus ml-2" (click)="initializeForm()"></i>
+       </td>
+          <td>
+              <select 
+                required    
+                formControlName="catagory"
+                (change)="OnCategoryDDLChange(fg.value,i)"
+                class="form-control form-control-sm form-rounded" >
+                <option value="">{{languageService.productEntry.Select}} {{languageService.productEntry.productCategory}}  </option>
+                <option *ngFor="let productCategorie of productCategories" [value]="productCategorie.ProductName">{{productCategorie.ProductName}}</option>
+            </select>
+              <div class="text-danger" *ngIf="fg.controls['catagory'].hasError('required')&& fg.controls['catagory'].touched" >
+              {{languageService.productEntry.productCategory}} {{languageService.productEntry.Required}}  
+              </div>
+             
+           </td>
+           <td>
+            <select  
+              formControlName="subCategory"
+              class="form-control form-control-sm form-rounded" >
+              <option value="">{{languageService.productEntry.Select}} {{languageService.productEntry.productCategory}}  </option>
+              <option *ngFor="let sc of productSubCategories" [value]="sc.SubCategoreisName">{{sc.SubCategoreisName}}</option>
+          </select>
+         </td>
+         <td>
+          <input  
+          formControlName="name"
+            type="text" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.productName}}" required>
+              <div class="text-danger" *ngIf="fg.controls['name'].hasError('required')&& fg.controls['name'].touched" >
+                {{languageService.productEntry.productName}} {{languageService.productEntry.Required}}
+              </div>
+         </td>
+
+         <!-- <td>
+          <input  
+          formControlName="serialNumber"
+            type="number" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.serialNumber}}">
+         </td> -->
+         <td>
+          <input  
+          formControlName="quantity"
+          type="number" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.OpeningQuantity}}" required>
+              <div class="text-danger" *ngIf="fg.controls['quantity'].hasError('required')&& fg.controls['quantity'].touched" >
+                {{languageService.productEntry.OpeningQuantity}} {{languageService.productEntry.Required}}
+              </div>
+         </td>     
+         <td>
+          <input  
+          formControlName="alertQuantity"
+          type="number" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.OpeningQuantity}}">
+              
+         </td>  
+         
+         <td>
+          <input  
+          formControlName="productBuyingPrice"
+          type="number" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.BuyingPrice}}" required>
+              <div class="text-danger" *ngIf="fg.controls['productBuyingPrice'].hasError('required')&& fg.controls['productBuyingPrice'].touched" >
+                {{languageService.productEntry.BuyingPrice}} {{languageService.productEntry.Required}}
+              </div>
+         </td>  
+         <td>
+          <input  
+          formControlName="cost"
+          type="number" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.SellingPrice}}" required>
+              <div class="text-danger" *ngIf="fg.controls['cost'].hasError('required')&& fg.controls['cost'].touched" >
+                {{languageService.productEntry.SellingPrice}} {{languageService.productEntry.Required}}
+              </div>
+         </td>  
+         
+         <td>
+          <select  formControlName="unit"  required
+                  class="form-control form-control-sm form-rounded" >
+                    <option value=''> {{languageService.productEntry.UnitType}} {{languageService.productEntry.Select}}</option>
+                    <option *ngFor="let u of UnitList" [value]="u.name">{{u.name}}</option>
+                </select>
+              <div class="text-danger" *ngIf="fg.controls['unit'].hasError('required')&& fg.controls['unit'].touched" >
+                {{languageService.productEntry.UnitType}} {{languageService.productEntry.Required}}
+              </div>  
+         </td> 
+
+         <td>
+          <input  
+          formControlName="barcode"
+          type="text" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.BarCode}}">
+              
+         </td>  
+
+         <td>
+          <input  
+          formControlName="vatPercent" (change)="vatAmountNDiscountCalculation(i)"
+          type="number" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.Vatin}}">
+              
+         </td> 
+         <td>
+          <input  
+          formControlName="vatAmount"  
+          type="number" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.VatAmount}}">
+              
+         </td> 
+         <td>
+          <input  
+          formControlName="discountPercent" (change)="vatAmountNDiscountCalculation(i)"
+          type="number" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.Discount}}">
+              
+         </td> 
+         <td>
+          <input  
+          formControlName="discountAmount"  
+          type="number" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.DiscountAmount}}">
+              
+         </td> 
+         <td>
+          <input  
+          formControlName="importedForm"
+          type="text" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.ImportedFrom}}">
+              
+         </td>  
+         <td>
+          <input  
+          formControlName="warantyNgurenty"
+          type="text" class="form-control form-control-sm form-rounded" 
+              placeholder="{{languageService.productEntry.warrentyOrGurrenty}}">
+              
+         </td>  
+         <td>
+          <textarea   
+          formControlName="remarks"
+           cols="20" 
+           rows="2"
+           placeholder="{{languageService.productEntry.Remarks}}"
+           ></textarea>
+          
+              
+         </td>  
+        </tr>
+      
+      </tbody>
+    </table>
+   
+  </div>
+
+</div>
+<button class="btn btn-primary" type="button" [disabled]="ProductEntryForm.invalid"   (click)="submit()">submit</button>
+    

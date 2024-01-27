@@ -1,0 +1,56 @@
+<!-- <div class="header-container">
+  <div class="logo-container">
+    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+      <nb-icon icon="menu-2-outline"></nb-icon>
+    </a>
+    
+    <a *ngIf="userInfoTblService.ObjectReciever.value.length==0" class="logo" ><strong>Easy to Sale</strong></a>
+
+    <a   class="logo" *ngIf="userInfoTblService.ObjectReciever.value.length!=0" href="#" (click)="navigateHome()"> {{userInfoTblService.ObjectReciever.value?.orgName}}</a>
+    
+  </div>
+  
+</div>
+
+<div class="header-container">
+  <nb-actions size="small">
+
+    
+   
+    <nb-action *ngIf="phone!=null" class="control-item">
+      
+      <select name="isBangla"
+       (change)="OnChangeLanguage()"
+       [(ngModel)]="language"
+       class="form-control">
+        
+        <option value='English'>English</option>
+        <option value='Bangla'>বাংলা</option>
+       
+    </select>
+    
+    </nb-action >
+     
+     <nb-action *ngIf="phone!=null">
+      <span class="fa-stack fa-1x" (click)="itemCardExpand()">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
+        <span class="badge">{{itemCartTblService.ObjectReciever.value.length}}</span>
+      </span>
+  </nb-action>
+   
+
+   
+    <nb-action class="user-action" *nbIsGranted="['view', 'user']" >
+      <nb-user  
+               [onlyPicture]="userPictureOnly"
+               [name]="userInfoTblService.ObjectReciever.value?.name"
+                
+               >
+      </nb-user>
+     
+    </nb-action>
+    <nb-action (click)="logout()" class="control-item logout" >{{languageService.productEntry.logout}}</nb-action>
+  </nb-actions>
+</div>
+ -->

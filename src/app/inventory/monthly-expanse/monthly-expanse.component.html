@@ -1,0 +1,57 @@
+
+<nb-card>
+    <!-- <div class="col-md-12" style = "overflow-x: scroll;">
+      <div class="smart-table-container" style = "width:2000px;"> -->
+  
+        <div class="example-container mat-elevation-z8">
+          <div class="example-header">
+            <h5>Monthly Expanse</h5>
+            <div class="row">
+  
+              <div class="col-sm-2">
+                <div class="form-group">
+              <input  type="text" #eDate="ngModel" [(ngModel)]="entryDate"  class="form-control"  id="JobNo" placeholder="Select Date"
+                  
+              [nbDatepicker]="formpicker">
+       <nb-datepicker #formpicker></nb-datepicker>
+     
+      </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <button   type="submit" class="btn btn-outline-success"   (click)="applyFilter(entryDate)"
+          >
+              
+              Search
+      </button>
+        </div>
+        
+      </div>
+      </div>
+  
+          </div>
+  
+          <mat-table #table [dataSource]="dataSource" matSort >
+
+
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark"> Date</mat-header-cell>
+             <mat-header-cell *matCellDef="let element" >{{element.date}}</mat-header-cell>
+          
+            </ng-container>
+  
+            <ng-container matColumnDef="totalExpense">
+                <mat-header-cell *matHeaderCellDef mat-sort-header class="text-dark"> Total Expense</mat-header-cell>
+             <mat-header-cell *matCellDef="let element" >{{element.totalExpense}}</mat-header-cell>
+
+            </ng-container>
+           
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+
+  
+  </nb-card>

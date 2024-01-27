@@ -1,0 +1,175 @@
+    
+
+    <!-- Sign up form -->
+    <section class="signup">
+      <div class="container">
+          <div class="signup-content ">
+            <div class="row">
+                <div class="col-md-5">
+                    
+                  
+                        <h2 class="form-title">Complete Your Profile</h2>
+                        <form method="POST" #form="ngForm" class="register-form" id="register-form">
+                          
+                          <div class="form-group">
+
+                                <label for="phone"><i class="fas fa-mobile-alt"></i></label>
+                                <input required #Phone="ngModel" type="text" name="phone" id="phone" [(ngModel)]="singupObj.phone" placeholder="Give Customer Mobile No."/> 
+                  
+                            <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.phone==''&&
+                              Phone.touched
+                              "
+                            >
+                            Mobile is required
+                            </div>
+                        </div>
+                          <div class="form-group">
+                                <label for="name"><i class="fas fa-cart-plus"></i></label>
+                                <input required #Name="ngModel" type="text" name="name" id="name" [(ngModel)]="singupObj.name" placeholder="Customer Name"/>
+                                <!-- <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.name==''&&
+                              Name.touched
+                              "
+                            >
+                            Customer Name is required
+                            </div> -->
+                            </div>
+                            <!-- <div class="form-group">
+                              <label for="name"><i class="fas fa-cart-plus"></i></label>
+                              <input required #OrgName="ngModel" type="text" name="orgName" id="orgName" [(ngModel)]="singupObj.orgName" placeholder="Supplier Organization name"/>
+                              <div
+                            class="text-left text-danger"
+                            *ngIf="
+                            singupObj.orgName==''&&
+                            OrgName.touched
+                            "
+                          >
+                          Organization  Name is required
+                          </div>
+                          </div> -->
+                            <div class="form-group">
+                                <label for="countryCode"><i class="fas fa-globe"></i></label>
+                              
+                                        <select required #CountryCode="ngModel" name="countryCode"  #countryCode="ngModel" 
+                            [(ngModel)]="singupObj.countryCode" class="form-control">
+                              <option value=""> Select Country</option>
+                              <option *ngFor="let cntry of countryList" [value]="cntry.name">{{cntry.name}}</option>
+                          </select>
+                          <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.countryCode==''&&
+                              CountryCode.touched
+                              "
+                            >
+                            Country is required
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="State"><i class="fas fa-chess-knight"></i></label>
+                                <input   #State="ngModel" type="text" name="State" id="State" [(ngModel)]="singupObj.State" placeholder="Give Your State Name"/>
+                                <!-- <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.State==''&&
+                              State.touched
+                              "
+                            >
+                            State is required
+                            </div> -->
+                            </div>
+                            <div class="form-group">
+                                <label for="AddressLineOne"><i class="fas fa-address-card"></i></label>
+                                <input   #AddressLineOne="ngModel" type="text" name="AddressLineOne" id="AddressLineOne" [(ngModel)]="singupObj.AddressLineOne" placeholder="Give Customer Address Line One"/>
+                                <!-- <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.AddressLineOne==''&&
+                              AddressLineOne.touched
+                              "
+                            >
+                            AddressLine One is required
+                            </div> -->
+                            </div>
+                            <div class="form-group">
+                              <label for="AddressLineTwo"><i class="fas fa-address-card"></i></label>
+                                <input   #AddressLineTwo="ngModel" type="text" name="AddressLineTwo" id="AddressLineTwo" [(ngModel)]="singupObj.AddressLineTwo" placeholder="Give Customer Address Line Two"/>
+                                <!-- <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.AddressLineTwo==''&&
+                              AddressLineTwo.touched
+                              "
+                            >
+                            AddressLine Two is required
+                            </div> -->
+                            </div>
+                            <!-- <div class="form-group">
+                              <label for="storeType"><i class="fas fa-i-cursor"></i></label>
+                            
+                                      <select required #StoreType="ngModel" name="storeType"  #countryCode="ngModel" 
+                          [(ngModel)]="singupObj.storeType" class="form-control">
+                            <option value=""> Select Customer Type</option>
+                            <option *ngFor="let s of shopTypeList" [value]="s.code">{{s.name}}</option>
+                        </select>
+                        <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.storeType==''&&
+                              StoreType.touched
+                              "
+                            >
+                            Customer Type is required
+                            </div>
+                          </div> -->
+                          <div class="form-group">
+                            <label for="email"><i class="fas fa-mobile-alt"></i></label>
+                            <input   #Email="ngModel" type="text" name="email" id="email" [(ngModel)]="singupObj.email" placeholder="Give Customer Email"/>
+                            <!-- <div
+                              class="text-left text-danger"
+                              *ngIf="
+                              singupObj.email==''&&
+                              Email.touched
+                              "
+                            >
+                            Email is required
+                            </div> -->
+                        </div>
+                        
+                        
+                      <div class="form-group">
+                        <label for="ImageLink"><i class="far fa-images"></i></label>
+                        <input type="text" name="ImageLink" id="ImageLink" [(ngModel)]="singupObj.ImageLink" placeholder="Customer Image Link"/>
+                    </div>
+                            <div class="form-group form-button">
+                                <input type="button"  [disabled]="
+                                
+                                singupObj.phone==''||
+                              
+                                singupObj.countryCode==''
+                              
+                              " name="" id="" (click)="saveMyCustomer()" class="form-submit" value="Save"/>
+                            </div>
+                            
+                        </form>
+                    
+                </div>
+                <div class="col-md-6">
+                    
+                        <figure><img src="assets/images2/supplierProfile.jpg" alt="sing up image"></figure>
+                        <!-- <a href="#" class="signup-image-link">I am already member</a> -->
+                    
+                </div>
+          </div>
+            
+            
+          </div>
+      </div>
+  </section>
+
+

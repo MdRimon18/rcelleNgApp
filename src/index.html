@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Find  Product from Company/Online Store Near by You!</title>
+  <base href="/">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bootstrap Material Admin by Bootstrapious.com</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+   
+   
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="assets/vendor/choices.js/public/assets/styles/choices.min.css">
+  
+    <link rel="stylesheet" href="assets/css/style.default.css" id="theme-stylesheet">
+  
+    <link rel="stylesheet" href="assets/css/custom.css">
+   
+    <link rel="shortcut icon" href="assets/img/favicon.ico">
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="assets/BootstrapCss/images/favicon.png"> -->
+    
+    <link href="assets/BootstrapCss/css/style.css" rel="stylesheet">
+
+ 
+ <!-- Below are e com css -->
+
+ <link rel="stylesheet" href="assets/e-css/animate.min.css">
+    <link rel="stylesheet" href="assets/e-css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/e-css/nice-select.css">
+    <link rel="stylesheet" href="assets/e-css/slick.min.css">
+     
+    <!-- <link rel="stylesheet" href="assets/e-css/style.css"> -->
+    <link rel="stylesheet" href="assets/e-css/main-color03-green.css">
+   
+    <!--sidenav Linking Google font link for icons -->
+     
+</head>
+ 
+
+<body>
+  <div class="page">
+    <div id="preloader">
+      <div class="loader">
+          <svg class="circular" viewBox="25 25 50 50">
+              <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+          </svg>
+      </div>
+  </div>
+  <app-root></app-root>
+</div>
+
+  <script src="assets/BootstrapCss/plugins/common/common.min.js"></script>
+  <script src="assets/BootstrapCss/js/custom.min.js"></script>
+  <script src="assets/BootstrapCss/js/settings.js"></script>
+  <script src="assets/BootstrapCss/js/gleek.js"></script>
+  <script src="assets/BootstrapCss/js/styleSwitcher.js"></script>
+
+ <!-- above bootstrap them new script -->
+   <!-- JavaScript files-->
+   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!-- <script src="assets/vendor/chart.js/Chart.min.js"></script>
+   <script src="assets/vendor/just-validate/js/just-validate.min.js"></script> -->
+   <script src="assets/vendor/choices.js/public/assets/scripts/choices.min.js"></script>
+    
+   <!-- Main File-->
+   <script  src="assets/js/front.js"></script>
+   <!-- <script src="assets/js/charts-home.js"></script> -->
+   <script>
+     // ------------------------------------------------------- //
+     //   Inject SVG Sprite - 
+     //   see more here 
+     //   https://css-tricks.com/ajaxing-svg-sprite/
+     // ------------------------------------------------------ //
+     function injectSvgSprite(path) {
+     
+         var ajax = new XMLHttpRequest();
+         ajax.open("GET", path, true);
+         ajax.send();
+         ajax.onload = function(e) {
+         var div = document.createElement("div");
+         div.className = 'd-none';
+         div.innerHTML = ajax.responseText;
+         document.body.insertBefore(div, document.body.childNodes[0]);
+         }
+     }
+     // this is set to BootstrapTemple website as you cannot 
+     // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+     // while using file:// protocol
+     // pls don't forget to change to your domain :)
+     injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg'); 
+     
+     
+   </script>
+
+ 
+
+ 
+
+</body>
+
+</html>

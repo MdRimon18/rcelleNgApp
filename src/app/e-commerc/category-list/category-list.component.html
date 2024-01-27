@@ -1,0 +1,119 @@
+ 
+<div class="page-contain category-page no-sidebar">
+  <div class="container">
+  
+    <!-- <div class="row">
+       
+        <div id="main-content" class="main-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="bd-example">
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="assets/e-images/main-slide-01.jpg"    class="d-block w-100" alt="...">
+                      <div class="carousel-caption d-none d-md-block" style="color: darkgreen;">
+                        <h5>First slide label</h5>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img src="assets/e-images/bg-newsletter.jpg" class="d-block w-100"    alt="...">
+                      <div class="carousel-caption d-none d-md-block" style="color: darkgreen;">
+                        <h5>Second slide label</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img src="assets/e-images/slide-01.jpg" class="d-block w-100"   alt="...">
+                      <div class="carousel-caption d-none d-md-block" style="color: darkgreen;">
+                        <h5>Third slide label</h5>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </div>
+            
+        </div>
+    </div> -->
+
+      <div class="row">
+
+          <!-- Main content -->
+          <div id="main-content" class="main-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+           
+              <div class="product-category grid-style">
+
+                <div class="row">
+                      <ul class="products-list"  >
+
+                          <li class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6" *ngFor="let item of productInfosFiltered| paginate: { itemsPerPage:8, currentPage: p }; index as i;">
+                              <div class="contain-product layout-default">
+                                  <div  class="product-thumb">
+                                      <a [routerLink]="['/e-commerce/single-product/',cmpnyName, item.key]"   class="link-to-product">
+                                          <img [src]="item.imageLink" alt="dd" width="270" height="270" class="product-thumnail">
+                                      </a>
+                                  </div>
+                                  <div class="info">
+                                      <b class="categories">{{item.catagory}}</b>
+                                      <h4 class="product-title"><a [routerLink]="['/e-commerce/single-product/',cmpnyName, item.key]" class="pr-name">{{item.name}}</a></h4>
+                                      <div class="price">
+                                          <ins><span class="price-amount"><span class="currencySymbol">TK.</span>{{item.cost}}</span></ins>
+                                          <del><span class="price-amount"><span class="currencySymbol">TK.</span>{{item.previousCost}}</span></del>
+                                      </div>
+                                      <!-- <div class="shipping-info">
+                                          <p class="shipping-day">3-Day Shipping</p>
+                                          <p class="for-today">Pree Pickup Today</p>
+                                      </div> -->
+                                      <div class="slide-down-box">
+                                          <!-- <p class="message">All products are carefully selected to ensure the Order.</p> -->
+                                          <div class="buttons">
+                                              <a   class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                               
+                                              
+                                              <a   class="btn add-to-cart-btn" *ngIf="item.quantity>0" (click)="itemCartTblService.addToCart(item)"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                              <a  class="btn add-to-cart-btn" *ngIf="item.quantity==0" (click)="itemCartTblService.addToCart(item)"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>Stock Finish</a>
+                                              <a   class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </li>
+                   
+                      </ul>
+                  </div>
+
+                  <div class="biolife-panigations-block">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                      <!-- <ul class="panigation-contain">
+                          <li><span class="current-page">1</span></li>
+                          <li><a href="#" class="link-page">2</a></li>
+                          <li><a href="#" class="link-page">3</a></li>
+                          <li><span class="sep">....</span></li>
+                          <li><a href="#" class="link-page">20</a></li>
+                          <li><a href="#" class="link-page next"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                      </ul> -->
+                  </div>
+
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+</div>
+
+ 

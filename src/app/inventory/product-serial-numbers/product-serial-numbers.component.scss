@@ -1,0 +1,41 @@
+.header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+  }
+  .btn-space {
+    margin-left: 10px; /* Adjust the value to set the desired space */
+  }
+  
+  .less-bold-lebel {
+    font-weight: 500; 
+   // font-weight: bold;
+    /* Additional styles if needed */
+  }
+  .footer {
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+   z-index: 1;
+  }
+ 
+  
+  @media (max-width: 600px) {
+    .header {
+      font-size: 0.8em;
+    }
+
+    .footer {
+      font-size: 0.8em;
+    }
+  }
+
+  
+ 
+ 
+  
+  
+  
+  
+  

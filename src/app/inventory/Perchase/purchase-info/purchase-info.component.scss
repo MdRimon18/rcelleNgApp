@@ -1,0 +1,88 @@
+.label {
+  display: inline-block;
+  margin-bottom: -0.5rem;
+}
+.card-header {
+  margin-bottom: -27px;}
+
+.parallelogram-input {
+  position: relative;
+ 
+  transform: skewX(-20deg);
+}
+.less-bold-input {
+  font-weight: 500; 
+ 
+}
+
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 133%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+    
+// ::ng-deep {
+//     .mat-dialog-container {
+//       padding: 0;
+//       box-shadow: none;
+//       background: none;
+//       color: none;
+//       padding: none;
+//       overflow: auto;
+//       // overflow-y: auto;
+//       // overflow-x: auto;
+//     }
+//   }
+  
+  .make-gold {
+    background-color: #bfdeff;
+  }
+  .mat-row:hover,
+  .mat-row:hover .mat-column-name {
+    background-color: #d1d3e0;
+  }
+  p {
+    font-family: Lato;
+  }
+  
+  .d-none {
+    display: none;
+  }
+  
+  .table-container {
+    overflow: auto;
+    table {
+      width: 100%;
+    }
+    th,
+    td {
+      padding: 0 1rem;
+      background: none;
+    }
+    th:nth-child(1) {
+      width: 20px;
+    }
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+    .no-default-height {
+      height: unset;
+    }
+    .filters-container {
+      overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.5s ease-in-out;
+      &.animate {
+        max-height: 60px !important;
+      }
+    }
+  }
+  

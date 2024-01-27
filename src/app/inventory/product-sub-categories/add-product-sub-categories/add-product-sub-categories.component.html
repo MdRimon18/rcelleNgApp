@@ -1,0 +1,47 @@
+ 
+ 
+ <div class="card-header crdHdr"> <h3 class="h4 mb-0">
+  <button (click)="backTo()"
+  class="btn"
+><i class="fas fa-arrow-left"></i>
+</button>
+  {{languageService.SalesReturnInfo.productSubCategoryInfo}} {{languageService.SalesReturnInfo.Entry}}</h3></div>
+ <div class="card-body animated-div">
+  <form #formSubCtgry="ngForm">
+   <div class="row gx-5  ">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label for="productCategoriesId" class="label text-dark"> {{languageService.productEntry.productCategory}}</label><span class="text-danger">*</span>              
+        <select required name="productCategoriesId"  #catagory="ngModel" 
+        
+        [(ngModel)]="productSubCategoryObj.productCategoriesId" class="form-control">
+          <option value="">{{languageService.productEntry.Select}} {{languageService.productEntry.productCategory}}  </option>
+          <option *ngFor="let productCategorie of productCategories" [value]="productCategorie.ProductName">{{productCategorie.ProductName}}</option>
+      </select>
+           <div class="text-left text-danger"
+           *ngIf="catagory.invalid&&catagory.touched">
+           {{languageService.productEntry.productCategory}} {{languageService.productEntry.Required}}! !
+         </div>
+      </div>
+    </div>
+<div class="col-sm-4">
+  <div class="form-group">
+    <label for="SubCategoreisName" class="label text-dark">{{languageService.SalesReturnInfo.productSubCategoryName}}</label><span class="text-danger">*</span>       
+    <input required name="SubCategoreisName"  #productNm="ngModel"
+    [(ngModel)]="productSubCategoryObj.SubCategoreisName" type="text" class="form-control" class="form-control"
+      id="SubCategoreisName" placeholder="{{languageService.SalesReturnInfo.productSubCategoryName}}" >
+      <div class="text-left text-danger"
+      *ngIf="productNm.invalid&&productNm.touched">
+      {{languageService.SalesReturnInfo.productSubCategoryName}} {{languageService.SalesReturnInfo.required}}
+      
+    </div>
+  </div>
+</div>
+</div>
+<input type="hidden" name="key" [(ngModel)]="productSubCategoryObj.key" >
+ 
+<button *ngIf="isButtonShow==false" [disabled]="formSubCtgry.invalid" class="btn btn-primary" (click)="save()">{{languageService.unitEntry.SaveButton}}</button>
+<button *ngIf="isButtonShow==true" [disabled]="formSubCtgry.invalid" class="btn btn-primary"  (click)="edit()">{{languageService.unitEntry.SaveButton}}</button>
+</form>
+</div>
+ 

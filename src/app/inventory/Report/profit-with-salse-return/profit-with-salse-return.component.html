@@ -1,0 +1,132 @@
+
+      <div class="card-header crdHdr"> <h5 align="center" class="h4 mb-0">{{languageService.SalesReturnInfo.ProfitwithSalesreturn}}</h5></div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-2 col-md-2 col-lg-2 mr-5">
+            <mat-form-field class="example-full-width less-bold-input" style="margin-top: 15px;">
+              <mat-select 
+              [(ngModel)]="dropdownValuesService.selectedDateRange"
+               name="selectedDateRange">
+                <!-- <mat-option [value]=""><strong>unselect</strong> </mat-option> -->
+              <mat-option (click)="onChangeDateRange()" class="less-bold-input" *ngFor="let f of dropdownValuesService.DateRanges" [value]="f.name">
+                {{f.name}}
+              </mat-option>
+            </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="form-group">
+              <label class="label" for="">{{languageService.SalesReturnInfo.fromDate}}</label>
+                <input
+                class="form-control parallelogram-input"
+                 type="date"
+                 name="fromDate" 
+                  
+                 [(ngModel)]="dropdownValuesService.fromDate"
+                 placeholder="Select Date"
+                 required >
+               
+             
+                
+            </div>
+           
+          </div>
+            
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="form-group ">
+              <label class="label" for="">{{languageService.SalesReturnInfo.toDate}}</label>
+                <input
+                class="form-control parallelogram-input"
+                 type="date"
+                 name="toDate" 
+                 #eDate="ngModel"
+                 [(ngModel)]="dropdownValuesService.toDate"
+                  
+                 required >
+               
+             
+                <div class="text-left text-danger"
+                *ngIf="entryDate==''&&eDate.touched">
+                Date is required 
+              </div>
+            </div>
+           
+          </div>
+      
+        
+          <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="form-group" >
+              <!-- <label for="">Click Here</label> -->
+              <button style="margin-top: 27px;"  type="submit" class="btn btn-outline-success"   (click)="applyFilter()"
+              >
+                  
+              {{languageService.SalesReturnInfo.search}}
+          </button>
+            </div>
+          </div>
+          
+        
+        </div>
+        <div class="row animated-div gx-5 bg-white">
+          <div class="example-header">
+            
+            <div class="row animated-div">
+              <div class="col-lg-3 col-12">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="icon flex-shrink-0 bg-green"><i class="far fa-calendar"></i></div>
+                      <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">{{rslprofitFromInvoice}}{{languageService.SalesReturnInfo.tk}} </strong><small class="text-uppercase text-gray-500 small d-block lh-1">  {{languageService.SalesReturnInfo.totalProfit}}</small></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-12">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="icon flex-shrink-0 bg-green"><i class="far fa-calendar"></i></div>
+                      <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">{{rsltotalSales}} {{languageService.SalesReturnInfo.tk}}</strong><small class="text-uppercase text-gray-500 small d-block lh-1">{{languageService.SalesReturnInfo.totalSales}}</small></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-12">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="icon flex-shrink-0 bg-green"><i class="far fa-calendar"></i></div>
+                      <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">{{rsltotalEarn}}{{languageService.SalesReturnInfo.tk}}</strong><small class="text-uppercase text-gray-500 small d-block lh-1"> {{languageService.SalesReturnInfo.totalEarn}}</small></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-12">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <div class="icon flex-shrink-0 bg-red"><i class="fas fa-tasks"></i></div>
+                    <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">{{rsltotalDue}} {{languageService.SalesReturnInfo.tk}}</strong><small class="text-uppercase text-gray-500 small d-block lh-1">{{languageService.SalesReturnInfo.totalDeuAmount}} </small></div>
+                  </div>
+                </div>
+              </div>
+           
+            </div>
+            <div class="col-lg-3 col-12">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="d-flex align-items-center">
+                    <div class="icon flex-shrink-0 bg-red"><i class="fas fa-tasks"></i></div>
+                    <div class="ms-3"><strong class="text-lg d-block lh-1 mb-1">{{rsltotalDiscount}}{{languageService.SalesReturnInfo.tk}}</strong><small class="text-uppercase text-gray-500 small d-block lh-1"> {{languageService.SalesReturnInfo.specialDiscount}}</small></div>
+                  </div>
+                </div>
+              </div>
+           
+            </div>
+              
+            </div>
+             
+          </div>
+        </div>
+      </div>
+      

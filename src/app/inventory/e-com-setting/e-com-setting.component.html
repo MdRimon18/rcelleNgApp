@@ -1,0 +1,90 @@
+<div class="card-header crdHdr">
+  <h5 align="center" class="h4 mb-0">
+ 
+ E-commerce Settings
+</h5>
+</div>
+<h6>
+  <button  [ngStyle]="{'color':'#44B244'}"class="btn addMore" title="E Commerce Settings"
+  (click)="addCmpInfo()"> <mat-icon>add_circle</mat-icon>
+ </button>
+  About Company</h6>
+    <table class="table table-sm ml-3">
+      <thead class="thdchild">
+        <tr class="row">
+          <th class="col-md-4" scope="col">Link Name <span class="text-danger">*</span></th>
+          <th  class="col-md-4" scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody class="tbdChild">
+        <tr class="row" [formGroup]="fg" *ngFor="let fg of cmpInfo.controls; let i=index;" (submit)="recordSubmit(fg)">
+          <td class="col-md-4">
+            <input  type="text" 
+            class="form-control form-rounded less-bold-input"   
+                 placeholder="link Name" formControlName="linkName" required>
+                <div class="text-danger less-bold-input" 
+                *ngIf="fg.controls['linkName'].hasError('required')&&fg.controls['linkName'].touched">
+               Link Name Required</div>
+              </td>
+              <td class="col-md-4">
+                <input  type="text" 
+                class="form-control form-rounded"   
+                     placeholder="Link" formControlName="link"
+                    required>
+               <div class="text-danger less-bold-input" 
+                    *ngIf="fg.controls['link'].hasError('required')&&fg.controls['link'].touched">
+                    Link is Required</div>
+             </td>
+             <td class="col-md-2"><button  title=""  class="btn btn-light ml-1 addMore" 
+              (click)="onDelete(i)"
+              >
+                  <i class="far fa-trash-alt fa-lg text-danger "></i>
+                  
+                </button> </td>
+         </tr>
+    
+     
+      
+       </tbody>
+     
+     </table>
+ <h6>
+  <button  [ngStyle]="{'color':'#44B244'}"class="btn addMore" title="E Commerce Settings"
+  (click)="addPlaceInfo()"> <mat-icon>add_circle</mat-icon>
+ </button>
+  Office Place or Transport Place</h6>
+     <table class="table table-sm ml-3">
+      <thead class="thdchild">
+        <tr class="row">
+          <th class="col-md-4" scope="col">Place Name <span class="text-danger">*</span></th>
+        </tr>
+      </thead>
+
+      <tbody class="tbdChild">
+        <tr class="row" [formGroup]="fg" *ngFor="let fg of placeInfo.controls; let i=index;" (submit)="recordSubmit(fg)">
+          <td class="col-md-4">
+            <textarea name="placeName" id="" 
+            cols="30" rows="7"
+            type="text" 
+            class="form-control form-rounded less-bold-input"   
+                 placeholder="Place Name" formControlName="placeName" required
+            ></textarea>
+                <div class="text-danger less-bold-input" 
+                *ngIf="fg.controls['placeName'].hasError('required')&&fg.controls['placeName'].touched">
+                Place Name Required</div>
+              </td>
+             
+             <td class="col-md-2"><button  title=""  class="btn btn-light ml-1 addMore" 
+              (click)="onDeletePlace(i)"
+              >
+                  <i class="far fa-trash-alt fa-lg text-danger "></i>
+                  
+                </button> </td>
+         </tr>
+    
+     
+       </tbody>
+     
+     </table>
+     <button  [disabled]="cmpInfo.invalid||placeInfo.invalid"  type="button" 
+     class="btn btn-primary" (click)="onSave()">Save</button>

@@ -1,0 +1,63 @@
+
+<div class="login-page">
+  <div class="container d-flex align-items-center position-relative py-5">
+    <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
+      <div class="card-body p-0">
+        <div class="row gx-0 align-items-stretch animated-div">
+          <!-- Logo & Information Panel-->
+          <div class="col-md-6 col-sm-6 col-lg-6">
+            <div class="info d-flex justify-content-center flex-column p-4 h-100">
+              <div class="py-5">
+                <h1 class="display-6 fw-bold">Login</h1>
+                <p class="fw-light mb-0">Login into RCell_E Inventory & E-Commerce Software Make Easy Your Buisness!</p>
+              </div>
+            </div>
+          </div>
+          <!-- Form Panel    -->
+          <div class="col-md-6 col-sm-6 col-lg-6 bg-white">
+            <div class="d-flex align-items-center px-4 px-lg-5 h-100">
+              <form   #form="ngForm" (submit)="login()" class="login-form py-5 w-100">
+                <div class="input-material-group mb-0">
+                  <label class="your_name" for="your_name">Mobile Number</label>
+                  <input placeholder="Mobile Number" #Your_Name="ngModel" type="text" name="your_name" [(ngModel)]="loginObj.your_name" required
+                   id="your_name" class="form-control form-control-sm form-rounded" type="text">
+                  <div *ngIf="Your_Name.invalid && (Your_Name.dirty || Your_Name.touched)" 
+                  class="alert alert-danger  form-control-sm form-rounded">
+                    <div *ngIf="Your_Name.errors.required">
+                      Mobile Number is required.
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="input-material-group mb-1">
+                  <label class="your_pass" for="your_pass">Password</label>
+                  <input placeholder="Password" #Your_pass="ngModel" name="your_pass"
+                   [(ngModel)]="loginObj.your_pass" class="form-control form-control-sm form-rounded"
+                   id="login-password" type="password" required>
+                  <div *ngIf="Your_pass.invalid && (Your_pass.dirty || Your_pass.touched)" class="alert alert-danger form-control-sm form-rounded">
+                    <div *ngIf="Your_pass.errors.required">
+                      Password is required.
+                    </div>
+                  </div>
+                </div>
+                <mat-spinner class="small-spinner" *ngIf="isLoading"></mat-spinner>
+                <button *ngIf="!isLoading" class="btn btn-primary mb-2"  id="login" 
+                type="submit" [disabled]="form.invalid">Login</button><br>
+                <a class="text-sm text-paleBlue" href="#">Forgot Password?</a><br>
+                <small class="text-gray-500">Do not have an account? </small>
+                <a class="text-sm text-paleBlue" [routerLink]="['/register']">Signup</a>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="text-center position-absolute bottom-0 start-0 w-100 z-index-20">
+  <div class="copyright">
+    <p>Copyright &copy; Designed & Developed by <a routerLink="/features-pricing" target="_blank">rcell_e.tech</a> 2020</p>
+</div>
+</div>

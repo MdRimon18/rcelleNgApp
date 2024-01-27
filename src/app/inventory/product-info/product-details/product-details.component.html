@@ -1,0 +1,58 @@
+<nb-card>
+  <div class="example-header">
+    <h5> Product details
+      <button class="float-right ml-5" mat-button (click)="onClose()">
+        <mat-icon class="float-right mt-2">close</mat-icon>
+      </button> </h5>
+  </div>
+
+  <div class="main-body">
+    <div class="container">
+    
+          
+    
+          <div class="row gutters-sm">
+            <div class="col-sm-6 col-xl-6 mb-6 animated-div">
+              <div class="card">
+        
+                <div class="card-body">
+                  <ul class="list-unstyled font-size-md mb-0">
+                    <li><strong>{{languageService.productEntry.productCategory}} :</strong><span class="text-secondary ml-1">{{data.catagory}}</span></li>
+                    <li><strong>{{languageService.productEntry.subCategory}}:</strong><span class="text-secondary ml-1">{{data.subCategory}}</span></li>
+                    <li><strong>{{languageService.productEntry.productName}}:</strong><span class="text-secondary ml-1">{{data.name}}</span></li>
+                    <li><strong>{{languageService.productEntry.BuyingPrice}}:</strong><span class="text-secondary ml-1">{{data.productBuyingPrice}}</span></li>
+                    <li><strong>{{languageService.productEntry.SellingPrice}}:</strong><span class="text-secondary ml-1">{{data.cost}}</span></li>
+                    <li><strong>{{languageService.productEntry.UnitType}}:</strong><span class="text-secondary ml-1"> {{data.unit}}</span></li>
+                    <li><strong>{{languageService.productEntry.OpeningQuantity}}:</strong><span class="text-secondary ml-1">{{data.quantity}}</span></li>
+                    <li><strong>{{languageService.productEntry.AlertQuantity}}:</strong><span class="text-secondary ml-1">{{data.alertQuantity}}</span></li>
+                    <li><strong>{{languageService.productEntry.Vatin}}:</strong><span class="text-secondary ml-1">{{data.vatPercent}}</span></li>
+                    <li><strong>{{languageService.productEntry.Discount}}:</strong><span class="text-secondary ml-1">{{data.discountPercent}}</span></li>
+                  </ul>
+                </div>
+                
+              </div>
+            </div>
+            <div class="col-sm-6 col-xl-6 mb-6 animated-div">
+              <div class="card border border-success">                                 
+                <div class="card-body">
+                  <ul class="list-unstyled font-size-sm mb-0">
+                    <li><strong>{{languageService.productEntry.VatAmount}}:</strong><span class="text-secondary ml-1">{{data.vatAmount}}</span></li>
+                    <li><strong>{{languageService.productEntry.DiscountAmount}}:</strong><span class="text-secondary ml-1">{{data?.discountAmount}}</span></li>
+                    <li><strong>{{languageService.productEntry.Date}}:</strong><span class="text-secondary ml-1">{{data.date}}</span></li>
+                    <li><strong>{{languageService.productEntry.waranty}}:</strong><span class="text-secondary ml-1">{{data.warantyNgurenty}}</span></li>
+                    <li><strong>{{languageService.productEntry.LinktoSupplier}}:</strong><span class="text-secondary ml-1">{{data.supplier}}</span></li>
+                    <li><strong>{{languageService.productEntry.Remarks}}:</strong><span class="text-secondary ml-1">{{data.remarks}}</span></li>
+                    <li><strong>{{languageService.productEntry.Desc}}:</strong><span class="text-secondary ml-1">{{data.Desc}}</span></li>
+                    <li><strong>{{languageService.productEntry.importedFrom}}:</strong><span class="text-secondary ml-1">{{data.importedForm}}</span></li>
+                  </ul>
+                </div>
+                 
+              </div>
+            </div>
+            
+          </div>
+    
+        </div>
+    </div>
+  
+</nb-card>

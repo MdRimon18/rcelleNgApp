@@ -1,0 +1,71 @@
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.span-input {
+  width: 100%;
+}
+
+.close-icon {
+  cursor: pointer;
+}
+
+/* Adjust the position of the icon */
+.close-icon i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+.bigger-asterisk {
+    font-size: 24px; /* Adjust the value as per your desired size */
+  }
+// @keyframes slide-in {
+//     from {transform: translateY(50px);}
+//     to {transform: translateY(0);}
+// }
+.bold-input {
+    font-weight: bold;
+    /* Additional styles if needed */
+  }
+  .less-bold-input {
+    font-weight: 500; 
+   // font-weight: bold;
+    /* Additional styles if needed */
+  }
+*{
+    margin: 0px;
+   // font-family: Arial, Helvetica, sans-serif;
+  }
+
+input[readonly] {
+    background-color: rgb(252,253,253);
+}
+.thdchild{
+    background-color: aliceblue;
+}
+.tbdChild{
+    background-color: #94F6D6;
+}
+
+// ::ng-deep .snackbar {
+//   background: green;
+// }
+
+
+::ng-deep {
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+      background-color:#ffffff;
+      
+  
+  }
+  
+  }
+  ::ng-deep .mat-form-field-underline {
+      display: none;
+   
+  }
+ 

@@ -1,0 +1,94 @@
+<div class="card-header crdHdr"> <h3 class="h4 mb-0"><button (click)="backToProductInfo()"
+  class="btn"
+  
+>
+<i class="fas fa-arrow-left"></i>
+</button>
+{{languageService.unitEntry.unitEntryTitle}}</h3></div>
+<div class="card-body">
+ <form action="">
+  <div class="row gx-5 bg-white">
+      
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="name" class="label">{{languageService.unitEntry.name}}</label>
+         <input name="name"  #name="ngModel"
+         [(ngModel)]="unitObj.name" type="text" 
+         class="form-control form-rounded form-control-sm"
+           id="name" placeholder="{{languageService.unitEntry.name}}" required>
+           <div class="text-left text-danger"
+           *ngIf="name.invalid&&name.touched">
+           {{languageService.unitEntry.requiredMessage}}!
+         </div>
+      </div>
+    </div>
+  </div>
+  <button  class="btn btn-primary"  [disabled]="unitObj.name==''"    (click)="update()">{{languageService.unitEntry.SaveButton}}</button>
+ </form>
+</div>
+
+
+
+
+ 
+   
+  
+     
+    
+         
+            
+             
+             
+           
+            
+         
+     
+    
+     
+  
+ 
+ 
+
+
+<!-- <div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header
+      > <button (click)="backToProductInfo()"
+      class="btn btn-outline-success "
+      
+    >
+    <i class="fas fa-arrow-left"></i>
+    </button>
+     Product Entry
+     
+     
+    </nb-card-header>
+        <nb-card-body>
+          <form>
+            <div class="row">
+              
+          
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="name" class="label">Unit Name</label>
+                   <input name="name"  #name="ngModel"
+                   [(ngModel)]="unitObj.name" type="text" class="form-control" class="form-control"
+                     id="name" placeholder="Unit Name" required>
+                     <div class="text-left text-danger"
+                     *ngIf="name.invalid&&name.touched">
+                     Unit Name is Required !
+                   </div>
+                </div>
+              </div>
+             
+             
+            </div>
+            
+            <button  [disabled]="unitObj.name==''" class="mr-1" nbButton (click)="update()">Update</button>
+          </form>
+        </nb-card-body>
+     
+    </nb-card>
+  </div>
+</div> -->

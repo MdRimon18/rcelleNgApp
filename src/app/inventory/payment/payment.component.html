@@ -1,0 +1,140 @@
+
+    <div class="card-header crdHdr"> 
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <button  title="{{languageService.productEntry.BackButtonhoverEffect}}"  
+          class="btn   addMore" (click)="backToInvoiceInfo()"
+        >
+        <i class="fas fa-arrow-left"></i>
+        </button>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9">
+          <h5 align="center" class="h4 mb-0">  Payment Details </h5></div>
+        </div>
+      </div>
+    
+    
+    <div class="card-body">
+      <div class="row gx-5 bg-white">
+        <div class="example-header">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <nb-card>
+      
+          <nb-card-body>
+        
+        
+            <form [formGroup]="fg" *ngFor="let fg of paymentForm.controls; let i=index;" (submit)="recordSubmit(fg)" >
+              <div class="row">
+                  <div class="col-sm-2">
+                      <div class="form-group">
+                        <label  for="entryDate" class="label">Date</label>
+                        <input readonly type="text" class="form-control"   type="text"
+                        id="entryDate" placeholder="Date" formControlName="entryDate">
+                    
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                          <label for="totalAmount" class="label">Total Amount</label>
+                          <input readonly type="text" class="form-control"   type="text"
+                          id="totalAmount" placeholder="TotalAmount" formControlName="totalAmount">
+                        </div>
+                    
+                      </div>
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label  for="PaidAmount" class="label">Paid Amount</label>
+                    <input readonly  type="text" class="form-control"    
+                    id="PaidAmount" placeholder="Paid Amount" formControlName="PaidAmount">
+                
+                  </div>
+                </div>
+              
+              
+              
+                <div class="col-sm-2">
+                  <div class="form-group">
+                  
+                
+                  </div>
+
+                </div>
+
+              
+                <div class="col-sm-1 mt-4">
+                  <div class="form-group">
+                  
+                <!-- <button  class="btn btn-light ml-1" (click)="onDelete(paymentForm,i)"
+                >
+                    <i class="far fa-trash-alt fa-lg text-danger"></i>
+                    
+                </button>    -->
+                  </div>
+          
+                </div>
+              </div>
+            
+            </form>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="DueAmount"  class="label">Due Amount</label>
+              
+            <input  type="text" class="form-control"   type="text" readonly
+            id="DueAmount" name="DueAmount" placeholder="Due Amount" [(ngModel)]="DueAmount">
+          </div>
+        </div>
+      
+      
+      
+        <div class="col-sm-2">
+          
+          <div class="form-group">
+          
+        
+            <label  for="paidAmount" class="label">paying Amount</label>
+            <input  type="text" class="form-control"   type="text"
+            id="paidAmount" [(ngModel)]="paidAmount" placeholder="Paid Amount" >
+        
+          </div>
+      
+        </div>
+      
+      
+        <div class="col-sm-1 mt-4">
+          <div class="form-group">
+            <!-- <button nbButton (click)="onSubmit(paymentForm,paidAmount)">Submit</button> -->
+            <button   class="btn btn-outline-success" (click)="onSubmit()">Submit</button>
+          
+          </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+              
+          
+            </div>
+          </div>
+          <div class="col-sm-2">
+              <div class="form-group">
+              
+              </div>
+          
+            </div>
+    
+
+      </div>
+    </div>
+
+          
+        
+          </nb-card-body>
+        </nb-card>
+      </div>
+
+      
+    </div>
+    </div>
+    </div>
+    </div>
